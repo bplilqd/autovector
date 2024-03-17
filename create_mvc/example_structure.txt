@@ -1,0 +1,48 @@
+json sorce:
+
+{"class_model":["work_class","function","set_app"],"page_view":["page_class","css","js"],"work_controller":{"work":{"0":"user","admin":["panel","setings"],"1":"edet"},"0":"other","1":"bot"},"other":[]}
+
+array sorce:
+
+$array['class_model'] = ['work_class', 'function', 'set_app'];
+$array['page_view'] = ['page_class', 'css', 'js'];
+$array['work_controller'] = ['work' => ['user', 'admin'=>['panel','setings'], 'edet'], 'other', 'bot'];
+$array['other'] = [];
+
+array print structure:
+
+    [class_model] => Array
+        (
+            [0] => work_class
+            [1] => function
+            [2] => set_app
+        )
+
+    [page_view] => Array
+        (
+            [0] => page_class
+            [1] => css
+            [2] => js
+        )
+
+    [work_controller] => Array
+        (
+            [work] => Array
+                (
+                    [0] => user
+                    [admin] => Array
+                        (
+                            [0] => panel
+                            [1] => setings
+                        )
+
+                    [1] => edet
+                )
+
+            [0] => other
+            [1] => bot
+        )
+
+    [other] => Array
+        (
+        )
