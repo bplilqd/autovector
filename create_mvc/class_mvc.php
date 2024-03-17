@@ -26,6 +26,38 @@ class class_mvc
         $this->json = $json;
     }
 
+protected function create_dir_new($array, $path = '')
+{
+    $str = '';
+
+    foreach ($array as $key => $value) {
+        // Создаем путь к текущей директории
+        $currentPath = $path . '/' . $key;
+
+        // Если значение - массив и не пустое
+        if (is_array($value) && !empty($value)) {
+            // Создаем директорию
+            mkdir($currentPath, 0777, true);
+
+            // Вызываем рекурсивно эту же функцию для обработки вложенных массивов
+            $str .= $this->create_dir($value, $currentPath);
+        } else {
+            // Если значение не пустое
+            if ($value) {
+                // Создаем директорию с текущим путем и значением как ее именем
+                mkdir($currentPath, 0777, true);
+                $str .= "\n" . ' [ ' . $currentPath . ' (d) ] ';
+            } else {
+                // Создаем пустую директорию с текущим путем и ключом как ее именем
+                mkdir($currentPath, 0777, true);
+                $str .= "\n" . ' [ ' . $currentPath . ' (e) ] ';
+            }
+        }
+    }
+
+    return $str;
+}
+    
     // method create directorys
     protected function create_dir($array, $path = '')
     {
