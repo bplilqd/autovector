@@ -4,7 +4,7 @@ require_once 'create_mvc/class_mvc.php';
 
 $array['class_model'] = ['work_class', 'function', 'set_app'];
 $array['page_view'] = ['page_class', 'css', 'js'];
-$array['work_controller'] = ['work' => ['user', 'admin'=>['panel','setings'], 'edet'], 'other', 'bot'];
+$array['work_controller'] = ['work' => ['user', 'admin'=>['panel','setings'=>['test']], 'edet'], 'other', 'bot'];
 $array['other'] = [];
 
 

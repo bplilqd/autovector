@@ -42,7 +42,7 @@ class class_mvc
                         // repost this function
                         if ($value2) {
                             $str .= "\n".' [ '.$path.'/'.$key.'/'.$key2.' (c)] - "restart function" ';
-                            $str .= $this->create_dir($value2, $key.'/'.$key2);
+                            $str .= $this->create_dir($value2, $path.'/'.$key.'/'.$key2);
                         }
                     }
                 }
