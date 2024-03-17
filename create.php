@@ -8,6 +8,6 @@ $array['page_view'] = ['page_class', 'css', 'js'];
 $array['work_controller'] = ['work' => ['user', 'admin'=>['panel','setings'=>['test']], 'edet'], 'other', 'bot'];
 $array['other'] = [];
 
-
+$path = __DIR__;
 $json = new arr_to_json_for_mvc($array);
-$mvc = new class_mvc($json->json);
+$mvc = new class_mvc($json->json, $path);
