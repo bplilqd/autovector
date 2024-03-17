@@ -9,10 +9,3 @@ class arr_to_json_for_mvc
         $this->json = $json;
     }
 }
-
-$array['class_model'] = ['work_class', 'function', 'set_app'];
-$array['page_view'] = ['page_class', 'css', 'js'];
-$array['work_controller'] = ['work' => ['user', 'admin', 'edet'], 'other', 'bot'];
-
-$json = new arr_to_json_for_mvc($array);
-echo $json->json;

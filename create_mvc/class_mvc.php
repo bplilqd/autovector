@@ -6,10 +6,12 @@ class class_mvc
     protected $json;
     protected $array;
 
-    function __construct()
+    function __construct($json)
     {
-        $this->set_parm(); // set json
+        $this->set_parm($json); // set json
         $this->parse_resource(); // decode json to array for next work
+        $str = $this->create_dir($this->array);
+        print_r($str);
     }
 
     protected function parse_resource()
@@ -17,19 +19,41 @@ class class_mvc
         $json = $this->json;
         $array = json_decode($json, true);
         $this->array = $array;
-        print_r($array);
     }
 
-    protected function set_parm()
+    protected function set_parm($json)
     {
-        $this->json = '{"class_model":["work_class","function","set_app"],"page_view":["page_class","css","js"],"work_controller":{"work":["user","admin","edet"],"0":"other","1":"bot"}}';
+        $this->json = $json;
     }
 
     // method create directorys
-    protected function create_dir()
+    protected function create_dir($array, $path = '')
     {
+        $str = '';
+        foreach ($array as $key => $value) {
+            if (gettype($value) == 'array' && $value) {
+                $str .= "\n".' ['.$path.'/'.$key.' (a)] ';
+                // if arr to parse for foreach
+                foreach ($value as $key2 => $value2) {
+                    // don't array
+                    if (gettype($value2) != 'array' && $value2) {
+                        $str .= "\n".'  [ '.$path.'/'.$key.'/'.$value2.' (b)] ';
+                    } else {
+                        // repost this function
+                        if ($value2) {
+                            $str .= "\n".' [ '.$path.'/'.$key.'/'.$key2.' (c)] - "запуск функции еще раз или вызов саму себя" ';
+                            $str .= $this->create_dir($value2, $key.'/'.$key2);
+                        }
+                    }
+                }
+            } else {
+                if ($value) {
+                    $str .= "\n".' [ '.$path.'/'.$value.' (d)] ';
+                } else {
+                    $str .= "\n".' [ '.$path.'/'.$key.' (e)] ';
+                }
+            }
+        }
+    return $str;
     }
 }
-
-$mvc = new class_mvc;
-echo "\n" . 'end_sorce_for_class_mvc';
