@@ -3,9 +3,10 @@ define("DS", DIRECTORY_SEPARATOR);
 require_once 'create_mvc/arr_to_json_for_mvc.php';
 require_once 'create_mvc/class_mvc.php';
 
-$array['class_model'] = ['work_class', 'function', 'set_app'];
-$array['page_view'] = ['page_class', 'css', 'js'];
-$array['work_controller'] = ['work' => ['user', 'admin'=>['panel','setings'=>['test']], 'edet'], 'other', 'bot'];
+$array['class_model'] = ['work_class', 'function', 'setings'];
+$array['page_view'] = ['page_class', 'template' => ['design' => ['css', 'js']]];
+$array['work_controller'] =
+    ['work' => ['auth', 'user', 'admin' => ['panel', 'setings' => ['user', 'panel']], 'bot'], 'other'];
 $array['other'] = [];
 
 $path = __DIR__;
