@@ -47,11 +47,9 @@ class class_mvc
                     } else {
 
                         // repost this function
-                        if ($value2) {
-                            $str .= "\n" . ' [ ' . $path . '/' . $key . '/' . $key2 . ' (c)] - "restart function" ';
-                            mkdir($path . DS . $key . DS . $key2, 0755);
-                            $str .= $this->create_dir($value2, $path . '/' . $key . '/' . $key2);
-                        }
+                        $str .= "\n" . ' [ ' . $path . '/' . $key . '/' . $key2 . ' (c)] - "restart function" ';
+                        mkdir($path . DS . $key . DS . $key2, 0755);
+                        $str .= $this->create_dir($value2, $path . '/' . $key . '/' . $key2);
                     }
                 }
             } else {
