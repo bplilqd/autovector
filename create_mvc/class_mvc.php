@@ -1,5 +1,7 @@
 <?php
 
+namespace create_mvc\mvc;
+
 class class_mvc
 {
 
