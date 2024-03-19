@@ -4,10 +4,20 @@ json sorce:
 
 array sorce:
 
-$array['class_model'] = ['work_class', 'function', 'set_app'];
-$array['page_view'] = ['page_class', 'css', 'js'];
-$array['work_controller'] = ['work' => ['user', 'admin'=>['panel','setings'], 'edet'], 'other', 'bot'];
+$array['class_model'] = ['work_class', 'function', 'setings'];
+$array['page_view'] = ['page_class', 'template' => ['design' => ['css', 'js']]];
+$array['work_controller'] =
+    ['work' => ['auth', 'user', 'admin' => ['panel', 'setings' => ['user', 'panel']], 'bot'], 'other'];
 $array['other'] = [];
+
+or
+
+$array['app']['class_model'] = ['work_class', 'function', 'setings'];
+$array['app']['page_view'] = ['page_class', 'template' => ['design' => ['css', 'js']]];
+$array['app']['work_controller'] =['work' => ['auth', 'user', 'admin']];
+$array['images'] = [];
+$array['css'] = [];
+$array['js'] = [];
 
 array print structure:
 
@@ -44,5 +54,56 @@ array print structure:
         )
 
     [other] => Array
+        (
+        )
+
+or
+
+ [app] => Array
+        (
+            [class_model] => Array
+                (
+                    [0] => work_class
+                    [1] => function
+                    [2] => setings
+                )
+
+            [page_view] => Array
+                (
+                    [0] => page_class
+                    [template] => Array
+                        (
+                            [design] => Array
+                                (
+                                    [0] => css
+                                    [1] => js
+                                )
+
+                        )
+
+                )
+
+            [work_controller] => Array
+                (
+                    [work] => Array
+                        (
+                            [0] => auth
+                            [1] => user
+                            [2] => admin
+                        )
+
+                )
+
+        )
+
+    [images] => Array
+        (
+        )
+
+    [css] => Array
+        (
+        )
+
+    [js] => Array
         (
         )
