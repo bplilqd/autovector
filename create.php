@@ -10,6 +10,7 @@ $array['app']['class_model'] = ['work_class', 'function', 'setings'];
 $array['app']['page_view'] = ['page_class', 'template' => ['design' => ['css', 'js']]];
 $array['app']['work_controller'] =['work' => ['user', 'admin']];
 $array['app']['work_controller']['work']['auth'] = [];
+$array['app']['work_controller']['test'] = [];
 $array['images'] = [];
 $array['css'] = [];
 $array['js'] = [];
