@@ -36,7 +36,7 @@ class class_mvc
         $str = "";
         foreach ($array as $key => $value) {
             if (is_array($value) && $value) {
-                $str .= "\n" . ' [' . $path . '/' . $key . ' (a)] ';
+                $str .= "\n" . $path . '/' . $key . ' (a)';
                 mkdir($path . DS . $key, 0755);
 
                 // if arr to parse for foreach
@@ -44,22 +44,22 @@ class class_mvc
 
                     // don't array
                     if (!is_array($value2) && $value2) {
-                        $str .= "\n" . '  [ ' . $path . '/' . $key . '/' . $value2 . ' (b)] ';
+                        $str .= "\n" . $path . '/' . $key . '/' . $value2 . ' (b)';
                         mkdir($path . DS . $key . DS . $value2, 0755);
                     } else {
 
                         // repost this function
-                        $str .= "\n" . ' [ ' . $path . '/' . $key . '/' . $key2 . ' (c)] - "restart function" ';
+                        $str .= "\n" . $path . '/' . $key . '/' . $key2 . ' (c) - "restart function" ';
                         mkdir($path . DS . $key . DS . $key2, 0755);
                         $str .= $this->create_dir($value2, $path . '/' . $key . '/' . $key2);
                     }
                 }
             } else {
                 if ($value) {
-                    $str .= "\n" . ' [ ' . $path . '/' . $value . ' (d)] ';
+                    $str .= "\n" . $path . '/' . $value . ' (d)';
                     mkdir($path . DS . $value, 0755);
                 } else {
-                    $str .= "\n" . ' [ ' . $path . '/' . $key . ' (e)] ';
+                    $str .= "\n" . $path . '/' . $key . ' (e)';
                     mkdir($path . DS . $key, 0755);
                 }
             }

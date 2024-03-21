@@ -1,69 +1,21 @@
 json sorce:
 
-{"class_model":["work_class","function","set_app"],"page_view":["page_class","css","js"],"work_controller":{"work":{"0":"user","admin":["panel","setings"],"1":"edet"},"0":"other","1":"bot"},"other":[]}
+{"app":{"class_model":["work_class","function","setings"],"page_view":{"0":"page_class","template":{"design":["css","js"]}},"work_controller":{"work":{"0":"user","1":"admin","auth":[]},"test":[]}},"images":[],"css":[],"js":[]}
 
 array sorce:
 
-$array['class_model'] = ['work_class', 'function', 'setings'];
-$array['page_view'] = ['page_class', 'template' => ['design' => ['css', 'js']]];
-$array['work_controller'] =
-    ['work' => ['auth', 'user', 'admin' => ['panel', 'setings' => ['user', 'panel']], 'bot'], 'other'];
-$array['other'] = [];
-
-or
-
 $array['app']['class_model'] = ['work_class', 'function', 'setings'];
 $array['app']['page_view'] = ['page_class', 'template' => ['design' => ['css', 'js']]];
-
 $array['app']['work_controller'] =['work' => ['user', 'admin']];
-
 $array['app']['work_controller']['work']['auth'] = [];
-
+$array['app']['work_controller']['test'] = [];
 $array['images'] = [];
 $array['css'] = [];
 $array['js'] = [];
 
 array print structure:
 
-    [class_model] => Array
-        (
-            [0] => work_class
-            [1] => function
-            [2] => set_app
-        )
-
-    [page_view] => Array
-        (
-            [0] => page_class
-            [1] => css
-            [2] => js
-        )
-
-    [work_controller] => Array
-        (
-            [work] => Array
-                (
-                    [0] => user
-                    [admin] => Array
-                        (
-                            [0] => panel
-                            [1] => setings
-                        )
-
-                    [1] => edet
-                )
-
-            [0] => other
-            [1] => bot
-        )
-
-    [other] => Array
-        (
-        )
-
-or
-
- [app] => Array
+    [app] => Array
         (
             [class_model] => Array
                 (
@@ -91,9 +43,16 @@ or
                 (
                     [work] => Array
                         (
-                            [0] => auth
-                            [1] => user
-                            [2] => admin
+                            [0] => user
+                            [1] => admin
+                            [auth] => Array
+                                (
+                                )
+
+                        )
+
+                    [test] => Array
+                        (
                         )
 
                 )
@@ -111,3 +70,26 @@ or
     [js] => Array
         (
         )
+
+path example created dirs
+
+/home/bplilqd/work/autovector/app (a)
+/home/bplilqd/work/autovector/app/class_model (c) - "restart function" 
+/home/bplilqd/work/autovector/app/class_model/work_class (d)
+/home/bplilqd/work/autovector/app/class_model/function (d)
+/home/bplilqd/work/autovector/app/class_model/setings (d)
+/home/bplilqd/work/autovector/app/page_view (c) - "restart function" 
+/home/bplilqd/work/autovector/app/page_view/page_class (d)
+/home/bplilqd/work/autovector/app/page_view/template (a)
+/home/bplilqd/work/autovector/app/page_view/template/design (c) - "restart function" 
+/home/bplilqd/work/autovector/app/page_view/template/design/css (d)
+/home/bplilqd/work/autovector/app/page_view/template/design/js (d)
+/home/bplilqd/work/autovector/app/work_controller (c) - "restart function" 
+/home/bplilqd/work/autovector/app/work_controller/work (a)
+/home/bplilqd/work/autovector/app/work_controller/work/user (b)
+/home/bplilqd/work/autovector/app/work_controller/work/admin (b)
+/home/bplilqd/work/autovector/app/work_controller/work/auth (c) - "restart function" 
+/home/bplilqd/work/autovector/app/work_controller/test (e)
+/home/bplilqd/work/autovector/images (e)
+/home/bplilqd/work/autovector/css (e)
+/home/bplilqd/work/autovector/js (e)
