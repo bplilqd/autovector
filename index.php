@@ -1,5 +1,4 @@
 <?php
-//require_once __DIR__ . '/app/function/function.php';
+define("PATH", __DIR__); // path to dir site
+require_once PATH . '/app/class_model/function/function.php';
 echo "Hello, World!";
-//print_r($_SERVER);
-
