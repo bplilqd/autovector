@@ -1,6 +1,7 @@
 <?php
 // основные настройки
 //$root = $_SERVER['DOCUMENT_ROOT']; // site root
+
 //$mail_send = 'info@' . $_SERVER['SERVER_NAME']; // емайл сайта по умолчанию
 $mail_send = 'info@*****'; // емайл сайта по умолчанию
 $phone_default = '7921*****'; // формат 79214604140
