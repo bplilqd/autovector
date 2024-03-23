@@ -1,4 +1,7 @@
 <?php
+
+namespace constantMain;
+
 // подклечение базы данных
 define("HOST_DB", $host_db); // хост
 define("USER_DB", $user_db); // пользователь
