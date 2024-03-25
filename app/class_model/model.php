@@ -2,6 +2,12 @@
 
 namespace model;
 
-class model{
-    //
+class model
+{
+    public function __construct()
+    {
+        //
+    }
+
+
 }
