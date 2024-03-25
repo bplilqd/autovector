@@ -16,6 +16,5 @@ define("HOST", '8tu.ru'); // имя сайта
 //define("REFERER", $_SERVER['HTTP_REFERER']); // реф ссылка
 define("HTTP_HTTPS", $http_or_https); // протокол по умолчанию например https://
 //define("MOBILE_DEVICE", $mobile_device_true);
-define("DS", DIRECTORY_SEPARATOR);
 define("SEKRET_KEY", $secret_key); // секретный ключ для генерации md5
 define("SET_COOK_TIME_HASH", $set_cook_time_hash); // установка времени жизни куки для авторизации

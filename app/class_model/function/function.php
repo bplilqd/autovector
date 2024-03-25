@@ -7,14 +7,18 @@ $time_start = microtime(true); // для вычеслений, внимание 
 //}else{
 //    $mobile_device_true = false;
 //}
+define("DS", DIRECTORY_SEPARATOR);
 
-require_once PATH . '/app/class_model/setings/config.php'; // конфиг
-require_once PATH . '/app/class_model/setings/constant.php'; // константы
-
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'config.php'; // конфиг
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'constant.php'; // константы
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // основной класс логики
+require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // основной класс страницы
+require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'main_controller.php'; // главный класс
 
 // функция время выполнения скрипта в  начале, обязательно microtime(true),
 // типа так: $time_start = microtime(true);
-function Time_sec($t_start, $t_end) {
+function Time_sec($t_start, $t_end)
+{
     $time_s = 'Время выполнения ';
     $t = $t_end - $t_start;
     $time_s .= round($t, 3);
@@ -22,7 +26,8 @@ function Time_sec($t_start, $t_end) {
 }
 
 // функция вычесления объема требуемой памяти
-function Memory_mb($a) {
+function Memory_mb($a)
+{
     $memory = 'Объем памяти ';
     $a = $a / 1024 / 1024;
     $memory .= round($a, 2);
@@ -30,19 +35,22 @@ function Memory_mb($a) {
 }
 
 // имя текущего класа исполнения, корневого объекта
-function set_main_class($type) {
+function set_main_class($type)
+{
     define("CLASS_NAME", $type); // имя класа $include_main задоное на странице выполнения
     require_once __DIR__ . '/' . $type . '.php';
 }
 
 // для вывода заголовков и не только
-function text_echo($name, $teg_html, $class_text = '') {
+function text_echo($name, $teg_html, $class_text = '')
+{
     $result = '<' . $teg_html . ' class="' . $class_text . '">' . $name . '</' . $teg_html . '>';
     return $result;
 }
 
 // для падежей
-function Padezh($number, $arr) {
+function Padezh($number, $arr)
+{
     $arr2 = array(2, 0, 1, 1, 1, 2);
     return $number . ' ' . $arr[($number % 100 > 4 && $number % 100 < 20) ? 2 : $arr2[min($number % 10, 5)]];
 }

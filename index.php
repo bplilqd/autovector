@@ -1,6 +1,9 @@
 <?php
-define("PATH", __DIR__); // path to dir site
-require_once PATH . '/app/class_model/function/function.php';
 
-$url = '/';
-print_r("PATH = ".PATH);
+use work\main_controller;
+
+define("PATH", __DIR__); // path to dir site
+require_once PATH . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'class_model' . DIRECTORY_SEPARATOR . 'function' . DIRECTORY_SEPARATOR . 'function.php';
+
+$main = new main_controller;
+print_r("PATH = " . PATH);
