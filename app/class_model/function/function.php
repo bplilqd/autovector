@@ -7,7 +7,6 @@ $time_start = microtime(true); // для вычеслений, внимание 
 //}else{
 //    $mobile_device_true = false;
 //}
-define("DS", DIRECTORY_SEPARATOR);
 // for functions
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'config.php'; // config
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'constant.php'; // constant
