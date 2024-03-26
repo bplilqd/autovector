@@ -2,11 +2,17 @@
 
 namespace work;
 
+use model\znach_array;
+
 class default_controller extends main_controller
 {
 
+    protected $znach_array;
+
     function __construct()
     {
+        // обработка запросов пользователя
+
         // add name for set autoload for class
         $this->start_name_class();
         // set objects
@@ -16,6 +22,8 @@ class default_controller extends main_controller
     // objects
     protected function set_object()
     {
+        // set new class
+        $this->znach_array = new znach_array;
         $name_model = 'model\\' . NAME_MODEL;
         $this->model = new $name_model;
     }
@@ -24,7 +32,7 @@ class default_controller extends main_controller
     protected function start_name_class()
     {
         // array for model class
-        $class_model = [NAME_MODEL];
+        $class_model = [NAME_MODEL, 'znach_array'];
         // array for view class
         $class_view = ['default_view'];
         // autoload class
