@@ -2,12 +2,8 @@
 
 namespace work;
 
-use model\znach_array;
-
 class default_controller extends main_controller
 {
-
-    
 
     function __construct()
     {
