@@ -4,7 +4,6 @@ namespace work;
 
 class main_controller
 {
-    protected $viwe;
     protected $model;
 
     // method for autoload class
