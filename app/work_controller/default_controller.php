@@ -7,7 +7,7 @@ use model\znach_array;
 class default_controller extends main_controller
 {
 
-    protected $znach_array;
+    
 
     function __construct()
     {
@@ -22,8 +22,7 @@ class default_controller extends main_controller
     // objects
     protected function set_object()
     {
-        // set new class
-        $this->znach_array = new znach_array;
+        // set new class to objects
         $name_model = 'model\\' . NAME_MODEL;
         $this->model = new $name_model;
     }
