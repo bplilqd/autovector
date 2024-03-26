@@ -8,12 +8,15 @@ $time_start = microtime(true); // для вычеслений, внимание 
 //    $mobile_device_true = false;
 //}
 define("DS", DIRECTORY_SEPARATOR);
-
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'config.php'; // конфиг
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'constant.php'; // константы
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // основной класс логики
-require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // основной класс страницы
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'main_controller.php'; // главный класс
+// for functions
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'config.php'; // config
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'constant.php'; // constant
+// for main class
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // main model class
+require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // main view class
+require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'main_controller.php'; // best main class
+// oter class
+require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'default_controller.php'; // default controller
 
 // функция время выполнения скрипта в  начале, обязательно microtime(true),
 // типа так: $time_start = microtime(true);
