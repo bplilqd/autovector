@@ -8,8 +8,8 @@ $time_start = microtime(true); // для вычеслений, внимание 
 //    $mobile_device_true = false;
 //}
 // for functions
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'config.php'; // config
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'setings' . DS . 'constant.php'; // constant
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'config.php'; // config
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'constant.php'; // constant
 // for main class
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // main model class
 require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // main view class
