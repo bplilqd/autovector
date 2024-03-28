@@ -14,6 +14,7 @@ class default_model extends model
         // set objects
         $this->set_objects();
         // имитируем запрос с базы данных
+        // и устанваливаем полученые данные
         $this->query_data_user_db();
     }
 

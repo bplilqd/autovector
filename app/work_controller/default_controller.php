@@ -9,7 +9,7 @@ class default_controller extends main_controller
     {
         // обработка запросов пользователя
 
-        // add name for set autoload for class
+        // add names for class for set autoload 
         $this->start_name_class();
         // set objects
         $this->set_object();
@@ -19,8 +19,7 @@ class default_controller extends main_controller
     protected function set_object()
     {
         // set new class to objects
-        $name_model = 'model\\' . NAME_MODEL;
-        $this->model = new $name_model;
+        $this->model = new ('model\\' . NAME_MODEL);
     }
 
     // start name class
@@ -30,14 +29,17 @@ class default_controller extends main_controller
         $class_mosel_setings = ['interface_user_classe', 'user_config'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS;
         $array[] = [$class_mosel_setings, $path_model];
+
         // array for model class
         $class_model = [NAME_MODEL, 'znach_array'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
         $array[] = [$class_model, $path_model];
+
         // array for view class
         $class_view = ['default_view'];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
+
         // autoload class
         $this->autoload_class($array);
     }
