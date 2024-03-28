@@ -13,4 +13,12 @@ class main_controller
             require_once $path .  $name_class . '.php';
         }
     }
+    // set for autoload class
+    protected function autoload_class($array)
+    {
+        foreach ($array as $value) {
+            $this->new_load_class($value[0], $value[1]); // to autoload
+
+        }
+    }
 }

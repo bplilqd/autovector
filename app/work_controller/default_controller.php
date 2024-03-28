@@ -26,23 +26,20 @@ class default_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+        // array for model -> settings class
+        $class_mosel_setings = ['interface_user_classe', 'user_config'];
+        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS;
+        $array[] = [$class_mosel_setings, $path_model];
         // array for model class
         $class_model = [NAME_MODEL, 'znach_array'];
+        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
+        $array[] = [$class_model, $path_model];
         // array for view class
         $class_view = ['default_view'];
-        // autoload class
-        $this->autoload_clas($class_model, $class_view);
-    }
-
-    // set for autoload class
-    protected function autoload_clas($class_model, $class_view)
-    {
-        // set path for model
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
-        $this->new_load_class($class_model, $path_model); // autoload for model
-        // set path for view
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
-        $this->new_load_class($class_view, $path_model); // autoload for view
-
+        $array[] = [$class_view, $path_model];
+        // autoload class
+        $this->autoload_class($array);
     }
+
 }
