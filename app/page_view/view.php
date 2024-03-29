@@ -4,9 +4,9 @@ namespace viwe;
 
 class viwe
 {
+    protected $top;
     public function __construct()
     {
-
-        //загрузка шаблонов по умолчанию
+        //
     }
 }

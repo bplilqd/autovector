@@ -9,6 +9,5 @@ define("DS", DIRECTORY_SEPARATOR); // builds a file path with the appropriate di
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'function.php'; // basic load function, config, class, constant and other...
 
 set_main_class(NAME_CONTROLLER); // set controller for start work
-$main = new ('controller\\'.NAME_CONTROLLER); // set object controller
-
-print_r($main);
+$main = new ('controller\\' . NAME_CONTROLLER); // set object controller
+//print_r($main);
