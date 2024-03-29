@@ -12,6 +12,7 @@ define("PASS_DB", $pass_db); // пароль пользователя базы �
 //define("IP", $_SERVER['REMOTE_ADDR']); // ip адрес пользователя
 //define("HOST", $_SERVER['SERVER_NAME']); // имя сайта
 define("NAME_MODEL", $name_model); // name basic of model
+define("NAME_CONTROLLER", $name_controller); // name basic of controller
 define("HOST", '8tu.ru'); // имя сайта
 define("SEC", $_SERVER['REQUEST_TIME']); // метка секунд
 //define("REFERER", $_SERVER['HTTP_REFERER']); // реф ссылка

@@ -1,11 +1,15 @@
 <?php
 
-namespace work;
+namespace controller;
 
 class main_controller
 {
     protected $model;
-
+    // set new class to objects
+    protected function set_object()
+    {
+        $this->model = new ('model\\' . NAME_MODEL);
+    }
     // method for autoload class
     protected function new_load_class($array, $path)
     {
@@ -17,7 +21,8 @@ class main_controller
     protected function autoload_class($array)
     {
         foreach ($array as $value) {
-            $this->new_load_class($value[0], $value[1]); // to autoload
+            // to autoload
+            $this->new_load_class($value[0], $value[1]);
 
         }
     }

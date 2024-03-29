@@ -1,6 +1,6 @@
 <?php
 
-namespace work;
+namespace controller;
 
 class default_controller extends main_controller
 {
@@ -11,15 +11,8 @@ class default_controller extends main_controller
 
         // add names for class for set autoload 
         $this->start_name_class();
-        // set objects
+        // set objects of model
         $this->set_object();
-    }
-
-    // objects
-    protected function set_object()
-    {
-        // set new class to objects
-        $this->model = new ('model\\' . NAME_MODEL);
     }
 
     // start name class
