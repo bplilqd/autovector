@@ -14,8 +14,6 @@ require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'co
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // main model class
 require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // main view class
 require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'main_controller.php'; // best main class
-// oter class
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'default_controller.php'; // default controller
 
 // функция время выполнения скрипта в  начале, обязательно microtime(true),
 // типа так: $time_start = microtime(true);
@@ -36,11 +34,10 @@ function Memory_mb($a)
     return $memory .= ' mb';
 }
 
-// имя текущего класа исполнения, корневого объекта
-function set_main_class($type)
+// имя текущего класа исполнения/controller, корневого объекта
+function set_main_class($name_class)
 {
-    define("CLASS_NAME", $type); // имя класа $include_main задоное на странице выполнения
-    require_once __DIR__ . '/' . $type . '.php';
+    require_once PATH . DS . 'app' . DS . 'work_controller' . DS . $name_class . '.php'; // controller
 }
 
 // для вывода заголовков и не только
