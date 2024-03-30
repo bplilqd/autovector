@@ -2,7 +2,7 @@
 
 class p_slice_class {
 
-    public $name_file_template = 'theme.html';
+    public $name_file_template = 'design.html';
     public $file_template_html; // file after download
     public $arr_subject; // сигменты по которым нужно резать шаблон
     static $list_rec_ok; // отчет
