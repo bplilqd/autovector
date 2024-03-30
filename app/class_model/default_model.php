@@ -17,7 +17,6 @@ class default_model extends model
 
     protected function set_and_settin_viwe()
     {
-        $this->viwe = new default_view;
         // имитируем запрос с базы данных
         // и устанваливаем полученые данные
         $this->query_data_user_db();
@@ -30,7 +29,8 @@ class default_model extends model
     {
         $this->user_config = new user_config;
         $this->znach_array = new znach_array;
-        // set objects viwe and option/settings
+        $this->viwe = new default_view;
+        // option/settings
         $this->set_and_settin_viwe();
     }
 
