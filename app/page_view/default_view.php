@@ -18,7 +18,7 @@ class default_view extends viwe implements set_theme
     public function include_theme()
     {
         // example structure
-        $arr = [
+        $array = [
             'header',
             'menu',
             'top',
@@ -29,14 +29,8 @@ class default_view extends viwe implements set_theme
             'sidebar',
             'foot'
         ];
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'header.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'menu.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'top.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'system_mesage.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'announce.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'title.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'content.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'sidebar.html';
-        require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . 'foot.html';
+        foreach($array as $value){
+            require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . $value.'.html';
+        }
     }
 }
