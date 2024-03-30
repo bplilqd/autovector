@@ -36,7 +36,7 @@ class default_model extends model
 
     protected function query_data_user_db()
     {
-        $array = ['user_theme' => 'design', 'data_bs_theme' => "light"];
+        $array = ['user_theme' => 'design', 'data_bs_theme' => "dark"];
         $this->user_config->input_data($array);
     }
 }

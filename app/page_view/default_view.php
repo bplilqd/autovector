@@ -25,8 +25,8 @@ class default_view extends viwe implements set_theme
             'system_mesage',
             'announce',
             'title',
-            'content',
             'sidebar',
+            'content',
             'foot'
         ];
         foreach($array as $value){

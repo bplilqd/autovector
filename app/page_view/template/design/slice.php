@@ -24,8 +24,8 @@ class p_slice_class {
             'system_mesage',
             'announce',
             'title',
-            'content',
             'sidebar',
+            'content',
             'foot'
         ];
         $this->arr_subject = $arr;
