@@ -13,21 +13,30 @@ class default_model extends model
     {
         // set objects
         $this->set_objects();
+    }
+
+    protected function set_and_settin_viwe()
+    {
+        $this->viwe = new default_view;
         // имитируем запрос с базы данных
         // и устанваливаем полученые данные
         $this->query_data_user_db();
+        $this->viwe->user_theme = $this->user_config->user_theme;
+        $this->viwe->data_bs_theme = $this->user_config->data_bs_theme;
+        $this->viwe->include_theme();
     }
 
     protected function set_objects()
     {
         $this->user_config = new user_config;
         $this->znach_array = new znach_array;
-        $this->viwe = new default_view;
+        // set objects viwe and option/settings
+        $this->set_and_settin_viwe();
     }
 
     protected function query_data_user_db()
     {
-        $array = ['user_theme' => 'dark_theme'];
+        $array = ['user_theme' => 'design', 'data_bs_theme' => "light"];
         $this->user_config->input_data($array);
     }
 }
