@@ -43,7 +43,7 @@ class default_model extends model
         // real connect db
         // .....?
         // imitation
-        $array = ['user_theme' => 'theme', 'data_bs_theme' => "dark"];
+        $array = ['user_theme' => 'design', 'data_bs_theme' => "light"];
         $this->user_config->input_data($array);
     }
 }
