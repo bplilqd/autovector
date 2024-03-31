@@ -18,6 +18,11 @@ class default_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+        // array for model -> connect class
+        $class_mosel_setings = ['interfaceForUseMysqli', 'forUseMysqli'];
+        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
+        $array[] = [$class_mosel_setings, $path_model];
+
         // array for model -> settings class
         $class_mosel_setings = ['interface_user_classe', 'user_config'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS;
