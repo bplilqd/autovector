@@ -4,14 +4,18 @@ namespace model;
 
 use viwe\default_view;
 use model\settings\user_config;
+use model\connect\forUseMysqli;
 
 class default_model extends model
 {
     protected $user_config;
     protected $znach_array;
+    protected $mysql;
     public function __construct()
     {
-        // set objects
+        // set object for connect mysql
+        $this->mysql = new forUseMysqli;
+        // set objects other
         $this->set_objects();
     }
 
@@ -36,7 +40,10 @@ class default_model extends model
 
     protected function query_data_user_db()
     {
-        $array = ['user_theme' => 'design', 'data_bs_theme' => "dark"];
+        // real connect db
+        // .....?
+        // imitation
+        $array = ['user_theme' => 'theme', 'data_bs_theme' => "dark"];
         $this->user_config->input_data($array);
     }
 }
