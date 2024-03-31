@@ -1,12 +1,14 @@
 <?php
 
 $time_start = microtime(true); // для вычеслений, внимание - не менять эту строку!
-// определение девайса
+
+// определение девайса перенести в главный контролер
 //if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPad') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'Mobile') || strstr($_SERVER['HTTP_USER_AGENT'], 'Phone') || isset($_GET['mobile'])) {
 //    $mobile_device_true = true;
 //}else{
 //    $mobile_device_true = false;
 //}
+
 // for functions
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'config.php'; // config
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'constant.php'; // constant
@@ -14,6 +16,12 @@ require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'co
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // main model class
 require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // main view class
 require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'main_controller.php'; // best main class
+
+// имя текущего класа исполнения/controller, корневого объекта
+function set_main_class($name_class)
+{
+    require_once PATH . DS . 'app' . DS . 'work_controller' . DS . $name_class . '.php'; // controller
+}
 
 // функция время выполнения скрипта в  начале, обязательно microtime(true),
 // типа так: $time_start = microtime(true);
@@ -34,11 +42,7 @@ function Memory_mb($a)
     return $memory .= ' mb';
 }
 
-// имя текущего класа исполнения/controller, корневого объекта
-function set_main_class($name_class)
-{
-    require_once PATH . DS . 'app' . DS . 'work_controller' . DS . $name_class . '.php'; // controller
-}
+
 
 // для вывода заголовков и не только
 function text_echo($name, $teg_html, $class_text = '')
