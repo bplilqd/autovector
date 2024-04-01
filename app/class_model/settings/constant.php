@@ -7,6 +7,9 @@ define("HOST_DB", $host_db); // хост
 define("USER_DB", $user_db); // пользователь
 define("NAME_DB", $name_db); // имя базы данных
 define("PASS_DB", $pass_db); // пароль пользователя базы данных
+// view
+define("DESIGN_THEME", 'design'); // theme default
+define("MODE_THEME", 'dark'); // mode default
 // служебные
 //define("USER_HASH", $_COOKIE['hash']); // hash
 //define("IP", $_SERVER['REMOTE_ADDR']); // ip адрес пользователя
