@@ -26,10 +26,10 @@ class useMysqli
         }
     }
 
-    // проверка на присутствие данных по задпнному запросу
+    // checking for the presence of data on a back request
     protected function sql_true($echo = true)
     {
-        // проверяем запрос
+        // checking the request
         $result = ($this->query->num_rows >= 1) ? true : false;
         if (!$result && $echo) {
             $this->error_arr[] = 'По вашему запросу ничего не найдено!';
@@ -47,13 +47,13 @@ class useMysqli
         ];
     }
 
-    // небольшой реестр пишет запросы в базу данных
+    // a small registry writes queries to the database
     protected function registry_sql($sql, $dir = false)
     {
         //$str = date("d.m.Y H:i:s") . ' | ' . $sql . ' | ' . IN_URL . ' | ' . IP . ". \r\n";
         $str = date("d.m.Y H:i:s") . ' | ' . $sql . ". \r\n";
         $this->registry_sql_echo[] = $str;
-        // запись в файл
+        // writing to file
         $new = fopen(PATH . DS . 'app' . DS . 'log' . DS . $dir . DS . "log_sql_" . date("m-Y") . ".txt", "a");
         fwrite($new, $str);
         fclose($new);
