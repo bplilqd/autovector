@@ -2,8 +2,6 @@
 
 namespace controller;
 
-// use model\... -> set to::set_object()
-
 class main_controller
 {
     protected $model;
