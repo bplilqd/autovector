@@ -24,7 +24,9 @@ class default_model extends model
         // имитируем запрос с базы данных
         // и устанваливаем полученые данные
         $this->query_data_user_db();
+        // set to name of current theme
         $this->viwe->user_theme = $this->user_config->user_theme;
+        // set to what is the dark or light theme
         $this->viwe->data_bs_theme = $this->user_config->data_bs_theme;
         $this->viwe->include_theme();
     }
@@ -43,7 +45,7 @@ class default_model extends model
         // real connect db
         // .....?
         // imitation
-        $array = ['user_theme' => 'design', 'data_bs_theme' => "light"];
+        $array = ['user_theme' => 'design', 'data_bs_theme' => "dark"];
         $this->user_config->input_data($array);
     }
 }
