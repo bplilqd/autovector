@@ -54,7 +54,7 @@ class useMysqli
         $str = date("d.m.Y H:i:s") . ' | ' . $sql . ". \r\n";
         $this->registry_sql_echo[] = $str;
         // writing to file
-        $new = fopen(PATH . DS . 'app' . DS . 'log' . DS . $dir . DS . "log_sql_" . date("m-Y") . ".txt", "a");
+        $new = fopen(PATH . DS . 'app' . DS . 'logs' . DS . $dir . DS . "log_sql_" . date("m-Y") . ".txt", "a");
         fwrite($new, $str);
         fclose($new);
     }

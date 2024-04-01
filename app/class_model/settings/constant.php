@@ -22,5 +22,5 @@ define("SEC", $_SERVER['REQUEST_TIME']); // метка секунд
 define("HTTP_HTTPS", $http_or_https); // протокол по умолчанию например https://
 define("SITE_URL", HTTP_HTTPS . HOST . DS);
 //define("MOBILE_DEVICE", $mobile_device_true);
-define("SEKRET_KEY", $secret_key); // секретный ключ для генерации md5
+define("SECRET_KEY", $secret_key); // секретный ключ для генерации md5
 define("SET_COOK_TIME_HASH", $set_cook_time_hash); // установка времени жизни куки для авторизации
