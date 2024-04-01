@@ -23,6 +23,11 @@ class auth_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+        // array for controller/work -> auth classes
+        $class_mosel_setings = ['auth_function'];
+        $path_model = PATH . DS . 'app' . DS . 'work_controller' . DS . 'work' . DS. 'auth' . DS;
+        $array[] = [$class_mosel_setings, $path_model];
+
         // array for model -> connect class
         $class_mosel_setings = ['useMysqli', 'interfaceForUseMysqli', 'forUseMysqli'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
