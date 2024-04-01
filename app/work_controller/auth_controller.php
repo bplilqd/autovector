@@ -16,7 +16,7 @@ class auth_controller extends main_controller
         // set objects of model
         $this->set_object();
         // sent data
-        $data=[];
+        $data = [];
         $this->model->data_of_auth($data);
     }
 
@@ -25,7 +25,7 @@ class auth_controller extends main_controller
     {
         // array for controller/work -> auth classes
         $class_mosel_setings = ['auth_function'];
-        $path_model = PATH . DS . 'app' . DS . 'work_controller' . DS . 'work' . DS. 'auth' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'work_controller' . DS . 'work' . DS . 'auth' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model -> connect class
@@ -39,12 +39,11 @@ class auth_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_set_theme','default_view'];
+        $class_view = ['interface_set_theme', NAME_VIEW];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 
         // autoload class
         $this->autoload_class($array);
     }
-
 }

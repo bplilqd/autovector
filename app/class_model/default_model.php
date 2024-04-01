@@ -2,7 +2,6 @@
 
 namespace model;
 
-use viwe\default_view;
 use model\settings\user_config;
 use model\connect\forUseMysqli;
 
@@ -39,7 +38,7 @@ class default_model extends model
         // set new
         $this->znach_array = new znach_array;
         // set template
-        $this->viwe = new default_view;
+        $this->viwe = new ('viwe\\'.NAME_VIEW);
         // option/settings
         $this->set_and_settin_viwe();
     }

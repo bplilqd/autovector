@@ -2,6 +2,7 @@
 
 $name_model = 'default_model'; // name basic of model / NAME_MODEL
 $name_controller = 'default_controller'; // name basic of controller / NAME_CONTROLLER
+$name_view = 'default_view'; // name basic ofview / NAME_VIEW
 
 define("PATH", __DIR__); // path to dir site
 define("DS", DIRECTORY_SEPARATOR); // builds a file path with the appropriate directory separator
