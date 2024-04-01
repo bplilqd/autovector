@@ -68,10 +68,10 @@ class forUseMysqli extends useMysqli implements interfaceForUseMysqli
         $this->set_db();
         // request
         $result = $this->query = $this->mysql->query($sql);
-            // calculate database query
-            $this->count_query_for_db(__FUNCTION__, $sql, $result);
-            // writing query to the log
-            $this->registry_sql($sql, 'log_sql');
+        // calculate database query
+        $this->count_query_for_db(__FUNCTION__, $sql, $result);
+        // writing query to the log
+        $this->registry_sql($sql, 'log_sql');
         return $result;
     }
 
