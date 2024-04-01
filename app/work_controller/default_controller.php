@@ -7,6 +7,8 @@ class default_controller extends main_controller
 
     function __construct()
     {
+        // set request
+        $this->set_request();
         // обработка запросов пользователя
 
         // add names for class for set autoload 
@@ -34,12 +36,11 @@ class default_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['default_view'];
+        $class_view = ['interface_set_theme', 'default_view'];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 
         // autoload class
         $this->autoload_class($array);
     }
-
 }
