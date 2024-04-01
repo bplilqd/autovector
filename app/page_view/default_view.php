@@ -2,13 +2,7 @@
 
 namespace viwe;
 
-interface set_theme
-{
-    public function __construct();
-    // print template
-    public function include_theme();
-}
-class default_view extends viwe implements set_theme
+class default_view extends viwe implements interface_set_theme
 {
     public function __construct()
     {
