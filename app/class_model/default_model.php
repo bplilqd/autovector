@@ -11,10 +11,9 @@ class default_model extends model
     protected $user_config;
     protected $znach_array;
     protected $mysql;
+
     public function __construct()
     {
-        // set object for connect mysql
-        $this->mysql = new forUseMysqli;
         // set objects other
         $this->set_objects();
     }
@@ -33,8 +32,13 @@ class default_model extends model
 
     protected function set_objects()
     {
+        // set object for connect mysql
+        $this->mysql = new forUseMysqli;
+        // set user
         $this->user_config = new user_config;
+        // set new
         $this->znach_array = new znach_array;
+        // set template
         $this->viwe = new default_view;
         // option/settings
         $this->set_and_settin_viwe();
