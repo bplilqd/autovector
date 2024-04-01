@@ -2,16 +2,43 @@
 
 namespace model;
 
-use viwe\default_view;
 use model\connect\forUseMysqli;
+use controller\work\auth\auth_function;
 
 class auth_model extends model
 {
     protected $mysql;
+    protected $auth_function;
+    
     public function __construct()
     {
         // set objects
         $this->set_objects();
+        // reg new user
+        //$this->registr_new_user();
+    }
+
+    protected function registr_new_user()
+    {
+        // check user in db
+        // ...?
+        $phone = 79214604140;
+        $pass = '123456qwerty';
+        $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
+        $name_table = 'user';
+        $array = [
+//            'login' => '',
+//            'name' => '',
+            'phone' => $phone,
+//            'email' => '',
+            'pass' => $generate_hash,
+            'user_theme' => DESIGN_THEME,
+            'data_bs_theme' => MODE_THEME,
+            'hash' => $generate_hash,
+            'sec' => time()
+        ];
+        // add new user to db
+        $this->mysql->insert_set_and_add($name_table, $array);
     }
 
     protected function set_and_settin_viwe()
@@ -34,9 +61,10 @@ class auth_model extends model
         // set object for connect mysql
         $this->mysql = new forUseMysqli;
         // set template
-        $this->viwe = new default_view;
+        $this->viwe = new ('viwe\\'.NAME_VIEW);
+        // other auth function
+        $this->auth_function = new auth_function;
         // option/settings
         $this->set_and_settin_viwe();
     }
-
 }
