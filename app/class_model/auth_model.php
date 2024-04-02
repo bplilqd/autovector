@@ -17,6 +17,7 @@ class auth_model extends model
     {
         // set objects
         $this->set_objects();
+
         // reg new user
         //$this->registr_new_user();
     }
@@ -28,6 +29,7 @@ class auth_model extends model
 
     public function set_and_settin_view()
     {
+        // data transfer and set -> view
         $this->view->content = $this->auth_form->form($this->input_data);
         // default set to name of current theme
         $this->view->user_theme = DESIGN_THEME; // theme default

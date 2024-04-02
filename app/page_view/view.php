@@ -4,7 +4,7 @@ namespace view;
 
 class view
 {
-    public $top;
+    public $top = '';
     public $content;
     public $sidebar;
     public $header;
