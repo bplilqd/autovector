@@ -11,6 +11,7 @@ class auth_model extends model
     protected $mysql;
     protected $auth_function;
     protected $auth_form;
+    protected $input_data; // data for auth_form
 
     public function __construct()
     {
@@ -18,10 +19,23 @@ class auth_model extends model
         $this->set_objects();
         // reg new user
         //$this->registr_new_user();
-        // work to wiew -> option/settings
-        $this->set_and_settin_view();
     }
 
+    public function data_of_auth($data)
+    {
+        $this->input_data = $data;
+    }
+
+    public function set_and_settin_view()
+    {
+        $this->view->content = $this->auth_form->form($this->input_data);
+        // default set to name of current theme
+        $this->view->user_theme = DESIGN_THEME; // theme default
+        // default set to what is the dark or light theme
+        $this->view->data_bs_theme = MODE_THEME; // mode default
+        // include theme
+        $this->view->include_theme();
+    }
     protected function registr_new_user()
     {
         // check user in db
@@ -45,31 +59,15 @@ class auth_model extends model
         $this->mysql->insert_set_and_add($name_table, $array);
     }
 
-    protected function set_and_settin_view()
-    {
-        $this->view->content = $this->auth_form->form();
-        // default set to name of current theme
-        $this->view->user_theme = DESIGN_THEME; // theme default
-        // default set to what is the dark or light theme
-        $this->view->data_bs_theme = MODE_THEME; // mode default
-        $this->view->include_theme();
-    }
-
-    public function data_of_auth($data)
-    {
-        // данные для запроса в базу данных
-        // авторизационные, регистрационные и т.д.
-    }
-
     protected function set_objects()
     {
         // set object for connect mysql
         $this->mysql = new forUseMysqli;
         // auth form
         $this->auth_form = new auth_form;
-        // set template
-        $this->view = new ('view\\' . NAME_VIEW);
         // other auth function
         $this->auth_function = new auth_function;
+        // set template
+        $this->view = new ('view\\' . NAME_VIEW)();
     }
 }
