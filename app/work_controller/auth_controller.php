@@ -9,15 +9,33 @@ class auth_controller extends main_controller
     {
         // set request
         $this->set_request();
-        // обработка запросов пользователя check data input from user
-
         // load casses - add names for class for set autoload 
         $this->start_name_class();
         // set objects of model
         $this->set_object();
-        // sent data
-        $data = [];
-        $this->model->data_of_auth($data);
+        // validation of user input
+        $this->check_of_user_input();
+        // work to wiew -> option/settings
+        $this->model->set_and_settin_view();
+    }
+
+    // validation of user input
+    protected function check_of_user_input()
+    {
+        // validation data of user
+        // ...?
+
+        // form handler
+        $request = $this->request;
+        //$request['phone'] = 79214604140;
+        if ($request) {
+            $data['auth_form'] = [
+                'phone' => $request['phone'],
+                'pass' => $request['pass']
+            ];
+            // sent data
+            $this->model->data_of_auth($data);
+        }
     }
 
     // start name class
