@@ -17,16 +17,16 @@ class default_model extends model
         $this->set_objects();
     }
 
-    protected function set_and_settin_viwe()
+    protected function set_and_settin_view()
     {
         // имитируем запрос с базы данных
         // и устанваливаем полученые данные
         $this->query_data_user_db();
         // set to name of current theme
-        $this->viwe->user_theme = $this->user_config->user_theme;
+        $this->view->user_theme = $this->user_config->user_theme;
         // set to what is the dark or light theme
-        $this->viwe->data_bs_theme = $this->user_config->data_bs_theme;
-        $this->viwe->include_theme();
+        $this->view->data_bs_theme = $this->user_config->data_bs_theme;
+        $this->view->include_theme();
     }
 
     protected function set_objects()
@@ -38,9 +38,9 @@ class default_model extends model
         // set new
         $this->znach_array = new znach_array;
         // set template
-        $this->viwe = new ('viwe\\'.NAME_VIEW);
+        $this->view = new ('view\\'.NAME_VIEW);
         // option/settings
-        $this->set_and_settin_viwe();
+        $this->set_and_settin_view();
     }
 
     protected function query_data_user_db()
