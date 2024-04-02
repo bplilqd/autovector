@@ -16,7 +16,7 @@ class main_controller
     }
 
     // set new class to objects
-    protected function set_object()
+    protected function set_object_model()
     {
 
         $this->model = new ('model\\' . NAME_MODEL);

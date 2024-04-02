@@ -13,8 +13,8 @@ class default_controller extends main_controller
 
         // add names for class for set autoload 
         $this->start_name_class();
-        // set objects of model
-        $this->set_object();
+        // set object of model
+        $this->set_object_model();
     }
 
     // start name class
