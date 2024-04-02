@@ -1,6 +1,6 @@
 <?php
 
-namespace viwe;
+namespace view;
 
 interface interface_set_theme
 {

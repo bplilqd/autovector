@@ -4,7 +4,7 @@ namespace model;
 
 class model
 {
-    protected $viwe;
+    protected $view;
     static $error_arr;
 
 }

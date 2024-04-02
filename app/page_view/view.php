@@ -1,8 +1,8 @@
 <?php
 
-namespace viwe;
+namespace view;
 
-class viwe
+class view
 {
     public $top;
     public $content;
@@ -12,8 +12,4 @@ class viwe
     public $title;
     public $user_theme;
     public $data_bs_theme;
-    public function __construct()
-    {
-        //
-    }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace viwe;
+namespace view;
 
-class default_view extends viwe implements interface_set_theme
+class default_view extends view implements interface_set_theme
 {
     public function __construct()
     {

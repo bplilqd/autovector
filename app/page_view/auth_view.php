@@ -1,14 +1,13 @@
 <?php
 
-namespace viwe;
+namespace view;
 
-class auth_view extends viwe implements interface_set_theme
+class auth_view extends view implements interface_set_theme
 {
     public function __construct()
     {
         $this->top = '<h1 class="text-info">Hello world!</h1>';
         $this->title = 'Авторизация';
-        $this->content = 'form';
     }
 
     public function include_theme()
