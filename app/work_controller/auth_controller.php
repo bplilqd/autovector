@@ -22,13 +22,13 @@ class auth_controller extends main_controller
     // validation of user input
     protected function check_of_user_input()
     {
-        // validation data of user
-        // ...?
-
-        // form handler
         $request = $this->request;
-        // $request['phone'] = 79214604140;
-        if ($request) {
+        if ($request['auth_submit'] == 'auth_submit') {
+
+            // validation data of user
+            // ...?
+
+            // form handler
             $data['auth_form'] = [
                 'phone' => $request['phone'],
                 'pass' => $request['pass']

@@ -41,7 +41,7 @@ class auth_form implements interface_auth_form
         ';
         }
         $str .= '
-        <button type="submit" name="auth_submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" name="auth_submit" value="auth_submit" class="btn btn-primary">Отправить</button>
     </form>';
         $this->form = $str;
     }
