@@ -18,11 +18,10 @@ class auth_form implements interface_auth_form
     protected function set_form()
     {
         $disabled = '';
-        $phone = "";
         $active_input_pass = false;
         if ($this->array) {
-            if ($this->array['auth_form']['phone']) {
-                $phone = $this->array['auth_form']['phone'];
+            $phone = $this->array['auth_form']['phone'];
+            if ($phone) {
                 $disabled = ' disabled';
                 $active_input_pass = true;
             }

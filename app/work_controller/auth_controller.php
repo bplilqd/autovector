@@ -51,7 +51,7 @@ class auth_controller extends main_controller
             // error
             $data['error_arr'][] = $this->error_arr;
 
-            // sent data
+            // sent data -> model
             $this->model->data_of_auth($data);
         }
     }
