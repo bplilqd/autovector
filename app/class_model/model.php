@@ -5,6 +5,6 @@ namespace model;
 class model
 {
     protected $view;
-    static $error_arr; // error
+    static $error_arr; // error 
 
 }
