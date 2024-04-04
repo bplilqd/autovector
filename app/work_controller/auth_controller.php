@@ -14,9 +14,16 @@ class auth_controller extends main_controller
         // set object of model
         $this->set_object_model();
         // validation of user input of data
-        $this->check_of_user_input();
+        if ($this->request) {
+            $this->check_of_user_input();
+        }
         // start work for wiew to model -> option/settings
         $this->model->set_and_settin_view();
+        // sending error to model
+        if ($this->error_arr) {
+            $this->model->error($this->error_arr, 'controller');
+        }
+        print_r($this->model->error_arr);
     }
 
     // validation of user input
@@ -27,14 +34,18 @@ class auth_controller extends main_controller
         if ($request['auth_submit'] == 'auth_submit') {
 
             // validation data of user
-            if ($this->phone_validate($request['phone'])) {
-                $phone = $this->valid_phone_set($request['phone']);
+            if ($request['phone']) {
+                if ($this->phone_validate($request['phone'])) {
+                    $phone = $this->valid_phone_set($request['phone']);
+                }
             }
 
             // form handler
             $data['auth_form'] = [
                 'phone' => $phone,
-                'pass' => strip_tags($request['pass'])
+                'set_phone' => strip_tags($request['set_phone']),
+                'pass' => strip_tags($request['pass']),
+                'auth_submit' => strip_tags($request['auth_submit'])
             ];
 
             // error
@@ -55,7 +66,7 @@ class auth_controller extends main_controller
 
     protected function phone_validate($phone)
     {
-        $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $phone));
+        $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', trim($phone)));
         if (!$result) {
             $this->error_arr[] = "Не корректный формат телефона, попробуйте такого вида +79006003070 или 89006003070.";
         }
