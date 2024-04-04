@@ -4,8 +4,9 @@ namespace controller;
 
 class main_controller
 {
-    protected $model;
-    protected $request;
+    protected $model; // model
+    protected $request; // request
+    static $error_arr; // error
 
     // set request
     protected function set_request()
