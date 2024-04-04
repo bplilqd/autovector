@@ -26,41 +26,75 @@ class auth_model extends model
     public function set_and_settin_view()
     {
         $data = $this->input_data;
-        if ($data) {
-            // registr new user
-            $this->set_registr($data);
-            // authorization
-            //...?
-        }
+        // reg or auth
+        $this->registr_or_authorization($data);
         // data transfer and set -> view
-        $this->view->content = $this->auth_form->form($this->input_data);
+        $this->view->content = $this->auth_form->form($data);
         // default set to name of current theme
         $this->view->user_theme = DESIGN_THEME; // theme default
         // default set to what is the dark or light theme
         $this->view->data_bs_theme = MODE_THEME; // mode default
         // got error from mysql
-        $this->error($this->mysql->error_arr, 'mysql');
+        if ($this->mysql->error_arr) {
+            $this->error($this->mysql->error_arr, 'mysql');
+        }
         // include theme
         $this->view->include_theme();
     }
+    protected function registr_or_authorization($data)
+    {
+        if ($data) {
+            if ($data['auth_form']['auth_submit']) {
+                // registr new user
+                $phone = $data['auth_form']['phone'];
+                $this->set_registr($phone);
+                // authorization
+                $set_phone = $data['auth_form']['set_phone'];
+                $pass = $data['auth_form']['pass'];
+                $this->authorization($set_phone, $pass);
+            }
+        }
+    }
+    protected function set_registr($phone)
+    {
+        if ($phone) {
+            $result = $this->check_user_to_db($phone);
+            if (!$result) {
+                $pass = $this->generateCode($this->length_generate_pass);
+                $this->registr_new_user($phone, $pass);
+                // отправляем пароль
+                // уведомляем что отправили пароль
+            }
+        }
+    }
+    protected function authorization($set_phone,$pass)
+    {
+        if ($set_phone && $pass) {
+            $result = $this->check_user_to_db($set_phone);
+            
+            if ($result) {
+                $row = $this->mysql->query->fetch_assoc();
+                $pass_db = $row['pass'];
+                
+                $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $set_phone);
+                if ($pass_db && $pass_db == $generate_hash) {
+                    // authorization good
+                    print_r('// authorization good');
+                } else {
+                    // authorization error
+                    print_r('// authorization error');
+                }
+            }
+        }
+    }
+
     public function data_of_auth($data)
     {
         $this->input_data = $data;
         print_r($this->input_data);
     }
 
-    protected function set_registr($data)
-    {
-        $phone = $data['auth_form']['phone'];
-        if ($data['auth_form']['auth_submit'] && $phone) {
-            $result = $this->check_user_to_db($phone);
-            if (!$result) {
-                $pass = $this->generateCode($this->length_generate_pass);
-                $this->registr_new_user($phone, $pass);
-                // уведомляем что отправили пароль
-            }
-        }
-    }
+
     // is there a user in the database (db)
     protected function check_user_to_db(int $phone)
     {
