@@ -12,4 +12,4 @@ require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'fu
 set_main_class(NAME_CONTROLLER); // set controller for start work
 $main = new ('controller\\' . NAME_CONTROLLER); // set object controller
 
-print_r($main);
+//print_r($main);
