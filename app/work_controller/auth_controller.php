@@ -15,7 +15,7 @@ class auth_controller extends main_controller
         $this->set_object_model();
         // validation of user input of data
         $this->check_of_user_input();
-        // start work to wiew -> option/settings
+        // start work for wiew to model -> option/settings
         $this->model->set_and_settin_view();
     }
 
@@ -33,8 +33,8 @@ class auth_controller extends main_controller
 
             // form handler
             $data['auth_form'] = [
-                'phone' => $request['phone'],
-                'pass' => $request['pass']
+                'phone' => $phone,
+                'pass' => strip_tags($request['pass'])
             ];
 
             // error
