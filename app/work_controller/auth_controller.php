@@ -23,19 +23,43 @@ class auth_controller extends main_controller
     protected function check_of_user_input()
     {
         $request = $this->request;
+        // if push button
         if ($request['auth_submit'] == 'auth_submit') {
 
             // validation data of user
-            // ...?
+            if ($this->phone_validate($request['phone'])) {
+                $phone = $this->valid_phone_set($request['phone']);
+            }
 
             // form handler
             $data['auth_form'] = [
                 'phone' => $request['phone'],
                 'pass' => $request['pass']
             ];
+
+            // error
+            $data['error_arr'][] = $this->error_arr;
+
             // sent data
             $this->model->data_of_auth($data);
         }
+    }
+
+    protected function valid_phone_set($phone)
+    {
+        $phone_trim = preg_replace('/[^0-9]/', '', trim($phone));
+        $phone_str = substr($phone_trim, -10);
+        $result = preg_replace('/^[9].*/', '7' . $phone_str, $phone_str);
+        return $result;
+    }
+
+    protected function phone_validate($phone)
+    {
+        $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $phone));
+        if (!$result) {
+            $this->error_arr[] = "Не корректный формат телефона, попробуйте такого вида +79006003070 или 89006003070.";
+        }
+        return $result;
     }
 
     // start name class
