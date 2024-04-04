@@ -4,12 +4,17 @@ namespace view;
 
 class view
 {
-    public $top = '';
-    public $content;
-    public $sidebar;
     public $header;
-    public $foot;
+    public $menu;
+    public $top;
+    public $system_mesage;
+    public $announce;
     public $title;
+    public $sidebar;
+    public $content;
+    public $foot;
+
+    // setting of theme
     public $user_theme;
     public $data_bs_theme;
 }
