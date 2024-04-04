@@ -60,7 +60,7 @@ class auth_model extends model
         if ($phone) {
             $result = $this->check_user_to_db($phone);
             if (!$result) {
-                $pass = $this->generateCode($this->length_generate_pass);
+                $pass = $this->auth_function->generateCode($this->length_generate_pass);
                 $this->registr_new_user($phone, $pass);
                 // отправляем пароль
                 // уведомляем что отправили пароль
@@ -79,6 +79,7 @@ class auth_model extends model
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $set_phone);
                 if ($pass_db && $pass_db == $generate_hash) {
                     // authorization good
+                    $this->view->system_mesage = '-> authorization good';
                     print_r('// authorization good');
                 } else {
                     // authorization error
@@ -122,16 +123,7 @@ class auth_model extends model
         print_r($array);
         $this->mysql->insert_set_and_add($name_table, $array);
     }
-    protected function generateCode($length = 6)
-    {
-        $chars = "abcdefikmprstuvwxyz123456789";
-        $code = "";
-        $clen = strlen($chars) - 1;
-        while (strlen($code) < $length) {
-            $code .= $chars[mt_rand(0, $clen)];
-        }
-        return $code;
-    }
+
     protected function set_objects()
     {
         // set object for connect mysql
