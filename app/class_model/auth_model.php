@@ -67,15 +67,15 @@ class auth_model extends model
             }
         }
     }
-    protected function authorization($set_phone,$pass)
+    protected function authorization($set_phone, $pass)
     {
         if ($set_phone && $pass) {
             $result = $this->check_user_to_db($set_phone);
-            
+
             if ($result) {
                 $row = $this->mysql->query->fetch_assoc();
                 $pass_db = $row['pass'];
-                
+
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $set_phone);
                 if ($pass_db && $pass_db == $generate_hash) {
                     // authorization good
@@ -116,7 +116,7 @@ class auth_model extends model
             'pass' => $generate_hash,
             'user_theme' => DESIGN_THEME,
             'data_bs_theme' => MODE_THEME,
-            'hash' => $generate_hash,
+            //             'hash' => '',
             'sec' => time()
         ];
         // add new user to db
