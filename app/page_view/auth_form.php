@@ -37,6 +37,7 @@ class auth_form implements interface_auth_form
         <div class="mb-3">
             <label for="pass" class="form-label">Пароль</label>
             <input name="pass" type="password" class="form-control" id="pass">
+            <input type="hidden" name="phone" value="' . $this->array['auth_form']['phone'] . '">
         </div>
         ';
         }
