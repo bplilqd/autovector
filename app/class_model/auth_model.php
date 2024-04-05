@@ -42,6 +42,7 @@ class auth_model extends model
         if ($this->mysql->error_arr) {
             $this->error($this->mysql->error_arr, 'mysql');
         }
+        print_r($this->error_arr);
         // include theme
         $this->view->include_theme();
     }
@@ -51,56 +52,68 @@ class auth_model extends model
         if ($data) {
             if ($data['auth_form']['auth_submit']) {
 
-                // registr new user
                 $phone = $data['auth_form']['phone'];
-                $this->set_registr($phone);
-
-                // authorization
                 $set_phone = $data['auth_form']['set_phone'];
                 $pass = $data['auth_form']['pass'];
-                $this->set_authorization($set_phone, $pass);
+
+                // registr new user
+                $this->set_registr($phone, $set_phone);
+
+                // authorization
+                $this->set_authorization($set_phone, $phone, $pass);
             }
         }
     }
 
-    protected function set_registr($phone)
+    protected function set_registr($phone, $set_phone)
     {
-        if ($phone) {
+        if ($phone && !$set_phone) {
             $result = $this->check_user_to_db($phone);
             if (!$result) {
+
                 $pass = $this->auth_function->generateCode($this->length_generate_pass);
-                $this->registr_new_user($phone, $pass);
+                $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
+
+                // egistr user
+                $this->registr_new_user($phone, $generate_hash);
                 // отправляем пароль
-                // уведомляем что отправили пароль
+                // уведомляем что отправили пароль открываем поле ввода пароля
             }
         }
     }
 
-    protected function authorization($set_phone, $pass_db, $generate_hash)
+    protected function authorization($pass_db, $generate_hash)
     {
         if ($pass_db && $pass_db == $generate_hash && !$this->error_arr['model']) {
             // authorization good
+            // set hash cook
+            $this->auth_set_cookie($generate_hash);
+            // ...set public $hash; // id user of the hash and public bool $auth; // auth bool FALSE or TRUE
             $this->view->system_mesage = '-> authorization good';
-            //header("Location: $this->redirect");
+            header("Location: /sites/autovector/");
         } else {
             // authorization error
             $this->error_arr['model'][] = ' -> authorization error';
-            // redirect ?phone=$set_phone&auth_submit=auth_submit
-            //header("Location: ?phone=$set_phone&auth_submit=auth_submit");
         }
     }
 
-    protected function set_authorization($set_phone, $pass)
+    protected function auth_set_cookie($hash) {
+        if ($hash) {
+            setcookie("hash", $hash, time() + SET_COOK_TIME_HASH, "/");
+        }
+    }
+
+    protected function set_authorization($set_phone, $phone, $pass)
     {
         if ($set_phone && $pass) {
-            $result = $this->check_user_to_db($set_phone);
+            $result = $this->check_user_to_db($phone);
             if ($result) {
 
                 $row = $this->mysql->query->fetch_assoc();
                 $pass_db = $row['pass'];
 
-                $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $set_phone);
-                $this->authorization($set_phone, $pass_db, $generate_hash);
+                $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
+                $this->authorization($pass_db, $generate_hash);
             }
         }
     }
@@ -108,7 +121,7 @@ class auth_model extends model
     public function data_of_auth($data)
     {
         $this->input_data = $data;
-        print_r($this->input_data);
+        //print_r($this->input_data);
     }
 
 
@@ -120,9 +133,8 @@ class auth_model extends model
         return $result;
     }
 
-    protected function registr_new_user($phone, $pass)
+    protected function registr_new_user($phone, $generate_hash)
     {
-        $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
         $name_table = 'user';
         $array = [
             //            'login' => '',
@@ -136,7 +148,6 @@ class auth_model extends model
             'sec' => time()
         ];
         // add new user to db
-        print_r($array);
         $this->mysql->insert_set_and_add($name_table, $array);
     }
 

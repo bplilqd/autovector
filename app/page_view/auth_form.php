@@ -18,21 +18,23 @@ class auth_form implements interface_auth_form
     protected function set_form()
     {
         $disabled = '';
+        $help_text = 'Введите номер телефона на котором есть WhathsApp';
         $active_input_pass = false;
         if ($this->array) {
             $phone = $this->array['auth_form']['phone'];
             if ($phone) {
+                $help_text = 'Ввести <a href="index.php">другой номер</a>';
                 $disabled = ' disabled';
                 $active_input_pass = true;
             }
         }
         $str = '
-    <form method="post">
+    <form method="post" action="">
         <div class="mb-3">
             <label for="phone" class="form-label">Телефон</label>
             <input name="phone" value="' . $phone . '" type="phone" class="form-control" 
             id="phone" aria-describedby="phoneHelp" placeholder="' . $phone . '"' . $disabled . '>
-            <div id="phoneHelp" class="form-text">Введите номер телефона на котором есть WhathsApp</div>
+            <div id="phoneHelp" class="form-text">'.$help_text.'</div>
         </div>';
 
         if ($active_input_pass) {
@@ -40,7 +42,8 @@ class auth_form implements interface_auth_form
         <div class="mb-3">
             <label for="pass" class="form-label">Пароль</label>
             <input name="pass" type="password" class="form-control" id="pass">
-            <input type="hidden" name="set_phone" value="' . $phone . '">
+            <input type="hidden" name="set_phone" value="true">
+            <input type="hidden" name="phone" value="' . $phone . '">
         </div>
         ';
         }
