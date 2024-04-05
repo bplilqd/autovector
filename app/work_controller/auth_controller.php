@@ -23,7 +23,6 @@ class auth_controller extends main_controller
         if ($this->error_arr) {
             $this->model->error($this->error_arr, 'controller');
         }
-        print_r($this->model->error_arr);
     }
 
     // validation of user input
@@ -68,7 +67,7 @@ class auth_controller extends main_controller
     {
         $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', trim($phone)));
         if (!$result) {
-            $this->error_arr[] = "Не корректный формат телефона, попробуйте такого вида +79006003070 или 89006003070.";
+            $this->error_arr[] = "Not correct format number phone, try example +79006003070 or 89006003070.";
         }
         return $result;
     }
