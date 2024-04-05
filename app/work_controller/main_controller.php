@@ -6,10 +6,10 @@ class main_controller
 {
     protected $model; // model
     protected $request; // request
-    static $error_arr; // error
+    static array $error_arr; // error
 
-    public $hash; // id user of the hash
-    public bool $auth; // auth bool FALSE or TRUE
+    public string $hash; // id user of the hash
+    public bool $auth = false; // auth bool FALSE or TRUE
 
     // set request
     protected function set_request()
