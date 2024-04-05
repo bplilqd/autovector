@@ -27,7 +27,7 @@ class auth_form implements interface_auth_form
             }
         }
         $str = '
-    <form>
+    <form method="post">
         <div class="mb-3">
             <label for="phone" class="form-label">Телефон</label>
             <input name="phone" value="' . $phone . '" type="phone" class="form-control" 
