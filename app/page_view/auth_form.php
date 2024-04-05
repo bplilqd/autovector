@@ -18,6 +18,7 @@ class auth_form implements interface_auth_form
     protected function set_form()
     {
         $disabled = '';
+        $phone = '';
         $help_text = 'Введите номер телефона на котором есть WhathsApp';
         $active_input_pass = false;
         if ($this->array) {
