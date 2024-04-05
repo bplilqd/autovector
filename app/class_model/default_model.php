@@ -7,9 +7,9 @@ use model\connect\forUseMysqli;
 
 class default_model extends model
 {
-    protected $user_config;
-    protected $znach_array;
-    protected $mysql;
+    protected object  $user_config;
+    protected object $znach_array;
+    protected object $mysql;
 
     public function __construct()
     {

@@ -9,13 +9,13 @@ use view\auth_form;
 class auth_model extends model
 {
     // objects
-    protected $mysql;
-    protected $auth_function;
-    protected $auth_form;
+    protected object $mysql;
+    protected object $auth_function;
+    protected object $auth_form;
     // other properties
     protected $input_data; // data for auth_form
-    protected $length_generate_pass = 8;
-    protected $redirect = SITE_URL;
+    protected int $length_generate_pass = 8;
+    protected string $redirect = SITE_URL;
 
     public function __construct()
     {
