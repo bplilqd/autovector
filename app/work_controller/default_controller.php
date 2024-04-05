@@ -9,8 +9,6 @@ class default_controller extends main_controller
     {
         // set request
         $this->set_request();
-        // обработка запросов пользователя
-
         // add names for class for set autoload 
         $this->start_name_class();
         // set object of model
