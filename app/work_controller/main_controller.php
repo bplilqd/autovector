@@ -8,8 +8,24 @@ class main_controller
     protected $request; // request
     static array $error_arr; // error
 
-    public string $hash; // id user of the hash
-    public bool $auth = false; // auth bool FALSE or TRUE
+    public string $hash = ''; // id user of the hash
+
+    protected function set_standart()
+    {
+        // set request
+        $this->set_request();
+        // set hash from browser
+        $this->set_hash_check();
+        // set object of model
+        $this->set_object_model();
+    }
+
+    protected function set_hash_check()
+    {
+        if ($_COOKIE['hash']) {
+            $this->hash = $_COOKIE['hash'];
+        }
+    }
 
     // set request
     protected function set_request()
