@@ -7,22 +7,25 @@ class auth_controller extends main_controller
 
     function __construct()
     {
-        // set request
-        $this->set_request();
         // load casses - add names for class for set autoload 
         $this->start_name_class();
-        // set object of model
-        $this->set_object_model();
+        // standart methods
+        $this->set_standart();
+        // if auth to refresh/redirect
+        if($this->hash){
+            $this->error_arr[] = 'Вы уже авторизованы. Перенаправление на главную через 5 секунд.';
+            header( "refresh:5; url=/sites/autovector/" );
+        }
         // validation of user input of data
         if ($this->request) {
             $this->check_of_user_input();
         }
-        // start work for wiew to model -> option/settings
-        $this->model->set_and_settin_view();
         // sending error to model
         if ($this->error_arr) {
             $this->model->error($this->error_arr, 'controller');
         }
+        // start work for wiew to model -> option/settings
+        $this->model->set_and_setting_view();
     }
 
     // validation of user input
@@ -86,7 +89,7 @@ class auth_controller extends main_controller
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
-        $class_model = [NAME_MODEL];
+        $class_model = ['interface_auth_model', NAME_MODEL];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
         $array[] = [$class_model, $path_model];
 
