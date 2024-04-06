@@ -18,10 +18,6 @@ class default_model extends model
 
     public function set_and_setting_view()
     {
-        // set to name of current theme
-        $this->view->user_theme = $this->user_config->user_theme;
-        // set to what is the dark or light theme
-        $this->view->data_bs_theme = $this->user_config->data_bs_theme;
         // got error from mysql
         if ($this->mysql->error_arr) {
             $this->error($this->mysql->error_arr, 'mysql');

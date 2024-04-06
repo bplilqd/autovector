@@ -15,6 +15,6 @@ class view
     public $foot;
 
     // setting of theme
-    public $user_theme;
-    public $data_bs_theme;
+    public $user_theme = DESIGN_THEME;
+    public $data_bs_theme = MODE_THEME;
 }

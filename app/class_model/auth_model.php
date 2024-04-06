@@ -88,7 +88,7 @@ class auth_model extends model implements interface_auth_model
             $this->auth_set_cookie($generate_hash);
             // ...set public $hash; // id user of the hash and public bool $auth; // auth bool FALSE or TRUE
             $this->view->system_mesage = '-> authorization good';
-            header("Location: /sites/autovector/");
+            header("Location: ../../../..");
         } else {
             // authorization error
             $this->error_arr['model'][] = ' -> authorization error';

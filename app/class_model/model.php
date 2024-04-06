@@ -36,7 +36,10 @@ class model
                 $row = $this->mysql->query->fetch_assoc();
                 // set user
                 $this->user_config->input_data($row);
-
+                // set to name of current theme
+                $this->view->user_theme = $this->user_config->user_theme;
+                // set to what is the dark or light theme
+                $this->view->data_bs_theme = $this->user_config->data_bs_theme;
                 // set online sec
             }
         }
