@@ -40,7 +40,8 @@ class auth_model extends model implements interface_auth_model
         if ($this->mysql->error_arr) {
             $this->error($this->mysql->error_arr, 'mysql');
         }
-        print_r($this->error_arr);
+        // for print errors
+        $this->view->error_print($this->error_arr);
         // include theme
         $this->view->include_theme();
     }
@@ -87,11 +88,11 @@ class auth_model extends model implements interface_auth_model
             // set hash cook
             $this->auth_set_cookie($generate_hash);
             // ...set public $hash; // id user of the hash and public bool $auth; // auth bool FALSE or TRUE
-            $this->view->system_mesage = '-> authorization good';
+            $this->view->system_mesage = 'authorization good';
             header("Location: ../../../..");
         } else {
             // authorization error
-            $this->error_arr['model'][] = ' -> authorization error';
+            $this->error_arr['model'][] = 'authorization error';
         }
     }
 
