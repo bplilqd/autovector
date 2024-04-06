@@ -7,12 +7,18 @@ class default_controller extends main_controller
 
     function __construct()
     {
-        // set request
-        $this->set_request();
-        // add names for class for set autoload 
+        // load casses - add names for class for set autoload 
         $this->start_name_class();
-        // set object of model
-        $this->set_object_model();
+        // standart methods
+        $this->set_standart();
+        // sending error to model
+        if ($this->error_arr) {
+            $this->model->error($this->error_arr, 'controller');
+        }
+        // set user auth
+        $this->model->set_user($this->hash);
+        // start work for wiew to model -> option/settings
+        $this->model->set_and_setting_view();
     }
 
     // start name class

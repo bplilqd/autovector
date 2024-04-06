@@ -7,7 +7,6 @@ use model\connect\forUseMysqli;
 
 class default_model extends model
 {
-    protected object  $user_config;
     protected object $znach_array;
     protected object $mysql;
 
@@ -17,15 +16,17 @@ class default_model extends model
         $this->set_objects();
     }
 
-    protected function set_and_settin_view()
+    public function set_and_setting_view()
     {
-        // имитируем запрос с базы данных
-        // и устанваливаем полученые данные
-        $this->query_data_user_db();
         // set to name of current theme
         $this->view->user_theme = $this->user_config->user_theme;
         // set to what is the dark or light theme
         $this->view->data_bs_theme = $this->user_config->data_bs_theme;
+        // got error from mysql
+        if ($this->mysql->error_arr) {
+            $this->error($this->mysql->error_arr, 'mysql');
+        }
+        print_r($this->error_arr);
         $this->view->include_theme();
     }
 
@@ -39,16 +40,5 @@ class default_model extends model
         $this->znach_array = new znach_array;
         // set template
         $this->view = new ('view\\'.NAME_VIEW);
-        // option/settings
-        $this->set_and_settin_view();
-    }
-
-    protected function query_data_user_db()
-    {
-        // real connect db
-        // .....?
-        // imitation
-        $array = ['user_theme' => 'theme', 'data_bs_theme' => "dark"];
-        $this->user_config->input_data($array);
     }
 }
