@@ -6,10 +6,8 @@ use model\connect\forUseMysqli;
 use controller\work\auth\auth_function;
 use view\auth_form;
 
-class auth_model extends model
+class auth_model extends model implements interface_auth_model
 {
-    // objects
-    protected object $mysql;
     protected object $auth_function;
     protected object $auth_form;
     // other properties
@@ -26,7 +24,7 @@ class auth_model extends model
         //$this->error_arr['model'][] = 'test error in the model';
     }
 
-    public function set_and_settin_view()
+    public function set_and_setting_view()
     {
         // receiving data
         $data = $this->input_data;
