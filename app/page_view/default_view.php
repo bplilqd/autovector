@@ -10,6 +10,13 @@ class default_view extends view implements interface_set_theme
         $url_img_autovector = SITE_URL . 'images/autovector.jpg';
         //$url_img_autovector = PATH . DS. 'images/autovector.jpg';
         $this->content = '<img src="' . $url_img_autovector . '" class="img-fluid" alt="autovector">';
+        $this->menu = '<a href="#"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
+    }
+
+    public function set_menu()
+    {
+        $str = '';
+        $this->menu = $str;
     }
 
     public function include_theme()
@@ -20,7 +27,7 @@ class default_view extends view implements interface_set_theme
             'top',
             'menu',
             'system_mesage',
-//            'announce',
+            //            'announce',
             'title',
             'sidebar',
             'content',
