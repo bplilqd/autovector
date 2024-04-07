@@ -13,7 +13,7 @@ class auth_controller extends main_controller
         $this->set_standart();
         // if auth to refresh/redirect
         if ($this->hash) {
-            $this->error_arr[] = 'Вы уже авторизованы. Перенаправление на главную через 5 секунд.';
+            $this->error_arr[] = 'As long as there is authorization, there will be a redirection after 5 seconds';
             header("refresh:5; url=../../../..");
         }
         // validation of user input of data
