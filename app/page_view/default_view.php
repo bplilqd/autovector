@@ -14,10 +14,12 @@ class default_view extends view implements interface_set_theme
         $this->menu = '<a href="/app/work_controller/work/auth/index.php"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
     }
 
-    public function set_menu()
+    public function set_menu($auth)
     {
-        $str = '';
-        $this->menu = $str;
+        if ($auth) {
+            $str = '<a href="/app/work_controller/work/auth/index.php"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
+            $this->menu = $str;
+        }
     }
 
     public function include_theme()
