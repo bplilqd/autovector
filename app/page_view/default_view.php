@@ -6,11 +6,12 @@ class default_view extends view implements interface_set_theme
 {
     public function __construct()
     {
-        $this->top = '<h1 class="text-info">Hello world!</h1>';
+        $this->top = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
         $url_img_autovector = SITE_URL . 'images/autovector.jpg';
         //$url_img_autovector = PATH . DS. 'images/autovector.jpg';
+        $this->title = 'Welcome';
         $this->content = '<img src="' . $url_img_autovector . '" class="img-fluid" alt="autovector">';
-        $this->menu = '<a href="#"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
+        $this->menu = '<a href="/app/work_controller/work/auth/index.php"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
     }
 
     public function set_menu()

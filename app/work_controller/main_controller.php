@@ -4,7 +4,7 @@ namespace controller;
 
 class main_controller
 {
-    protected $model; // model
+    protected object $model; // model
     protected $request; // request
     static array $error_arr; // error
 
@@ -22,8 +22,8 @@ class main_controller
 
     protected function set_hash_check()
     {
-        if ($_COOKIE['hash']) {
-            $this->hash = $_COOKIE['hash'];
+        if (USER_HASH) {
+            $this->hash = USER_HASH;
         }
     }
 
