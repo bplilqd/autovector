@@ -24,7 +24,7 @@ class view
         if ($error_arr) {
             $result = '';
             foreach ($error_arr as $k => $v) {
-                foreach ($v as $key => $val) {
+                foreach ($v as $val) {
                     $result .= '
                     <div class="alert alert-danger" role="alert">
                         ' . $k . ' -> ' . $val . '

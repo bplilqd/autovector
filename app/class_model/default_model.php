@@ -23,6 +23,7 @@ class default_model extends model
             $this->error($this->mysql->error_arr, 'mysql');
         }
         print_r($this->error_arr);
+        $this->view->set_menu($this->auth);
         $this->view->include_theme();
     }
 
