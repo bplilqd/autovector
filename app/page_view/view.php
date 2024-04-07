@@ -13,6 +13,7 @@ class view
     public $sidebar;
     public $content;
     public $foot;
+    public $meta;
 
     // setting of theme
     public $user_theme = DESIGN_THEME;
