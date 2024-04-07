@@ -17,10 +17,10 @@ class default_view extends view implements interface_set_theme
         // example structure
         $array = [
             'header',
-            'menu',
             'top',
+            'menu',
             'system_mesage',
-            'announce',
+//            'announce',
             'title',
             'sidebar',
             'content',

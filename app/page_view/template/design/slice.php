@@ -19,8 +19,8 @@ class p_slice_class {
     protected function set_arr_for_cuts() {
         $arr = [
             'header',
-            'menu',
             'top',
+            'menu',
             'system_mesage',
             'announce',
             'title',
