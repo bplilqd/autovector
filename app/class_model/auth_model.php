@@ -81,14 +81,18 @@ class auth_model extends model implements interface_auth_model
         }
     }
 
-    protected function authorization($pass_db, $generate_hash)
+    protected function authorization($phone, $pass_db, $generate_hash)
     {
         if ($pass_db && $pass_db == $generate_hash && !$this->error_arr['model']) {
             // authorization good
+            
             // set hash cook
             $this->auth_set_cookie($generate_hash);
-            // ...set public $hash; // id user of the hash and public bool $auth; // auth bool FALSE or TRUE
-            $this->view->system_mesage = 'authorization good';
+
+            // update user
+            $sql = "UPDATE `user` SET `hash` = '$generate_hash' WHERE `user`.`phone` = $phone";
+            $this->mysql->sql_update($sql);
+
             header("Location: ../../../..");
         } else {
             // authorization error
@@ -112,7 +116,7 @@ class auth_model extends model implements interface_auth_model
                 $pass_db = $row['pass'];
 
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
-                $this->authorization($pass_db, $generate_hash);
+                $this->authorization($phone, $pass_db, $generate_hash);
             }
         }
     }
