@@ -92,7 +92,7 @@ class auth_model extends model implements interface_auth_model
             header("Location: ../../../..");
         } else {
             // authorization error
-            $this->error_arr['model'][] = 'authorization error';
+            $this->error_arr['model'][] = 'Incorrect password.';
         }
     }
 

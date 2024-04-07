@@ -12,9 +12,9 @@ class auth_controller extends main_controller
         // standart methods
         $this->set_standart();
         // if auth to refresh/redirect
-        if($this->hash){
+        if ($this->hash) {
             $this->error_arr[] = 'Вы уже авторизованы. Перенаправление на главную через 5 секунд.';
-            header( "refresh:5; url=../../../.." );
+            header("refresh:5; url=../../../..");
         }
         // validation of user input of data
         if ($this->request) {
@@ -40,6 +40,8 @@ class auth_controller extends main_controller
                 if ($this->phone_validate($request['phone'])) {
                     $phone = $this->valid_phone_set($request['phone']);
                 }
+            } else {
+                $this->error_arr[] = 'Enter phone number.';
             }
 
             // form handler
@@ -49,9 +51,6 @@ class auth_controller extends main_controller
                 'pass' => strip_tags($request['pass']),
                 'auth_submit' => strip_tags($request['auth_submit'])
             ];
-
-            // error
-            $data['error_arr'][] = $this->error_arr;
 
             // sent data -> model
             $this->model->data_of_auth($data);
