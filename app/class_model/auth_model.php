@@ -19,9 +19,6 @@ class auth_model extends model implements interface_auth_model
     {
         // set objects
         $this->set_objects();
-
-        // example error for model
-        //$this->error_arr['model'][] = 'test error in the model';
     }
 
     public function set_and_setting_view()
@@ -30,16 +27,19 @@ class auth_model extends model implements interface_auth_model
         $data = $this->input_data;
         // reg or auth
         $this->registr_or_authorization($data);
-        // data transfer and set -> view
+
+        // got error from mysql
+        if ($this->mysql->error_arr) {
+            $this->error($this->mysql->error_arr, 'mysql');
+        }
+
+        // view ->
+        // data transfer and set view
         $this->view->content = $this->auth_form->form($data);
         // default set to name of current theme
         $this->view->user_theme = DESIGN_THEME; // theme default
         // default set to what is the dark or light theme
         $this->view->data_bs_theme = MODE_THEME; // mode default
-        // got error from mysql
-        if ($this->mysql->error_arr) {
-            $this->error($this->mysql->error_arr, 'mysql');
-        }
         // for print errors
         $this->view->error_print($this->error_arr);
         // include theme
@@ -75,8 +75,10 @@ class auth_model extends model implements interface_auth_model
 
                 // egistr user
                 $this->registr_new_user($phone, $generate_hash);
+
                 // отправляем пароль
-                // уведомляем что отправили пароль открываем поле ввода пароля
+
+                // уведомляем что отправили пароль
             }
         }
     }
@@ -100,12 +102,6 @@ class auth_model extends model implements interface_auth_model
         }
     }
 
-    protected function auth_set_cookie($hash) {
-        if ($hash) {
-            setcookie("hash", $hash, time() + SET_COOK_TIME_HASH, "/");
-        }
-    }
-
     protected function set_authorization($set_phone, $phone, $pass)
     {
         if ($set_phone && $pass) {
@@ -120,7 +116,11 @@ class auth_model extends model implements interface_auth_model
             }
         }
     }
-
+    protected function auth_set_cookie($hash) {
+        if ($hash) {
+            setcookie("hash", $hash, time() + SET_COOK_TIME_HASH, "/");
+        }
+    }
     public function data_of_auth($data)
     {
         $this->input_data = $data;
