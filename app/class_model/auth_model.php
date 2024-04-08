@@ -42,6 +42,7 @@ class auth_model extends model implements interface_auth_model
         $this->view->data_bs_theme = MODE_THEME; // mode default
         // for print errors
         $this->view->error_print($this->error_arr);
+        // set_foot
         $this->view->set_foot($this->mysql->count_query);
         // include theme
         $this->view->include_theme();
