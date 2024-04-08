@@ -19,6 +19,17 @@ class view
     public $user_theme = DESIGN_THEME;
     public $data_bs_theme = MODE_THEME;
 
+    public function set_foot($count_query)
+    {
+        $count_db_request = 0;
+        if ($count_query) {
+            $count_db_request = count($count_query);
+        }
+
+        $str = "<center><p> " . Memory_mb(memory_get_usage()) . " <br> Запросов к базе данных " . $count_db_request . " <br> " . Time_sec(TIME_START, microtime(true)) . "</p></center>";
+        $this->foot = $str;
+    }
+
     public function error_print($error_arr)
     {
         if ($error_arr) {

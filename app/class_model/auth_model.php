@@ -42,6 +42,7 @@ class auth_model extends model implements interface_auth_model
         $this->view->data_bs_theme = MODE_THEME; // mode default
         // for print errors
         $this->view->error_print($this->error_arr);
+        $this->view->set_foot($this->mysql->count_query);
         // include theme
         $this->view->include_theme();
     }
@@ -87,7 +88,7 @@ class auth_model extends model implements interface_auth_model
     {
         if ($pass_db && $pass_db == $generate_hash && !$this->error_arr['model']) {
             // authorization good
-            
+
             // set hash cook
             $this->auth_set_cookie($generate_hash);
 
@@ -116,7 +117,8 @@ class auth_model extends model implements interface_auth_model
             }
         }
     }
-    protected function auth_set_cookie($hash) {
+    protected function auth_set_cookie($hash)
+    {
         if ($hash) {
             setcookie("hash", $hash, time() + SET_COOK_TIME_HASH, "/");
         }

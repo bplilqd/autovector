@@ -24,6 +24,7 @@ class default_model extends model
         }
         print_r($this->error_arr);
         $this->view->set_menu($this->auth);
+        $this->view->set_foot($this->mysql->count_query);
         $this->view->include_theme();
     }
 
