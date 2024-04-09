@@ -9,7 +9,7 @@ use view\auth_form;
 class auth_model extends model implements interface_auth_model
 {
     protected object $auth_function;
-    protected object $auth_form;
+    public object $auth_form;
     // other properties
     protected $input_data; // data for auth_form
     protected int $length_generate_pass = 8;
@@ -32,20 +32,8 @@ class auth_model extends model implements interface_auth_model
         if ($this->mysql->error_arr) {
             $this->error($this->mysql->error_arr, 'mysql');
         }
-
-        // view ->
-        // data transfer and set view
-        $this->view->content = $this->auth_form->form($data);
-        // default set to name of current theme
-        $this->view->user_theme = DESIGN_THEME; // theme default
-        // default set to what is the dark or light theme
-        $this->view->data_bs_theme = MODE_THEME; // mode default
-        // for print errors
-        $this->view->error_print($this->error_arr);
-        // set_foot
-        $this->view->set_foot($this->mysql->count_query);
-        // include theme
-        $this->view->include_theme();
+        // count queries in database
+        $this->count_query = $this->mysql->count_query;
     }
 
     protected function registr_or_authorization($data)
@@ -165,7 +153,5 @@ class auth_model extends model implements interface_auth_model
         $this->auth_form = new auth_form;
         // other auth function
         $this->auth_function = new auth_function;
-        // set template
-        $this->view = new ('view\\' . NAME_VIEW)();
     }
 }

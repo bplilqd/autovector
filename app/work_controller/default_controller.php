@@ -19,6 +19,17 @@ class default_controller extends main_controller
         $this->model->set_user($this->hash);
         // start work for wiew to model -> option/settings
         $this->model->set_and_setting_view();
+
+        // view ->
+        $this->settings_user();
+        // for print errors
+        $this->view->error_print($this->model->error_arr);
+        // set_menu
+        $this->view->set_menu($this->model->auth);
+        // set_foot
+        $this->view->set_foot($this->model->count_query);
+        // include theme
+        $this->view->include_theme();
     }
 
     // start name class

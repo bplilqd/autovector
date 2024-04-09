@@ -5,6 +5,8 @@ namespace controller;
 class main_controller
 {
     protected object $model; // model
+    protected object $view;
+
     protected $request; // request
     static array $error_arr; // error
 
@@ -17,9 +19,18 @@ class main_controller
         // set hash from browser
         $this->set_hash_check();
         // set object of model
-        $this->set_object_model();
+        $this->set_object_model_and_view();
     }
 
+    protected function settings_user()
+    {
+        if ($this->model->auth) {
+            // set to name of current theme
+            $this->view->user_theme = $this->model->user_config->user_theme;
+            // set to what is the dark or light theme
+            $this->view->data_bs_theme = $this->model->user_config->data_bs_theme;
+        }
+    }
     protected function set_hash_check()
     {
         if (USER_HASH) {
@@ -36,10 +47,12 @@ class main_controller
     }
 
     // set new class to objects
-    protected function set_object_model()
+    protected function set_object_model_and_view()
     {
-
+        // set model
         $this->model = new ('model\\' . NAME_MODEL);
+        // set view -> template
+        $this->view = new ('view\\' . NAME_VIEW);
     }
 
     // method for autoload class

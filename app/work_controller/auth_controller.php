@@ -5,6 +5,8 @@ namespace controller;
 class auth_controller extends main_controller
 {
 
+    protected $data; // data of auth
+
     function __construct()
     {
         // load casses - add names for class for set autoload 
@@ -26,6 +28,20 @@ class auth_controller extends main_controller
         }
         // start work for wiew to model -> option/settings
         $this->model->set_and_setting_view();
+
+        // view ->
+        // data transfer and set view
+        $this->view->content = $this->model->auth_form->form($this->data);
+        // default set to name of current theme
+        $this->view->user_theme = DESIGN_THEME; // theme default
+        // default set to what is the dark or light theme
+        $this->view->data_bs_theme = MODE_THEME; // mode default
+        // for print errors
+        $this->view->error_print($this->model->error_arr);
+        // set_foot
+        $this->view->set_foot($this->model->count_query);
+        // include theme
+        $this->view->include_theme();
     }
 
     // validation of user input
@@ -54,6 +70,8 @@ class auth_controller extends main_controller
 
             // sent data -> model
             $this->model->data_of_auth($data);
+            // set data of user
+            $this->data =$data;
         }
     }
 

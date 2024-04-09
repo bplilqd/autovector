@@ -22,14 +22,8 @@ class default_model extends model
         if ($this->mysql->error_arr) {
             $this->error($this->mysql->error_arr, 'mysql');
         }
-        // for print errors
-        $this->view->error_print($this->error_arr);
-        // set_menu
-        $this->view->set_menu($this->auth);
-        // set_foot
-        $this->view->set_foot($this->mysql->count_query);
-        // include theme
-        $this->view->include_theme();
+        // count queries in database
+        $this->count_query = $this->mysql->count_query;
     }
 
     protected function set_objects()
@@ -40,7 +34,5 @@ class default_model extends model
         $this->user_config = new user_config;
         // set new
         $this->znach_array = new znach_array;
-        // set template
-        $this->view = new ('view\\' . NAME_VIEW);
     }
 }
