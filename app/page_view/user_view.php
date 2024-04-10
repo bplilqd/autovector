@@ -2,12 +2,30 @@
 
 namespace view;
 
-class user_view extends view implements interface_set_theme
+class user_view extends view implements interface_set_theme, interface_user_view
 {
     public function __construct()
     {
         $this->top = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
         $this->title = 'User page';
+    }
+
+    public function set_menu()
+    {
+        $menu = '
+        <ul class="nav nav-underline">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Профиль</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Настройки</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Выход</a>
+          </li>
+        </ul>
+        ';
+        $this->menu = $menu;
     }
 
     public function include_theme()
