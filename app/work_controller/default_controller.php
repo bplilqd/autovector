@@ -28,7 +28,9 @@ class default_controller extends main_controller
         // for print errors
         $this->view->error_print($this->model->error_arr);
         // set_menu
-        $this->view->set_menu($this->model->auth);
+        if ($this->model->auth) {
+            $this->view->set_menu();
+        }
         // set_foot
         $this->view->set_foot($this->model->count_query);
         // include theme
