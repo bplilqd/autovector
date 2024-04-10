@@ -9,15 +9,18 @@ class auth_controller extends main_controller
 
     function __construct()
     {
+        // controller ->
         // load casses - add names for class for set autoload 
         $this->start_name_class();
-        // standart methods
+        // standart methods -> set request, set hash from browser, set object of model and others...
         $this->set_standart();
         // if auth to refresh/redirect
         if ($this->hash) {
             $this->error_arr[] = 'As long as there is authorization, there will be a redirection after 5 seconds';
             header("refresh:5; url=../../../..");
         }
+
+        // model ->
         // validation of user input of data
         if ($this->request) {
             $this->check_of_user_input();
@@ -26,8 +29,8 @@ class auth_controller extends main_controller
         if ($this->error_arr) {
             $this->model->error($this->error_arr, 'controller');
         }
-        // start work for wiew to model -> option/settings
-        $this->model->set_and_setting_view();
+        // start work for to model -> option/settings
+        $this->model->set_and_setting();
 
         // view ->
         // data transfer and set view
@@ -71,7 +74,7 @@ class auth_controller extends main_controller
             // sent data -> model
             $this->model->data_of_auth($data);
             // set data of user
-            $this->data =$data;
+            $this->data = $data;
         }
     }
 
