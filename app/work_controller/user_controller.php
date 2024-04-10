@@ -27,6 +27,8 @@ class user_controller extends main_controller
         $this->settings_user();
         // for print errors
         $this->view->error_print($this->model->error_arr);
+        // set menu
+        $this->view->set_menu();
         // set_foot
         $this->view->set_foot($this->model->count_query);
         // include theme
@@ -52,7 +54,7 @@ class user_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_set_theme', NAME_VIEW];
+        $class_view = ['interface_set_theme', 'interface_user_view', NAME_VIEW];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 
