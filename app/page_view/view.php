@@ -21,12 +21,12 @@ class view
 
     public function set_foot($count_query)
     {
-        $count_db_request = 0;
-        if ($count_query) {
-            $count_db_request = count($count_query);
+
+        if (!$count_query) {
+            $count_query = 0;
         }
 
-        $str = "<center><p> " . Memory_mb(memory_get_usage()) . " <br> Запросов к базе данных " . $count_db_request . " <br> " . Time_sec(TIME_START, microtime(true)) . "</p></center>";
+        $str = "<center><p> " . Memory_mb(memory_get_usage()) . " <br> Запросов к базе данных " . $count_query . " <br> " . Time_sec(TIME_START, microtime(true)) . "</p></center>";
         $this->foot = $str;
     }
 
