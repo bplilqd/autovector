@@ -4,20 +4,44 @@ namespace view;
 
 class view
 {
-    public $header;
-    public $menu;
-    public $top;
-    public $system_mesage;
-    public $announce;
-    public $title;
-    public $sidebar;
-    public $content;
-    public $foot;
-    public $meta;
+    private $header;
+    private $menu;
+    private $top;
+    private $system_mesage;
+    private $announce;
+    private $title;
+    private $sidebar;
+    private $content;
+    private $foot;
+    private $meta;
 
     // setting of theme
     public $user_theme = DESIGN_THEME;
     public $data_bs_theme = MODE_THEME;
+
+    // set properties (function in data)
+    public function setting_properties($property, $set_option, $change_or_set_parm = '', $start_parm = '', $end_parm = '')
+    {
+        $result = '';
+        if ($set_option == 'set') {
+            $result = $change_or_set_parm;
+            $this->$property = $result;
+        }
+        if ($set_option == 'start') {
+            $result = $start_parm . $this->$property;
+            $this->$property = $result;
+        }
+        if ($set_option == 'end') {
+            $result = $this->$property . $end_parm;
+            $this->$property = $result;
+        }
+    }
+
+    // getting_properties (function out data)
+    public function getting_properties($property)
+    {
+        return $this->$property;
+    }
 
     public function set_foot($count_query)
     {
