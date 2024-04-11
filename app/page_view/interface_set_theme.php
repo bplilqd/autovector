@@ -9,7 +9,7 @@ interface interface_set_theme
     // for error print
     public function error_print($error_arr);
     // function the input data of properties
-    public function setting_properties($property, $set_option, $change_or_set_parm = '', $start_parm = '', $end_parm = '');
+    public function setting_properties($property, $change_or_set_parm = '', $start_parm = '', $end_parm = '');
     // function the output data
     public function getting_properties($property);
 }

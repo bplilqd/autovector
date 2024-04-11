@@ -4,6 +4,7 @@ namespace view;
 
 class view
 {
+    // standart
     private $header;
     private $menu;
     private $top;
@@ -13,6 +14,7 @@ class view
     private $sidebar;
     private $content;
     private $foot;
+    // extra
     private $meta;
 
     // setting of theme
@@ -20,18 +22,21 @@ class view
     public $data_bs_theme = MODE_THEME;
 
     // set properties (function in data)
-    public function setting_properties($property, $set_option, $change_or_set_parm = '', $start_parm = '', $end_parm = '')
+    public function setting_properties($property, $change_or_set_parm = '', $start_parm = '', $end_parm = '')
     {
         $result = '';
-        if ($set_option == 'set') {
+        // set
+        if ($change_or_set_parm) {
             $result = $change_or_set_parm;
             $this->$property = $result;
         }
-        if ($set_option == 'start') {
+        // start
+        if ($start_parm) {
             $result = $start_parm . $this->$property;
             $this->$property = $result;
         }
-        if ($set_option == 'end') {
+        // end
+        if ($end_parm) {
             $result = $this->$property . $end_parm;
             $this->$property = $result;
         }
