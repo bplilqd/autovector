@@ -34,11 +34,12 @@ class auth_controller extends main_controller
 
         // view ->
         // data transfer and set view
-        $this->view->content = $this->model->auth_form->form($this->data);
+        $form = $this->model->auth_form->form($this->data);
+        $this->view->setting_properties('content', 'set', $form);
         // default set to name of current theme
-        $this->view->user_theme = DESIGN_THEME; // theme default
+        $this->view->setting_properties('user_theme', 'set', DESIGN_THEME); // theme default
         // default set to what is the dark or light theme
-        $this->view->data_bs_theme = MODE_THEME; // mode default
+        $this->view->setting_properties('data_bs_theme', 'set', MODE_THEME); // mode default
         // for print errors
         $this->view->error_print($this->model->error_arr);
         // set_foot

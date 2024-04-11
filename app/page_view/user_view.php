@@ -6,8 +6,8 @@ class user_view extends view implements interface_set_theme, interface_user_view
 {
     public function __construct()
     {
-        $this->top = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
-        $this->title = 'User page';
+        $this->setting_properties('top', 'set', '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>');
+        $this->setting_properties('title', 'set', 'User page');
     }
 
     public function set_menu()
@@ -25,7 +25,7 @@ class user_view extends view implements interface_set_theme, interface_user_view
           </li>
         </ul>
         ';
-        $this->menu = $menu;
+        $this->setting_properties('menu', 'set', $menu);
     }
 
     public function include_theme()

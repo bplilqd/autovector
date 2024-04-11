@@ -3,6 +3,7 @@
 <html lang="ru">
 
 <head>
+  <?=$this->getting_properties('meta')?>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hello, world!</title>
@@ -18,7 +19,7 @@
       <!--top-->
       <div class="row gy-5">
         <div class="col">
-          <?=$this->top?>
+          <?=$this->getting_properties('top')?>
           <!--del-->
           <h1 class="text-info">Hello, world!</h1>
           <!--/del-->
@@ -27,7 +28,7 @@
       <!--/top-->
       <!--menu-->
       <div class="col-12">
-        <?=$this->menu?>
+        <?=$this->getting_properties('menu')?>
         <!--del-->
         <ul class="nav nav-underline">
           <li class="nav-item">
@@ -45,7 +46,7 @@
       <!--/menu-->
       <!--system_mesage-->
       <div class="col-12">
-        <?=$this->system_mesage?>
+        <?=$this->getting_properties('system_mesage')?>
         <!--del-->
         system_mesage
         <!--/del-->
@@ -53,7 +54,7 @@
       <!--/system_mesage-->
       <!--announce-->
       <div class="col-12">
-        <?=$this->announce?>
+        <?=$this->getting_properties('announce')?>
         <!--del-->
         announce
         <!--/del-->
@@ -63,7 +64,7 @@
       <div class="col-12">
         <div class="card bg-secondary text-body">
           <div class="card-body">
-            <?=$this->title?>
+            <?=$this->getting_properties('title')?>
             <!--del-->
             title
             <!--/del-->
@@ -75,7 +76,7 @@
       <div class="col-12">
         <div class="card text-body">
           <div class="card-body">
-            <?=$this->sidebar?>
+            <?=$this->getting_properties('sidebar')?>
             <!--del-->
             sidebar
             <!--/del-->
@@ -87,7 +88,7 @@
       <div class="col-12">
         <div class="card text-body">
           <div class="card-body">
-            <?=$this->content?>
+            <?=$this->getting_properties('content')?>
             <!--del-->
             content
             <!--/del-->
@@ -96,7 +97,7 @@
       </div>
       <!--/content-->
       <!--foot-->
-      <?=$this->foot?>
+      <?=$this->getting_properties('foot')?>
       <!--del-->
       foot
       <!--/del-->

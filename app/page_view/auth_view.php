@@ -6,8 +6,8 @@ class auth_view extends view implements interface_set_theme
 {
     public function __construct()
     {
-        $this->top = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
-        $this->title = 'Авторизация';
+        $this->setting_properties('top', 'set', '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>');
+        $this->setting_properties('title', 'set', 'Авторизация');
     }
 
     public function include_theme()
