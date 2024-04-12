@@ -2,7 +2,7 @@
 
 namespace model\function;
 
-class recaptcha
+class recaptcha_old_version
 {
     static $error_arr;
     public $captcha;
