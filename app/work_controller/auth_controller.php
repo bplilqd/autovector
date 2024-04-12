@@ -36,6 +36,9 @@ class auth_controller extends main_controller
         // data transfer and set view
         $form = $this->model->auth_form->form($this->data);
         $this->view->setting_properties('content', $form);
+        // set recaptcha js to meta
+        $meta = '';
+        $this->view->setting_properties('meta', $meta);
         // default set to name of current theme
         $this->view->setting_properties('user_theme', DESIGN_THEME); // theme default
         // default set to what is the dark or light theme

@@ -27,17 +27,17 @@ class view
         $result = '';
         // set
         if ($change_or_set_parm) {
-            $result = $change_or_set_parm;
+            $result = $change_or_set_parm . "\n";
             $this->$property = $result;
         }
         // start
         if ($start_parm) {
-            $result = $start_parm . $this->$property;
+            $result = $start_parm . "\n" . $this->$property;
             $this->$property = $result;
         }
         // end
         if ($end_parm) {
-            $result = $this->$property . $end_parm;
+            $result = $this->$property . $end_parm . "\n";
             $this->$property = $result;
         }
     }
