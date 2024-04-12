@@ -27,7 +27,7 @@ class view
         $result = '';
         // set
         if ($change_or_set_parm) {
-            $result = $change_or_set_parm . "\n";
+            $result = $change_or_set_parm;
             $this->$property = $result;
         }
         // start
@@ -37,7 +37,7 @@ class view
         }
         // end
         if ($end_parm) {
-            $result = $this->$property . $end_parm . "\n";
+            $result = $this->$property . "\n" .  $end_parm . "\n";
             $this->$property = $result;
         }
     }
