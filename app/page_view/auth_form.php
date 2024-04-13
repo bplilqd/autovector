@@ -37,7 +37,6 @@ class auth_form implements interface_auth_form
             id="phone" aria-describedby="phoneHelp" placeholder="' . $phone . '"' . $disabled . '>
             <div id="phoneHelp" class="form-text">'.$help_text.'</div>
         </div>';
-
         if ($active_input_pass) {
             $str .= '
         <div class="mb-3">

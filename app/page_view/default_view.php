@@ -6,18 +6,22 @@ class default_view extends view implements interface_set_theme
 {
     public function __construct()
     {
-        $this->setting_properties('top', '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>');
+        $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
+        $this->setting_properties('top', $top_str);
+
         $url_img_autovector = SITE_URL . 'images/autovector.jpg';
         //$url_img_autovector = PATH . DS. 'images/autovector.jpg';
         $this->setting_properties('title', 'Welcome');
         $this->setting_properties('content', '<img src="' . $url_img_autovector . '" class="img-fluid" alt="autovector">');
-        $this->setting_properties('menu', '<a href="/app/work_controller/work/auth/index.php"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>');
+        
+        $menu_str = '<a href="/app/work_controller/work/auth/"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
+        $this->setting_properties('menu', $menu_str);
     }
 
     public function set_menu()
     {
-            $str = '<a href="/app/work_controller/work/auth/index.php"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
-            $this->setting_properties('menu', $str);
+        $menu_str = '<a href="/app/work_controller/work/auth/"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
+        $this->setting_properties('menu', $menu_str);
     }
 
     public function include_theme()
