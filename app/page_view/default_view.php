@@ -14,13 +14,13 @@ class default_view extends view implements interface_auth_view
         $this->setting_properties('title', 'Welcome');
         $this->setting_properties('content', '<img src="' . $url_img_autovector . '" class="img-fluid" alt="autovector">');
         
-        $menu_str = '<a href="/app/work_controller/work/auth/"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
+        $menu_str = '<a href="/panel/auth/"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
         $this->setting_properties('menu', $menu_str);
     }
 
     public function set_menu()
     {
-        $menu_str = '<a href="/app/work_controller/work/auth/"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
+        $menu_str = '<a href="/panel/user/"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
         $this->setting_properties('menu', $menu_str);
     }
 
