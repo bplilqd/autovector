@@ -65,8 +65,8 @@ class auth_model extends model implements interface_auth_model
                 $set_phone = $data['auth_form']['set_phone'];
                 $pass = $data['auth_form']['pass'];
                 if (RECAPTCHA_ON) {
-                // recaptcha false / true
-                $captcha = $this->captcha->captcha;
+                    // recaptcha false / true
+                    $captcha = $this->captcha->captcha;
                     // with check
                     if ($captcha) {
                         $this->set_new_auth_or_reg($set_phone, $phone, $pass);
@@ -85,8 +85,11 @@ class auth_model extends model implements interface_auth_model
             $result = $this->check_user_to_db($phone);
             if (!$result) {
 
+                // auth_function
                 $pass = $this->auth_function->generateCode($this->length_generate_pass);
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
+                // got error from auth_function
+                $this->got_error_from_auth_function();
 
                 // egistr user
                 $this->registr_new_user($phone, $generate_hash);
@@ -117,6 +120,12 @@ class auth_model extends model implements interface_auth_model
         }
     }
 
+    protected function got_error_from_auth_function()
+    {
+        if ($this->auth_function->error_arr) {
+            $this->error($this->auth_function->error_arr, 'auth_function');
+        }
+    }
     protected function set_authorization($set_phone, $phone, $pass)
     {
         if ($set_phone && $pass) {
@@ -126,7 +135,11 @@ class auth_model extends model implements interface_auth_model
                 $row = $this->mysql->query->fetch_assoc();
                 $pass_db = $row['pass'];
 
+                // auth_function
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
+                // got error from auth_function
+                $this->got_error_from_auth_function();
+
                 $this->authorization($phone, $pass_db, $generate_hash);
             }
         }
