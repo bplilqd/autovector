@@ -29,14 +29,23 @@ class auth_model extends model implements interface_auth_model
         $data = $this->input_data;
         // reg or auth
         $this->registr_or_authorization($data);
-
-        // got error from mysql
-        if ($this->mysql->error_arr) {
-            $this->error($this->mysql->error_arr, 'mysql');
-        }
+        // collection a errors from classes
+        $this->sending_error_message_from_classes();
         // count queries in database
         if ($this->mysql->count_query) {
             $this->count_query = count($this->mysql->count_query);
+        }
+    }
+
+    protected function sending_error_message_from_classes()
+    {
+        // got error from captcha
+        if ($this->captcha->error_arr) {
+            $this->error($this->captcha->error_arr, 'captcha');
+        }
+        // got error from mysql
+        if ($this->mysql->error_arr) {
+            $this->error($this->mysql->error_arr, 'mysql');
         }
     }
 
@@ -48,7 +57,7 @@ class auth_model extends model implements interface_auth_model
         // authorization
         $this->set_authorization($set_phone, $phone, $pass);
     }
-    
+
     protected function registr_or_authorization($data)
     {
         if ($data) {
@@ -57,10 +66,8 @@ class auth_model extends model implements interface_auth_model
                 $set_phone = $data['auth_form']['set_phone'];
                 $pass = $data['auth_form']['pass'];
                 if (RECAPTCHA_ON) {
-                    // start recaptcha for check
-                    $this->captcha->recaptcha();
-                    // recaptcha false / true
-                    $captcha = $this->captcha->captcha;
+                // recaptcha false / true
+                $captcha = $this->captcha->captcha;
                     // with check
                     if ($captcha) {
                         $this->set_new_auth_or_reg($set_phone, $phone, $pass);
