@@ -10,6 +10,15 @@ class auth_controller extends main_controller
     function __construct()
     {
         // controller ->
+        $this->set_in_controller();
+        // model ->
+        $this->set_in_model();
+        // view ->
+        $this->set_in_view();
+    }
+
+    protected function set_in_controller()
+    {
         // load casses - add names for class for set autoload 
         $this->start_name_class();
         // standart methods -> set request, set hash from browser, set object of model and others...
@@ -19,8 +28,10 @@ class auth_controller extends main_controller
             $this->error_arr[] = 'As long as there is authorization, there will be a redirection after 5 seconds';
             header("refresh:5; url=../../../..");
         }
+    }
 
-        // model ->
+    protected function set_in_model()
+    {
         // validation of user input of data
         if ($this->request) {
             $this->check_of_user_input();
@@ -31,14 +42,18 @@ class auth_controller extends main_controller
         }
         // start work for to model -> option/settings
         $this->model->set_and_setting();
+    }
 
-        // view ->
+    protected function set_in_view()
+    {
         // data transfer and set view
         $form = $this->model->auth_form->form($this->data);
         $this->view->setting_properties('content', $form);
-        // set recaptcha js to meta
-        $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
-        $this->view->setting_properties('meta', '', $meta);
+        if (RECAPTCHA_ON) {
+            // set recaptcha js to meta
+            $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
+            $this->view->setting_properties('meta', '', $meta);
+        }
         // default set to name of current theme
         $this->view->setting_properties('user_theme', DESIGN_THEME); // theme default
         // default set to what is the dark or light theme
@@ -63,7 +78,7 @@ class auth_controller extends main_controller
         }
         return $captcha;
     }
-    
+
     // validation of user input
     protected function check_of_user_input()
     {
