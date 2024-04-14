@@ -51,37 +51,50 @@ class auth_controller extends main_controller
         $this->view->include_theme();
     }
 
+    protected function check_recaptcha()
+    {
+        if (RECAPTCHA_ON) {
+            // start recaptcha for check
+            $this->model->captcha->recaptcha();
+            // recaptcha false / true
+            $captcha = $this->model->captcha->captcha;
+        } else {
+            $captcha = true;
+        }
+        return $captcha;
+    }
+    
     // validation of user input
     protected function check_of_user_input()
     {
         $request = $this->request;
-        //$captcha = $this->model->captcha->captcha;
         // if push button
         if ($request['auth_submit'] == 'auth_submit') {
-            //if ($captcha) {
+            $captcha = $this->check_recaptcha();
+            if ($captcha) {
 
-            // validation data of user
-            if ($request['phone']) {
-                if ($this->phone_validate($request['phone'])) {
-                    $phone = $this->valid_phone_set($request['phone']);
+                // validation data of user
+                if ($request['phone']) {
+                    if ($this->phone_validate($request['phone'])) {
+                        $phone = $this->valid_phone_set($request['phone']);
+                    }
+                } else {
+                    $this->error_arr[] = 'Enter phone number.';
                 }
-            } else {
-                $this->error_arr[] = 'Enter phone number.';
+
+                // form handler
+                $data['auth_form'] = [
+                    'phone' => $phone,
+                    'set_phone' => strip_tags($request['set_phone']),
+                    'pass' => strip_tags($request['pass']),
+                    'auth_submit' => strip_tags($request['auth_submit'])
+                ];
+
+                // sent data -> model
+                $this->model->data_of_auth($data);
+                // set data of user
+                $this->data = $data;
             }
-
-            // form handler
-            $data['auth_form'] = [
-                'phone' => $phone,
-                'set_phone' => strip_tags($request['set_phone']),
-                'pass' => strip_tags($request['pass']),
-                'auth_submit' => strip_tags($request['auth_submit'])
-            ];
-
-            // sent data -> model
-            $this->model->data_of_auth($data);
-            // set data of user
-            $this->data = $data;
-            //}
         }
     }
 
