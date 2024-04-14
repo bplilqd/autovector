@@ -3,7 +3,7 @@
 namespace model;
 
 use model\connect\forUseMysqli;
-use controller\work\auth\auth_function;
+use model\function\auth_function;
 use view\auth_form;
 use model\function\recaptcha_v2;
 

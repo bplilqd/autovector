@@ -26,7 +26,7 @@ class auth_controller extends main_controller
         // if auth to refresh/redirect
         if ($this->hash) {
             $this->error_arr[] = 'As long as there is authorization, there will be a redirection after 5 seconds';
-            header("refresh:5; url=../../../..");
+            header("refresh:5; url=/");
         }
         // validation of user input of data
         if ($this->request) {
@@ -134,13 +134,8 @@ class auth_controller extends main_controller
     protected function start_name_class()
     {
         // array for model -> fuction classes
-        $class_mosel_setings = ['recaptcha_v2'];
+        $class_mosel_setings = ['recaptcha_v2','auth_function'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
-        $array[] = [$class_mosel_setings, $path_model];
-
-        // array for controller/work -> auth classes
-        $class_mosel_setings = ['auth_function'];
-        $path_model = PATH . DS . 'app' . DS . 'work_controller' . DS . 'work' . DS . 'auth' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model -> connect class
