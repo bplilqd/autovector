@@ -56,7 +56,7 @@ class default_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_set_theme', NAME_VIEW];
+        $class_view = ['interface_auth_view', NAME_VIEW];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 
