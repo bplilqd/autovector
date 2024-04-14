@@ -4,6 +4,7 @@ namespace model;
 
 use model\settings\user_config;
 use model\connect\forUseMysqli;
+use model\function\znach_array;
 
 class default_model extends model
 {
