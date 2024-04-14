@@ -49,7 +49,9 @@ class auth_form implements interface_auth_form
         }
         if (RECAPTCHA_ON) {
             $str .= '
-        <div class="mb-3 g-recaptcha" data-theme="' . MODE_THEME . '" data-sitekey="' . RECAPTCHA_HTML . '"></div>
+        <div class="mb-3">
+            <div class="g-recaptcha" data-theme="' . MODE_THEME . '" data-sitekey="' . RECAPTCHA_HTML . '"></div>
+        </div>
         ';
         }
         $str .= '
