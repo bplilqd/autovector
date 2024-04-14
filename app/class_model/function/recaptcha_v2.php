@@ -1,11 +1,13 @@
 <?php
 
+// create: https://www.google.com/recaptcha/admin/create
+
 namespace model\function;
 
-class recaptcha_old_version
+class recaptcha_v2
 {
     static $error_arr;
-    public $captcha;
+    public $captcha = false;
 
     public function recaptcha()
     {
