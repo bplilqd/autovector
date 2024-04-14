@@ -35,7 +35,7 @@ class auth_form implements interface_auth_form
             <label for="phone" class="form-label">Телефон</label>
             <input name="phone" value="' . $phone . '" type="phone" class="form-control" 
             id="phone" aria-describedby="phoneHelp" placeholder="' . $phone . '"' . $disabled . '>
-            <div id="phoneHelp" class="form-text">'.$help_text.'</div>
+            <div id="phoneHelp" class="form-text">' . $help_text . '</div>
         </div>';
         if ($active_input_pass) {
             $str .= '
@@ -45,6 +45,11 @@ class auth_form implements interface_auth_form
             <input type="hidden" name="set_phone" value="true">
             <input type="hidden" name="phone" value="' . $phone . '">
         </div>
+        ';
+        }
+        if (RECAPTCHA_ON) {
+            $str .= '
+        <div class="g-recaptcha mb-3" data-sitekey="' . RECAPTCHA_HTML . '"></div>
         ';
         }
         $str .= '

@@ -5,11 +5,13 @@ namespace model;
 use model\connect\forUseMysqli;
 use controller\work\auth\auth_function;
 use view\auth_form;
+use model\function\recaptcha_v2;
 
 class auth_model extends model implements interface_auth_model
 {
     protected object $auth_function;
     public object $auth_form;
+    public object $captcha;
     // other properties
     protected $input_data; // data for auth_form
     protected int $length_generate_pass = 8;
@@ -33,25 +35,40 @@ class auth_model extends model implements interface_auth_model
             $this->error($this->mysql->error_arr, 'mysql');
         }
         // count queries in database
-        if($this->mysql->count_query){
+        if ($this->mysql->count_query) {
             $this->count_query = count($this->mysql->count_query);
         }
     }
 
+    protected function set_new_auth_or_reg($set_phone, $phone, $pass)
+    {
+        // registr new user
+        $this->set_registr($phone, $set_phone);
+
+        // authorization
+        $this->set_authorization($set_phone, $phone, $pass);
+    }
+    
     protected function registr_or_authorization($data)
     {
         if ($data) {
             if ($data['auth_form']['auth_submit']) {
-
                 $phone = $data['auth_form']['phone'];
                 $set_phone = $data['auth_form']['set_phone'];
                 $pass = $data['auth_form']['pass'];
-
-                // registr new user
-                $this->set_registr($phone, $set_phone);
-
-                // authorization
-                $this->set_authorization($set_phone, $phone, $pass);
+                if (RECAPTCHA_ON) {
+                    // start recaptcha for check
+                    $this->captcha->recaptcha();
+                    // recaptcha false / true
+                    $captcha = $this->captcha->captcha;
+                    // with check
+                    if ($captcha) {
+                        $this->set_new_auth_or_reg($set_phone, $phone, $pass);
+                    }
+                    // without check
+                } else {
+                    $this->set_new_auth_or_reg($set_phone, $phone, $pass);
+                }
             }
         }
     }
@@ -155,5 +172,7 @@ class auth_model extends model implements interface_auth_model
         $this->auth_form = new auth_form;
         // other auth function
         $this->auth_function = new auth_function;
+        // recaptcha v2
+        $this->captcha = new recaptcha_v2;
     }
 }

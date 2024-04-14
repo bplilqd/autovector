@@ -37,8 +37,8 @@ class auth_controller extends main_controller
         $form = $this->model->auth_form->form($this->data);
         $this->view->setting_properties('content', $form);
         // set recaptcha js to meta
-        $meta = '';
-        $this->view->setting_properties('meta', $meta);
+        $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
+        $this->view->setting_properties('meta', '', $meta);
         // default set to name of current theme
         $this->view->setting_properties('user_theme', DESIGN_THEME); // theme default
         // default set to what is the dark or light theme
@@ -55,8 +55,10 @@ class auth_controller extends main_controller
     protected function check_of_user_input()
     {
         $request = $this->request;
+        //$captcha = $this->model->captcha->captcha;
         // if push button
         if ($request['auth_submit'] == 'auth_submit') {
+            //if ($captcha) {
 
             // validation data of user
             if ($request['phone']) {
@@ -79,6 +81,7 @@ class auth_controller extends main_controller
             $this->model->data_of_auth($data);
             // set data of user
             $this->data = $data;
+            //}
         }
     }
 
@@ -102,6 +105,11 @@ class auth_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+        // array for model -> fuction classes
+        $class_mosel_setings = ['recaptcha_v2'];
+        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
+        $array[] = [$class_mosel_setings, $path_model];
+
         // array for controller/work -> auth classes
         $class_mosel_setings = ['auth_function'];
         $path_model = PATH . DS . 'app' . DS . 'work_controller' . DS . 'work' . DS . 'auth' . DS;

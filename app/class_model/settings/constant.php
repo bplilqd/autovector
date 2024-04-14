@@ -29,5 +29,6 @@ define("SECRET_KEY", $secret_key); // секретный ключ для ген�
 define("SET_COOK_TIME_HASH", $set_cook_time_hash); // установка времени жизни куки для авторизации
 
 // captcha
-define("RECAPTCHA_HTML", $recaptcha_key_html);
-define("RECAPTCHA_INSIDE", $recaptcha_key_inside);
+define("RECAPTCHA_HTML", $recaptcha_key_html); // open key
+define("RECAPTCHA_INSIDE", $recaptcha_key_inside); // secret key
+define("RECAPTCHA_ON", $recaptcha_on); // true/false
