@@ -8,10 +8,10 @@ class model
     protected object $mysql;
     public object $user_config;
 
-    static $error_arr; // error
-    static $success_arr; // success
-    static $warning_arr; // warning
-    static $info_arr; // danger
+    public $error_arr; // error
+    //static $success_arr; // success
+    //static $warning_arr; // warning
+    //static $info_arr; // danger
 
     public string $hash = ''; // id user of the hash
     public bool $auth = false; // auth bool FALSE or TRUE

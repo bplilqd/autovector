@@ -6,7 +6,7 @@ namespace model\function;
 
 class recaptcha_v2
 {
-    static $error_arr;
+    public $error_arr;
     public $captcha = false;
 
     public function recaptcha()

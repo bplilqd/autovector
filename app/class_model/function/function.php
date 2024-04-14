@@ -2,10 +2,11 @@
 define("TIME_START", microtime(true)); // для вычеслений, внимание - не менять эту строку!
 
 // определение девайса перенести в главный контролер
-if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPad') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'Mobile') || strstr($_SERVER['HTTP_USER_AGENT'], 'Phone') || isset($_GET['mobile'])) {
-    $mobile_device_true = true;
-} else {
-    $mobile_device_true = false;
+$mobile_device_true = false;
+if ($_SERVER['HTTP_USER_AGENT']) {
+    if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPad') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'Mobile') || strstr($_SERVER['HTTP_USER_AGENT'], 'Phone') || isset($_GET['mobile'])) {
+        $mobile_device_true = true;
+    }
 }
 
 // for functions

@@ -4,7 +4,7 @@ namespace controller\work\auth;
 
 class auth_function{
 
-    static $error_arr;
+    public $error_arr;
     public function generateCode($length = 6)
     {
         $chars = "abcdefikmprstuvwxyz123456789";

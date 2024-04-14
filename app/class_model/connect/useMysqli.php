@@ -7,9 +7,9 @@ class useMysqli
     // for db
     public $mysql = null;
     public $query = null;
-    static $count_query; // count query
+    public $count_query; // count query
     // handler of systeam messages
-    static $error_arr; // array with errors
+    public $error_arr; // array with errors
     // log query
     static $registry_sql_echo; // array with the querys
     // connect db

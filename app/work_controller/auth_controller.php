@@ -28,14 +28,14 @@ class auth_controller extends main_controller
             $this->error_arr[] = 'As long as there is authorization, there will be a redirection after 5 seconds';
             header("refresh:5; url=../../../..");
         }
-    }
-
-    protected function set_in_model()
-    {
         // validation of user input of data
         if ($this->request) {
             $this->check_of_user_input();
         }
+    }
+
+    protected function set_in_model()
+    {
         // sending error to model
         if ($this->error_arr) {
             $this->model->error($this->error_arr, 'controller');

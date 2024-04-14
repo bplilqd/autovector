@@ -8,7 +8,7 @@ class main_controller
     protected object $view;
 
     protected $request; // request
-    static array $error_arr; // error
+    protected $error_arr; // error
 
     public string $hash = ''; // id user of the hash
 
