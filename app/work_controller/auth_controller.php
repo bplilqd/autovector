@@ -63,7 +63,7 @@ class auth_controller extends main_controller
         }
         return $captcha;
     }
-
+    
     // validation of user input
     protected function check_of_user_input()
     {
@@ -71,7 +71,7 @@ class auth_controller extends main_controller
         // if push button
         if ($request['auth_submit'] == 'auth_submit') {
             $captcha = $this->check_recaptcha();
-            //if ($captcha) {
+            if ($captcha) {
 
                 // validation data of user
                 if ($request['phone']) {
@@ -94,7 +94,7 @@ class auth_controller extends main_controller
                 $this->model->data_of_auth($data);
                 // set data of user
                 $this->data = $data;
-            //}
+            }
         }
     }
 
