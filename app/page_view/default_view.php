@@ -2,7 +2,7 @@
 
 namespace view;
 
-class default_view extends view implements interface_set_theme
+class default_view extends view implements interface_auth_view
 {
     public function __construct()
     {

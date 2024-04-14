@@ -2,7 +2,7 @@
 
 namespace view;
 
-interface interface_set_theme
+interface interface_auth_view
 {
     // print template
     public function include_theme();
