@@ -113,7 +113,7 @@ class auth_model extends model implements interface_auth_model
             $sql = "UPDATE `user` SET `hash` = '$generate_hash' WHERE `user`.`phone` = $phone";
             $this->mysql->sql_update($sql);
 
-            header("Location: ../../../..");
+            header("Location: ../..");
         } else {
             // authorization error
             $this->error_arr['model'][] = 'Incorrect password.';
