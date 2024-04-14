@@ -53,7 +53,6 @@ class auth_model extends model implements interface_auth_model
     {
         // registr new user
         $this->set_registr($phone, $set_phone);
-
         // authorization
         $this->set_authorization($set_phone, $phone, $pass);
     }
