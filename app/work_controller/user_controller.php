@@ -2,10 +2,24 @@
 
 namespace controller;
 
+use view\not_authorized_view;
+
 class user_controller extends main_controller
 {
 
+    protected object $not_authorized;
+
     function __construct()
+    {
+        // controller ->
+        $this->set_in_controller();
+        // model ->
+        $this->set_in_model();
+        // view ->
+        $this->set_in_view();
+    }
+
+    protected function set_in_controller()
     {
         // controller ->
         // load casses - add names for class for set autoload 
@@ -16,30 +30,51 @@ class user_controller extends main_controller
         if ($this->error_arr) {
             $this->model->error($this->error_arr, 'controller');
         }
+    }
 
+    protected function set_in_model()
+    {
         // model ->
         // set user auth
         $this->model->set_user($this->hash);
         // start work for to model -> option/settings
         $this->model->set_and_setting();
-
-        // view ->
+        // set of the settings user
         $this->settings_user();
-        // for print errors
-        $this->view->error_print($this->model->error_arr);
-        // set menu
-        $this->view->set_menu();
-        // set_foot
-        $this->view->set_foot($this->model->count_query);
-        // include theme
-        $this->view->include_theme();
+    }
+
+    protected function set_in_view()
+    {
+        // view ->
+        if ($this->model->auth) {
+            // authorized -> view...
+            // set menu
+            $this->view->set_menu();
+            // for print errors
+            $this->view->error_print($this->model->error_arr);
+            // include theme
+            $this->view->include_theme();
+        } else {
+            // not authorized -> not_authorized
+            // set other object of view
+            $this->not_authorized = new not_authorized_view;
+            // error and redirect
+            $this->model->error_arr['view'][] = 'Not authorized, there will be a redirection after 5 seconds';
+            header("refresh:5; url=../auth");
+            // set_foot
+            $this->not_authorized->set_foot($this->model->count_query);
+            // for print errors
+            $this->not_authorized->error_print($this->model->error_arr);
+            // include theme
+            $this->not_authorized->include_theme();
+        }
     }
 
     // start name class
     protected function start_name_class()
     {
         // array for model -> connect class
-        $class_mosel_setings = ['useMysqli', 'interfaceForUseMysqli', 'forUseMysqli'];
+        $class_mosel_setings = ['interfaceForUseMysqli', 'useMysqli', 'forUseMysqli'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
@@ -54,7 +89,7 @@ class user_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_auth_view', 'interface_user_view', NAME_VIEW];
+        $class_view = ['interface_auth_view', 'interface_user_view', 'not_authorized_view', NAME_VIEW];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 
