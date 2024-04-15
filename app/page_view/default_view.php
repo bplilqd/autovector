@@ -6,8 +6,8 @@ class default_view extends view implements interface_auth_view
 {
     public function __construct()
     {
-        $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
-        $this->setting_properties('top', $top_str);
+        $this->start_standart_view();
+      
 
         $url_img_autovector = SITE_URL . 'images/autovector.jpg';
         //$url_img_autovector = PATH . DS. 'images/autovector.jpg';

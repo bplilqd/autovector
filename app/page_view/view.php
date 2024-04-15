@@ -21,6 +21,13 @@ class view
     public $user_theme = DESIGN_THEME;
     public $data_bs_theme = MODE_THEME;
 
+    // main property of this class
+    protected function start_standart_view()
+    {
+        $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
+        $this->setting_properties('top', $top_str);
+    }
+
     // set properties (function in data)
     public function setting_properties($property, $change_or_set_parm = '', $start_parm = '', $end_parm = '')
     {

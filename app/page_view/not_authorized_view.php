@@ -6,7 +6,7 @@ class not_authorized_view extends view implements interface_auth_view
 {
     public function __construct()
     {
-        $this->setting_properties('top', '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>');
+        $this->start_standart_view();
         $this->setting_properties('title', 'You not authorized');
     }
 
