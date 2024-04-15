@@ -56,18 +56,24 @@ class user_controller extends main_controller
             $this->view->include_theme();
         } else {
             // not authorized -> not_authorized
-            // set other object of view
-            $this->not_authorized = new not_authorized_view;
             // error and redirect
             $this->model->error_arr['view'][] = 'Not authorized, there will be a redirection after 5 seconds';
             header("refresh:5; url=../auth");
-            // set_foot
-            $this->not_authorized->set_foot($this->model->count_query);
-            // for print errors
-            $this->not_authorized->error_print($this->model->error_arr);
-            // include theme
-            $this->not_authorized->include_theme();
+            // set this method if there is no authorization
+            $this->set_for_not_authorized();
         }
+    }
+
+    protected function set_for_not_authorized()
+    {
+        // set other object of view
+        $this->not_authorized = new not_authorized_view;
+        // set_foot
+        $this->not_authorized->set_foot($this->model->count_query);
+        // for print errors
+        $this->not_authorized->error_print($this->model->error_arr);
+        // include theme
+        $this->not_authorized->include_theme();
     }
 
     // start name class
