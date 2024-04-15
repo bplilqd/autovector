@@ -14,7 +14,7 @@ class auth_view extends view implements interface_auth_view
     {
         // setting of theme
         $this->user_theme = 'design';
-        //$this->data_bs_theme = 'light';
+        $this->data_bs_theme = 'light';
 
         // example structure
         $array = [
