@@ -11,7 +11,7 @@ class useMysqli
     // handler of systeam messages
     public $error_arr; // array with errors
     // log query
-    static $registry_sql_echo; // array with the querys
+    public $registry_sql_echo; // array with the querys
     // connect db
 
     protected function set_db()

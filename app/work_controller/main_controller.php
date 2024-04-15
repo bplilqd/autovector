@@ -31,6 +31,7 @@ class main_controller
             $this->view->data_bs_theme = $this->model->user_config->data_bs_theme;
         }
     }
+
     protected function set_hash_check()
     {
         if (USER_HASH) {

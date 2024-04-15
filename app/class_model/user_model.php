@@ -17,15 +17,18 @@ class user_model extends model
 
     public function set_and_setting()
     {
+        // if authorized. if allowed to continue
+        if ($this->auth) {
+            
+        }
         // got error from mysql
         if ($this->mysql->error_arr) {
             $this->error($this->mysql->error_arr, 'mysql');
         }
         // count queries in database
-        if($this->mysql->count_query){
+        if ($this->mysql->count_query) {
             $this->count_query = count($this->mysql->count_query);
         }
-        
     }
 
     protected function set_objects()
