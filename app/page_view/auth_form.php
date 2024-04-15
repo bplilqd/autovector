@@ -49,12 +49,24 @@ class auth_form implements interface_auth_form
         }
         if (RECAPTCHA_ON) {
             $str .= '
-        <div class="mb-3 g-recaptcha" data-theme="' . MODE_THEME . '" data-sitekey="' . RECAPTCHA_HTML . '"></div>
+        <div class="mb-3 g-recaptcha" data-theme="' . $this->invert_mode_theme(MODE_THEME) . '" data-sitekey="' . RECAPTCHA_HTML . '"></div>
         ';
         }
         $str .= '
         <button type="submit" name="auth_submit" value="auth_submit" class="btn btn-primary">Отправить</button>
     </form>';
         $this->form = $str;
+    }
+
+    protected function invert_mode_theme($mode_theme)
+    {
+        $result = '';
+        if ($mode_theme == 'light') {
+            $result = 'dark';
+        }
+        if($mode_theme == 'dark'){
+            $result = 'light';
+        }
+        return $result;
     }
 }
