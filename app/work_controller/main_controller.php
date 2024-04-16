@@ -5,7 +5,7 @@ namespace controller;
 class main_controller
 {
     protected object $model; // model
-    protected object $view;
+    protected object $view; // view
 
     protected $request; // request
     protected $error_arr; // error
@@ -19,7 +19,7 @@ class main_controller
         // set hash from browser
         $this->set_hash_check();
         // set object of model
-        $this->set_object_model_and_view();
+        $this->set_object_default();
     }
 
     protected function settings_user()
@@ -48,7 +48,7 @@ class main_controller
     }
 
     // set new class to objects
-    protected function set_object_model_and_view()
+    protected function set_object_default()
     {
         // set model
         $this->model = new ('model\\' . NAME_MODEL);

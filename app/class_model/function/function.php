@@ -10,6 +10,8 @@ if ($_SERVER['HTTP_USER_AGENT']) {
 }
 
 // for functions
+require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'translations.php'; // translations
+// for settings
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'config.php'; // config
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'constant.php'; // constant
 // for main class
