@@ -4,6 +4,8 @@ namespace view;
 
 class user_view extends view implements interface_auth_view, interface_user_view
 {
+  protected $data_user;
+
   public function __construct()
   {
     $this->start_standart_view();
@@ -28,6 +30,25 @@ class user_view extends view implements interface_auth_view, interface_user_view
     $this->setting_properties('menu', $menu);
   }
 
+  public function set_content()
+  {
+    $data = $this->data_user;
+    $content = '
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">' . $data['name'] . '</li>
+    <li class="list-group-item">+' . $data['phone'] . '</li>
+    <li class="list-group-item">' . $data['email'] . '</li>
+    <li class="list-group-item">Заречистрирован: ' . $data['date'] . '</li>
+</ul>
+    ';
+    $this->setting_properties('content', $content);
+  }
+
+  public function input_data_user($data_user)
+  {
+    $this->data_user = $data_user;
+  }
+
   public function include_theme()
   {
     // example structure
@@ -36,7 +57,7 @@ class user_view extends view implements interface_auth_view, interface_user_view
       'top',
       'menu',
       'system_mesage',
-      //            'announce',
+      //'announce',
       'title',
       'sidebar',
       'content',
