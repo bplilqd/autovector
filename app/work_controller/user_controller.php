@@ -47,15 +47,21 @@ class user_controller extends main_controller
     {
         // view ->
         if ($this->model->auth) {
-            // authorized -> view...
+            // if authorized -> view...
+            // sent data for set in wiew
+            $this->view->input_data_user($this->model->data_user);
+            // set content
+            $this->view->set_content();
             // set menu
             $this->view->set_menu();
+            // set_foot
+            $this->view->set_foot($this->model->count_query);
             // for print errors
             $this->view->error_print($this->model->error_arr);
             // include theme
             $this->view->include_theme();
         } else {
-            // not authorized -> not_authorized
+            // if not authorized -> not_authorized
             // error and redirect
             $this->model->error_arr['view'][] = 'Not authorized, there will be a redirection after 5 seconds';
             header("refresh:5; url=../auth");
