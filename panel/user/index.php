@@ -6,7 +6,7 @@ $name_model = 'user_model'; // name basic of model / NAME_MODEL
 $name_controller = 'user_controller'; // name basic of controller / NAME_CONTROLLER
 $name_view = 'user_view'; // name basic ofview / NAME_VIEW
 
-define("PATH", '../..'); // path to dir site
+define("PATH", realpath(__DIR__.'/../..')); // path to dir site
 define("DS", DIRECTORY_SEPARATOR); // builds a file path with the appropriate directory separator
 
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'function.php'; // basic load function, config, class, constant and other...
