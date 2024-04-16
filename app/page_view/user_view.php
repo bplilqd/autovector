@@ -35,10 +35,15 @@ class user_view extends view implements interface_auth_view, interface_user_view
     $data = $this->data_user;
     $content = '
 <ul class="list-group list-group-flush">
-    <li class="list-group-item">' . $data['name'] . '</li>
-    <li class="list-group-item">+' . $data['phone'] . '</li>
-    <li class="list-group-item">' . $data['email'] . '</li>
-    <li class="list-group-item">Заречистрирован: ' . $data['date'] . '</li>
+';
+    foreach ($data as $value) {
+      if ($value) {
+        $content .= '
+    <li class="list-group-item">' . $value . '</li>
+    ';
+      }
+    }
+    $content .= '
 </ul>
     ';
     $this->setting_properties('content', $content);
