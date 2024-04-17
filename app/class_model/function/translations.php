@@ -4,22 +4,44 @@ namespace model\function;
 
 interface interface_translations
 {
-    public function set_lang($lang);
+    public static function getInstance();
+    public function set_language($language);
+    public function get_message($name, $key);
 }
 
+// Singleton
 class translations implements interface_translations
 {
 
-    public string $lang;
-    public $auth;
+    private $language;
+    private static $instance;
+    protected $auth;
+    protected $mysql;
 
-    public function set_lang($lang)
+    private function __construct()
     {
-        $this->lang = $lang;
-        $this->auth = include __DIR__.'/../../../lang/' . $lang . '/auth.php';
+        $this->language = 'en';
+    }
+
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function set_language($language)
+    {
+        $this->language = $language;
+    }
+
+    public function get_message($name, $key)
+    {
+        $language = $this->language;
+        if (!$this->$name) {
+            $this->$name = include realpath(__DIR__ . '/../../../lang/' . $language . '/' . $name . '.php');
+        }
+        return $this->$name[$key];
     }
 }
-
-//$translations = new translations;
-//$translations->set_lang('ru');
-//print_r($translations->auth['not_correct_format_number']);
