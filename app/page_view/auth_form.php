@@ -7,7 +7,6 @@ class auth_form implements interface_auth_form
     protected $test;
     protected $array;
     protected $form;
-    static $error_arr;
 
     public function form($array)
     {
