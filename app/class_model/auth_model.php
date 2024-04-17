@@ -6,16 +6,17 @@ use model\connect\forUseMysqli;
 use model\function\auth_function;
 use view\auth_form;
 use model\function\recaptcha_v2;
+use model\function\translations;
 
 class auth_model extends model implements interface_auth_model
 {
     protected object $auth_function;
     public object $auth_form;
     public object $captcha;
+    protected object $translations; // lang
     // other properties
     protected $input_data; // data for auth_form
     protected int $length_generate_pass = 8;
-    protected string $redirect = SITE_URL;
 
     public function __construct()
     {
@@ -116,7 +117,7 @@ class auth_model extends model implements interface_auth_model
             header("Location: ../..");
         } else {
             // authorization error
-            $this->error_arr['model'][] = 'Incorrect password.';
+            $this->error_arr['model'][] = $this->translations->get_message('auth', 'incorrect_pass');
         }
     }
 
@@ -144,7 +145,7 @@ class auth_model extends model implements interface_auth_model
                     $this->authorization($phone, $pass_db, $generate_hash);
                 }
             } else {
-                $this->error_arr['model'][] = 'No password. Enter your password.';
+                $this->error_arr['model'][] = $this->translations->get_message('auth', 'no_pass');
             }
         }
     }
@@ -189,6 +190,8 @@ class auth_model extends model implements interface_auth_model
 
     protected function set_objects()
     {
+        // set object for enter of language
+        $this->translations = translations::getInstance();
         // set object for connect mysql
         $this->mysql = new forUseMysqli;
         // auth form

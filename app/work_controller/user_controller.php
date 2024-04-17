@@ -63,7 +63,7 @@ class user_controller extends main_controller
         } else {
             // if not authorized -> not_authorized
             // error and redirect
-            $this->model->error_arr['view'][] = 'Not authorized, there will be a redirection after 5 seconds';
+            $this->model->error_arr['view'][] = $this->translations->get_message('auth', 'not_authorized');
             header("refresh:5; url=../auth");
             // set this method if there is no authorization
             $this->set_for_not_authorized();

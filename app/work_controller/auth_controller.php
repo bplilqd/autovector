@@ -25,7 +25,7 @@ class auth_controller extends main_controller
         $this->set_standart();
         // if auth to refresh/redirect
         if ($this->hash) {
-            $this->error_arr[] = 'As long as there is authorization, there will be a redirection after 5 seconds';
+            $this->error_arr[] = $this->translations->get_message('auth', 'redirection_after');
             header("refresh:5; url=/");
         }
         // validation of user input of data
@@ -94,7 +94,7 @@ class auth_controller extends main_controller
                         $phone = $this->valid_phone_set($request['phone']);
                     }
                 } else {
-                    $this->error_arr[] = 'Enter phone number.';
+                    $this->error_arr[] = $this->translations->get_message('auth', 'enter_phone');
                 }
 
                 // form handler
@@ -125,7 +125,7 @@ class auth_controller extends main_controller
     {
         $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', trim($phone)));
         if (!$result) {
-            $this->error_arr[] = "Not correct format number phone, try example +79006003070 or 89006003070.";
+            $this->error_arr[] = $this->translations->get_message('auth', 'not_correct_format_number');
         }
         return $result;
     }
@@ -134,7 +134,7 @@ class auth_controller extends main_controller
     protected function start_name_class()
     {
         // array for model -> fuction classes
-        $class_mosel_setings = ['recaptcha_v2','auth_function'];
+        $class_mosel_setings = ['recaptcha_v2', 'auth_function'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 

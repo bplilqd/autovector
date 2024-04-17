@@ -2,10 +2,14 @@
 
 namespace controller;
 
+use model\function\translations;
+
 class main_controller
 {
     protected object $model; // model
     protected object $view; // view
+
+    protected object $translations; // lang
 
     protected $request; // request
     protected $error_arr; // error
@@ -50,6 +54,8 @@ class main_controller
     // set new class to objects
     protected function set_object_default()
     {
+        // set object for enter of language
+        $this->translations = translations::getInstance();
         // set model
         $this->model = new ('model\\' . NAME_MODEL);
         // set view -> template

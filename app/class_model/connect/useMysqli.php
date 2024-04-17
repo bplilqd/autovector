@@ -2,8 +2,12 @@
 
 namespace model\connect;
 
+use model\function\translations;
+
 class useMysqli
 {
+    // object language
+    protected $translations;
     // for db
     public $mysql = null;
     public $query = null;
@@ -14,6 +18,7 @@ class useMysqli
     public $registry_sql_echo; // array with the querys
     // connect db
 
+
     protected function set_db()
     {
         if (!$this->mysql) {
@@ -21,8 +26,17 @@ class useMysqli
             $this->mysql->set_charset("utf8");
             // check connect
             if ($this->mysql->connect_error) {
-                $this->error_arr[] = "Ошибка подключения к базе данных: " . $this->mysql->connect_error;
+                $this->language();
+                $this->error_arr[] = $this->translations->get_message('mysql', 'error_connecting') . $this->mysql->connect_error;
             }
+        }
+    }
+
+    protected function language()
+    {
+        // set object for enter of language
+        if(!$this->translations){
+            $this->translations = translations::getInstance();
         }
     }
 
@@ -32,7 +46,8 @@ class useMysqli
         // checking the request
         $result = ($this->query->num_rows >= 1) ? true : false;
         if (!$result && $echo) {
-            $this->error_arr[] = 'По вашему запросу ничего не найдено!';
+            $this->language();
+            $this->error_arr[] = $this->translations->get_message('mysql', 'nothing_was_found');
         }
         return $result;
     }
