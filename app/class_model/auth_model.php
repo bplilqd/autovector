@@ -128,19 +128,23 @@ class auth_model extends model implements interface_auth_model
     }
     protected function set_authorization($set_phone, $phone, $pass)
     {
-        if ($set_phone && $pass) {
-            $result = $this->check_user_to_db($phone);
-            if ($result) {
+        if ($set_phone) {
+            if ($pass) {
+                $result = $this->check_user_to_db($phone);
+                if ($result) {
 
-                $row = $this->mysql->query->fetch_assoc();
-                $pass_db = $row['pass'];
+                    $row = $this->mysql->query->fetch_assoc();
+                    $pass_db = $row['pass'];
 
-                // auth_function
-                $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
-                // got error from auth_function
-                $this->got_error_from_auth_function();
+                    // auth_function
+                    $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
+                    // got error from auth_function
+                    $this->got_error_from_auth_function();
 
-                $this->authorization($phone, $pass_db, $generate_hash);
+                    $this->authorization($phone, $pass_db, $generate_hash);
+                }
+            } else {
+                $this->error_arr['model'][] = 'No password. Enter your password.';
             }
         }
     }
