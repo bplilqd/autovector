@@ -22,6 +22,7 @@ class not_authorized_view extends view implements interface_auth_view
             'title',
             //'sidebar',
             //'content',
+            //'content_without_sidebar',
             'foot'
         ];
         foreach ($array as $value) {

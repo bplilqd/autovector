@@ -26,6 +26,7 @@ class p_slice_class {
             'title',
             'sidebar',
             'content',
+            'content_without_sidebar',
             'foot'
         ];
         $this->arr_subject = $arr;

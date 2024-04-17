@@ -66,6 +66,7 @@ class user_view extends view implements interface_auth_view, interface_user_view
       'title',
       'sidebar',
       'content',
+      //'content_without_sidebar',
       'foot'
     ];
     foreach ($array as $value) {
