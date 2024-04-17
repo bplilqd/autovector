@@ -4,17 +4,24 @@
 
 namespace model\function;
 
+use model\function\translations;
+
 class recaptcha_v2
 {
     public $error_arr;
-    public $captcha = false;
+    public bool $captcha = false;
+    protected object $translations; // lang
 
     public function recaptcha()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // set object for enter of language
+            $this->translations = translations::getInstance();
+            
             if (empty($_POST['g-recaptcha-response'])) {
                 // write down an error
-                $this->error_arr[] = "Error of recaptcha.";
+                $this->error_arr[] = $this->translations->get_message('auth', 'error_captcha');
             }
 
             $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -40,7 +47,7 @@ class recaptcha_v2
                 $this->captcha = true;
             } else {
                 // write down an error
-                $this->error_arr[] = "Verification failed, click - I'm not a robot.";
+                $this->error_arr[] = $this->translations->get_message('auth', 'verification_failed');
             }
         }
     }
