@@ -13,7 +13,6 @@ class view
     private $title;
     private $sidebar;
     private $content;
-    private $content_without_sidebar;
     private $foot;
     // extra
     private $meta;
