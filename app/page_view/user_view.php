@@ -2,13 +2,28 @@
 
 namespace view;
 
+use model\function\znach_array;
+
 class user_view extends view implements interface_auth_view, interface_user_view
 {
   protected $data_user;
+  protected $array_info_user_content;
+  
+  protected $znach_array;
 
   public function __construct()
   {
+    // set
+    $this->znach_array = new znach_array;
+    // start standart
     $this->start_standart_view();
+    // data output limitation
+    $this->array_info_user_content = [
+      'name',
+      'phone',
+      'email',
+      'date'
+    ];
   }
 
   public function set_menu()
@@ -35,8 +50,9 @@ class user_view extends view implements interface_auth_view, interface_user_view
     $content = '
 <ul class="list-group list-group-flush">
 ';
-    foreach ($data as $value) {
-      if ($value) {
+    $array = $this->array_info_user_content;
+    foreach ($data as $key => $value) {
+      if ($value && in_array($key, $array)) {
         $content .= '
     <li class="list-group-item">' . $value . '</li>
     ';
