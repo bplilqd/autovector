@@ -2,28 +2,37 @@
 
 namespace view;
 
+use model\function\translations;
+
 class auth_form implements interface_auth_form
 {
     protected $test;
     protected $array;
     protected $form;
+    protected object $translations; // lang
 
     public function form($array)
     {
+        // set object for enter of language
+        $this->translations = translations::getInstance();
+        // data
         $this->array = $array;
+        // set
         $this->set_form();
+        // sent
         return $this->form;
     }
     protected function set_form()
     {
         $disabled = '';
         $phone = '';
-        $help_text = 'Введите номер телефона на котором есть WhathsApp';
+        $help_text = $this->translations->get_message('auth_form', 'help_text');
         $active_input_pass = false;
         if ($this->array) {
             $phone = $this->array['auth_form']['phone'];
             if ($phone) {
-                $help_text = 'Ввести <a href="index.php">другой номер</a>';
+                $help_text = $this->translations->get_message('auth_form', 'help_text2') .
+                    ' <a href="index.php">' . $this->translations->get_message('auth_form', 'help_text3') . '</a>';
                 $disabled = ' disabled';
                 $active_input_pass = true;
             }
@@ -31,7 +40,7 @@ class auth_form implements interface_auth_form
         $str = '
     <form method="post" action="">
         <div class="mb-3">
-            <label for="phone" class="form-label">Телефон</label>
+            <label for="phone" class="form-label">' . $this->translations->get_message('auth_form', 'phone') . '</label>
             <input name="phone" value="' . $phone . '" type="phone" class="form-control" 
             id="phone" aria-describedby="phoneHelp" placeholder="' . $phone . '"' . $disabled . '>
             <div id="phoneHelp" class="form-text">' . $help_text . '</div>
@@ -39,7 +48,7 @@ class auth_form implements interface_auth_form
         if ($active_input_pass) {
             $str .= '
         <div class="mb-3">
-            <label for="pass" class="form-label">Пароль</label>
+            <label for="pass" class="form-label">' . $this->translations->get_message('auth_form', 'pass') . '</label>
             <input name="pass" type="password" class="form-control" id="pass">
             <input type="hidden" name="set_phone" value="true">
             <input type="hidden" name="phone" value="' . $phone . '">
@@ -52,7 +61,7 @@ class auth_form implements interface_auth_form
         ';
         }
         $str .= '
-        <button type="submit" name="auth_submit" value="auth_submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" name="auth_submit" value="auth_submit" class="btn btn-primary">' . $this->translations->get_message('auth_form', 'auth_submit') . '</button>
     </form>';
         $this->form = $str;
     }
@@ -63,7 +72,7 @@ class auth_form implements interface_auth_form
         if ($mode_theme == 'light') {
             $result = 'dark';
         }
-        if($mode_theme == 'dark'){
+        if ($mode_theme == 'dark') {
             $result = 'light';
         }
         return $result;

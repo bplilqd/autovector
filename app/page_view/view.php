@@ -2,8 +2,11 @@
 
 namespace view;
 
+use model\function\translations;
+
 class view
 {
+    protected object $translations; // lang
     // standart
     private $header;
     private $menu;
@@ -24,6 +27,8 @@ class view
     // main property of this class
     protected function start_standart_view()
     {
+        // set object for enter of language
+        $this->translations = translations::getInstance();
         $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
         $this->setting_properties('top', $top_str);
     }
