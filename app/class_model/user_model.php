@@ -15,6 +15,7 @@ class user_model extends model
     {
         // set objects other
         $this->set_objects();
+
     }
 
     public function set_and_setting()
@@ -40,7 +41,7 @@ class user_model extends model
 
         $user_data = [
             'name' => $user_config->name,
-            'phone' => '+'.$user_config->phone,
+            'phone' => '+' . $user_config->phone,
             'email' => $user_config->email,
             'user_theme' => $user_config->user_theme,
             'data_bs_theme' => $user_config->data_bs_theme,
