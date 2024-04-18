@@ -9,7 +9,6 @@ class user_view extends view implements interface_auth_view, interface_user_view
   public function __construct()
   {
     $this->start_standart_view();
-    $this->setting_properties('title', 'User page');
   }
 
   public function set_menu()
@@ -17,13 +16,13 @@ class user_view extends view implements interface_auth_view, interface_user_view
     $menu = '
         <ul class="nav nav-underline">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/panel/user/">Профиль</a>
+            <a class="nav-link active" aria-current="page" href="/panel/user/">' . $this->translations->get_message('panel_user', 'profile') . '</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?settings">Настройки</a>
+            <a class="nav-link" href="?settings">' . $this->translations->get_message('panel_user', 'settings') . '</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?logout">Выход</a>
+            <a class="nav-link" href="?logout">' . $this->translations->get_message('panel_user', 'logout') . '</a>
           </li>
         </ul>
         ';

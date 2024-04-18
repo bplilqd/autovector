@@ -7,7 +7,7 @@ class auth_view extends view implements interface_auth_view
     public function __construct()
     {
         $this->start_standart_view();
-        $this->setting_properties('title', 'Авторизация');
+        $this->setting_properties('title', $this->translations->get_message('auth', 'auth'));
     }
 
     public function include_theme()

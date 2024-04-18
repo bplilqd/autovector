@@ -50,6 +50,9 @@ class user_controller extends main_controller
             // if authorized -> view...
             // sent data for set in wiew
             $this->view->input_data_user($this->model->data_user);
+            // set title
+            $title_user_page = $this->translations->get_message('panel_user', 'title_user_page');
+            $this->view->setting_properties('title', $title_user_page);
             // set content
             $this->view->set_content();
             // set menu

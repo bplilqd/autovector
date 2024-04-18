@@ -8,5 +8,6 @@ return [
     'incorrect_pass' => 'Incorrect password.',
     'not_authorized' => 'Not authorized, there will be a redirection after 5 seconds',
     'error_captcha' => 'Recaptcha error.',
-    'verification_failed' => 'Verification failed, click - I\'m not a robot.'
+    'verification_failed' => 'Verification failed, click - I\'m not a robot.',
+    'auth' => 'Authorization'
 ];
