@@ -92,7 +92,12 @@ class user_controller extends main_controller
         $class_mosel_setings = ['interfaceForUseMysqli', 'useMysqli', 'forUseMysqli'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
         $array[] = [$class_mosel_setings, $path_model];
-
+        
+        // array for model -> function class
+        $class_mosel_setings = ['znach_array'];
+        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
+        $array[] = [$class_mosel_setings, $path_model];
+        
         // array for model -> settings class
         $class_mosel_setings = ['interface_user_classe', 'user_config'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS;
