@@ -11,6 +11,7 @@ define("PASS_DB", $pass_db); // пароль пользователя базы �
 // for set theme
 define("DESIGN_THEME", 'theme'); // theme default
 define("MODE_THEME", 'dark'); // mode default
+define("LANGUAGE", 'en'); // mode default
 
 // system
 define("NAME_MODEL", $name_model); // name basic of model

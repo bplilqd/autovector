@@ -181,6 +181,7 @@ class auth_model extends model implements interface_auth_model
             'pass' => $generate_hash,
             'user_theme' => DESIGN_THEME,
             'data_bs_theme' => MODE_THEME,
+            'language' => LANGUAGE,
             //             'hash' => '',
             'sec' => time()
         ];

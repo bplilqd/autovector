@@ -29,6 +29,10 @@ class main_controller
     protected function settings_user()
     {
         if ($this->model->auth) {
+            // set lang
+            $language = $this->model->user_config->language;
+            $this->translations->set_language($language);
+
             // set to name of current theme
             $this->view->user_theme = $this->model->user_config->user_theme;
             // set to what is the dark or light theme
