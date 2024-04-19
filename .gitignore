@@ -1,6 +1,6 @@
 app/class_model/settings/config.php
 app/test/index.php
-app/logs/*
+app/logs/log_sql/*
 composer.phar
 /vendor/
 composer.lock
