@@ -53,12 +53,8 @@ class user_controller extends main_controller
             $this->view->set_content();
             // set menu
             $this->view->set_menu();
-            // set_foot
-            $this->view->set_foot($this->model->count_query);
-            // for print errors
-            $this->view->error_print(); 
-            // include theme
-            $this->view->include_theme();
+            // more if authorized
+            $this->more_setting_default('view');
         } else {
             // if not authorized -> not_authorized
             // error and redirect
@@ -69,21 +65,21 @@ class user_controller extends main_controller
                 )
             );
             header("refresh:5; url=../auth");
+            // set other object of view
+            $this->not_authorized = new not_authorized_view;
             // set this method if there is no authorization
-            $this->set_for_not_authorized();
+            $this->more_setting_default('not_authorized');
         }
     }
-
-    protected function set_for_not_authorized()
+    
+    protected function more_setting_default($view_namme)
     {
-        // set other object of view
-        $this->not_authorized = new not_authorized_view;
         // set_foot
-        $this->not_authorized->set_foot($this->model->count_query);
+        $this->$view_namme->set_foot($this->model->count_query);
         // for print errors
-        $this->not_authorized->error_print();
+        $this->$view_namme->error_print();
         // include theme
-        $this->not_authorized->include_theme();
+        $this->$view_namme->include_theme();
     }
 
     // start name class

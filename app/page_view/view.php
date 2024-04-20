@@ -69,7 +69,6 @@ class view
 
     public function set_foot($count_query)
     {
-
         if (!$count_query) {
             $count_query = 0;
         }

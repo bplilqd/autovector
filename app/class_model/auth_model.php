@@ -17,7 +17,7 @@ class auth_model extends model implements interface_auth_model
     protected object $translations; // lang
     protected object $error_manager; // error
     // other properties
-    protected $input_data; // data for auth_form
+    protected $input_data = []; // data for auth_form
     protected int $length_generate_pass = 8;
 
     public function __construct()

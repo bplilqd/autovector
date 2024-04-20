@@ -13,7 +13,7 @@ class main_controller
     protected object $translations; // lang
     protected object $error_manager; // error
 
-    protected $request; // request
+    protected $request = []; // request
 
     public string $hash = ''; // id user of the hash
 

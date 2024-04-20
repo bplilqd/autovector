@@ -5,7 +5,7 @@ namespace controller;
 class auth_controller extends main_controller
 {
 
-    protected $data; // data of auth
+    protected $data = []; // data of auth
 
     function __construct()
     {

@@ -8,7 +8,6 @@ class default_view extends view implements interface_auth_view
     {
         $this->start_standart_view();
       
-
         $url_img_autovector = SITE_URL . 'images/autovector.jpg';
         //$url_img_autovector = PATH . DS. 'images/autovector.jpg';
 

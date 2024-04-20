@@ -12,7 +12,7 @@ class auth_view extends view implements interface_auth_view
 
     public function include_theme()
     {
-        // setting of theme
+        // hard setting of theme
         $this->user_theme = 'design';
         //$this->data_bs_theme = 'light';
 
