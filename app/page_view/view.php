@@ -20,7 +20,9 @@ class view
     // extra
     private $meta;
 
+
     // setting of theme
+    public $language = LANGUAGE;
     public $user_theme = DESIGN_THEME;
     public $data_bs_theme = MODE_THEME;
 
@@ -29,6 +31,7 @@ class view
     {
         // set object for enter of language
         $this->translations = translations::getInstance();
+        
         $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
         $this->setting_properties('top', $top_str);
     }
