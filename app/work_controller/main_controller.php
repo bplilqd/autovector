@@ -35,7 +35,7 @@ class main_controller
             $this->translations->set_language($language);
             // set lang to html default pages
             $this->view->language = $language;
-            print_r('[' . strtoupper($language) . '] ');
+            //print_r('[' . strtoupper($language) . '] ');
             // set to name of current theme
             $this->view->user_theme = $this->model->user_config->user_theme;
             // set to what is the dark or light theme
