@@ -32,7 +32,7 @@ class view
         // set object for enter of language
         $this->translations = translations::getInstance();
         
-        $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello world!</h1></a>';
+        $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello, World!</h1></a>';
         $this->setting_properties('top', $top_str);
     }
 
@@ -70,7 +70,13 @@ class view
             $count_query = 0;
         }
 
-        $str = "<center><p> " . Memory_mb(memory_get_usage()) . " <br> Запросов к базе данных " . $count_query . " <br> " . Time_sec(TIME_START, microtime(true)) . "</p></center>";
+        $str = "
+        <center>
+        <p> " . Memory_mb(memory_get_usage()) . " <br> 
+        ".$this->translations->get_message('content_page', 'database_queries')." " . $count_query . " <br> 
+        " . Time_sec(TIME_START, microtime(true)) . "
+        </p>
+        </center>";
         $this->foot = $str;
     }
 

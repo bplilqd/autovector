@@ -15,15 +15,17 @@ class translations implements interface_translations
 
     private $language;
     private static $instance;
-    protected $lang_set;
+
+    // language packs
     protected $auth;
     protected $mysql;
     protected $auth_form;
     protected $panel_user;
+    protected $content_page;
 
     private function __construct()
     {
-        $this->language = 'en';
+        $this->language = LANGUAGE;
     }
 
     public static function getInstance()
@@ -43,9 +45,10 @@ class translations implements interface_translations
     {
         $language = $this->language;
         // If the language is changed, download the package again
-        if (!$this->$name || $this->lang_set != $language) {
-            $this->lang_set = $language; // for control set lang
-            $this->$name = include realpath(__DIR__ . '/../../../lang/' . $language . '/' . $name . '.php');
+        if (!$this->$name) {
+            $path = __DIR__ . '/../../../lang/' . $language . '/' . $name . '.php';
+            $this->$name = include realpath($path);
+            //print_r('lang_set ' . $language . ' -> ' . $path . "\n");
         }
         return $this->$name[$key];
     }
