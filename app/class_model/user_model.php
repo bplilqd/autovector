@@ -25,10 +25,6 @@ class user_model extends model
             // data user for sent to wiew
             $this->set_data_user_for_view();
         }
-        // got error from mysql
-        if ($this->mysql->error_arr) {
-            $this->error($this->mysql->error_arr, 'mysql');
-        }
         // count queries in database
         if ($this->mysql->count_query) {
             $this->count_query = count($this->mysql->count_query);

@@ -3,6 +3,7 @@
 namespace controller;
 
 use model\function\translations;
+use controller\error\error_manager;
 
 class main_controller
 {
@@ -10,9 +11,9 @@ class main_controller
     protected object $view; // view
 
     protected object $translations; // lang
+    protected object $error_manager; // error
 
     protected $request; // request
-    protected $error_arr; // error
 
     public string $hash = ''; // id user of the hash
 
@@ -61,6 +62,8 @@ class main_controller
     // set new class to objects
     protected function set_object_default()
     {
+        // setting error object
+        $this->error_manager = error_manager::get_instance();
         // set object for enter of language
         $this->translations = translations::getInstance();
         // set model

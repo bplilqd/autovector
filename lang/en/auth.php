@@ -9,5 +9,6 @@ return [
     'not_authorized' => 'Not authorized, there will be a redirection after 5 seconds',
     'error_captcha' => 'Recaptcha error.',
     'verification_failed' => 'Verification failed, click - I\'m not a robot.',
-    'auth' => 'Authorization'
+    'auth' => 'Authorization',
+    'no_data' => 'no data'
 ];

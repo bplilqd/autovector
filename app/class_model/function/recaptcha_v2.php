@@ -5,23 +5,30 @@
 namespace model\function;
 
 use model\function\translations;
+use controller\error\error_manager;
 
 class recaptcha_v2
 {
-    public $error_arr;
     public bool $captcha = false;
     protected object $translations; // lang
+    protected object $error_manager; // error
 
     public function recaptcha()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            // setting error object
+            $this->error_manager = error_manager::get_instance();
             // set object for enter of language
             $this->translations = translations::getInstance();
-            
+
             if (empty($_POST['g-recaptcha-response'])) {
                 // write down an error
-                $this->error_arr[] = $this->translations->get_message('auth', 'error_captcha');
+                $this->error_manager->add_error(
+                    $this->translations->get_message(
+                        'auth',
+                        'error_captcha'
+                    )
+                );
             }
 
             $url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -47,7 +54,12 @@ class recaptcha_v2
                 $this->captcha = true;
             } else {
                 // write down an error
-                $this->error_arr[] = $this->translations->get_message('auth', 'verification_failed');
+                $this->error_manager->add_error(
+                    $this->translations->get_message(
+                        'auth',
+                        'verification_failed'
+                    )
+                );
             }
         }
     }

@@ -3,17 +3,17 @@
 namespace model\connect;
 
 use model\function\translations;
+use controller\error\error_manager;
 
 class useMysqli
 {
     // object language
-    protected $translations;
+    protected object $translations; // lang
+    protected object $error_manager; // error
     // for db
     public $mysql = null;
     public $query = null;
     public $count_query; // count query
-    // handler of systeam messages
-    public $error_arr; // array with errors
     // log query
     public $registry_sql_echo; // array with the querys
     // connect db
@@ -21,23 +21,28 @@ class useMysqli
 
     protected function set_db()
     {
+        $this->dependency_injection();
         if (!$this->mysql) {
             $this->mysql = new \mysqli(HOST_DB, USER_DB, PASS_DB, NAME_DB);
             $this->mysql->set_charset("utf8");
             // check connect
             if ($this->mysql->connect_error) {
-                $this->language();
-                $this->error_arr[] = $this->translations->get_message('mysql', 'error_connecting') . $this->mysql->connect_error;
+                $this->error_manager->add_error(
+                    $this->translations->get_message(
+                        'mysql',
+                        'error_connecting'
+                    ) . $this->mysql->connect_error
+                );
             }
         }
     }
 
-    protected function language()
+    protected function dependency_injection()
     {
+        // setting error object
+        $this->error_manager = error_manager::get_instance();
         // set object for enter of language
-        if(!$this->translations){
-            $this->translations = translations::getInstance();
-        }
+        $this->translations = translations::getInstance();
     }
 
     // checking for the presence of data on a back request
@@ -46,8 +51,12 @@ class useMysqli
         // checking the request
         $result = ($this->query->num_rows >= 1) ? true : false;
         if (!$result && $echo) {
-            $this->language();
-            $this->error_arr[] = $this->translations->get_message('mysql', 'nothing_was_found');
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'mysql',
+                    'nothing_was_found'
+                )
+            );
         }
         return $result;
     }

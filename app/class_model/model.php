@@ -8,7 +8,6 @@ class model
     protected object $mysql;
     public object $user_config;
 
-    public $error_arr; // error
     //static $success_arr; // success
     //static $warning_arr; // warning
     //static $info_arr; // danger
@@ -17,12 +16,6 @@ class model
     public bool $auth = false; // auth bool FALSE or TRUE
 
     public $count_query; // count request in db
-    
-    // collecter of errors
-    public function error($array, $name)
-    {
-        $this->error_arr[$name] = $array;
-    }
 
     public function set_user($hash)
     {

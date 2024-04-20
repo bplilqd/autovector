@@ -26,10 +26,6 @@ class user_controller extends main_controller
         $this->start_name_class();
         // standart methods -> set request, set hash from browser, set object of model and others...
         $this->set_standart();
-        // sending error to model
-        if ($this->error_arr) {
-            $this->model->error($this->error_arr, 'controller');
-        }
     }
 
     protected function set_in_model()
@@ -60,13 +56,18 @@ class user_controller extends main_controller
             // set_foot
             $this->view->set_foot($this->model->count_query);
             // for print errors
-            $this->view->error_print($this->model->error_arr);
+            $this->view->error_print(); 
             // include theme
             $this->view->include_theme();
         } else {
             // if not authorized -> not_authorized
             // error and redirect
-            $this->model->error_arr['view'][] = $this->translations->get_message('auth', 'not_authorized');
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'auth',
+                    'not_authorized'
+                )
+            );
             header("refresh:5; url=../auth");
             // set this method if there is no authorization
             $this->set_for_not_authorized();
@@ -80,7 +81,7 @@ class user_controller extends main_controller
         // set_foot
         $this->not_authorized->set_foot($this->model->count_query);
         // for print errors
-        $this->not_authorized->error_print($this->model->error_arr);
+        $this->not_authorized->error_print();
         // include theme
         $this->not_authorized->include_theme();
     }
@@ -92,12 +93,12 @@ class user_controller extends main_controller
         $class_mosel_setings = ['interfaceForUseMysqli', 'useMysqli', 'forUseMysqli'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
         $array[] = [$class_mosel_setings, $path_model];
-        
+
         // array for model -> function class
         $class_mosel_setings = ['znach_array'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
         $array[] = [$class_mosel_setings, $path_model];
-        
+
         // array for model -> settings class
         $class_mosel_setings = ['interface_user_classe', 'user_config'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS;

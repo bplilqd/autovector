@@ -19,10 +19,6 @@ class default_model extends model
 
     public function set_and_setting()
     {
-        // got error from mysql
-        if ($this->mysql->error_arr) {
-            $this->error($this->mysql->error_arr, 'mysql');
-        }
         // count queries in database
         if($this->mysql->count_query){
             $this->count_query = count($this->mysql->count_query);

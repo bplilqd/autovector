@@ -2,9 +2,13 @@
 
 namespace model\function;
 
-class auth_function{
+use model\function\translations;
+use controller\error\error_manager;
 
-    public $error_arr;
+class auth_function{
+    // object language
+    protected object $translations; // lang
+    protected object $error_manager; // error
     public function generateCode($length = 6)
     {
         $chars = "abcdefikmprstuvwxyz123456789";
@@ -21,7 +25,24 @@ class auth_function{
             $generate_hash = md5("$secret_key:$pass:$phone");
             return $generate_hash;
         } else {
-            $this->error_arr[] = __FUNCTION__ . ' not data';
+            $this->dependency_injection();
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'auth',
+                    'no_data'
+                )
+            );
+        }
+    }
+    protected function dependency_injection()
+    {
+        // setting error object
+        if (!$this->error_manager) {
+            $this->error_manager = error_manager::get_instance();
+        }
+        // set object for enter of language
+        if (!$this->translations) {
+            $this->translations = translations::getInstance();
         }
     }
 }

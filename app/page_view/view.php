@@ -3,9 +3,11 @@
 namespace view;
 
 use model\function\translations;
+use controller\error\error_manager;
 
 class view
 {
+    protected object $error_manager; // error
     protected object $translations; // lang
     // standart
     private $header;
@@ -29,9 +31,11 @@ class view
     // main property of this class
     protected function start_standart_view()
     {
+        // setting error object
+        $this->error_manager = error_manager::get_instance();
         // set object for enter of language
         $this->translations = translations::getInstance();
-        
+
         $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello, World!</h1></a>';
         $this->setting_properties('top', $top_str);
     }
@@ -73,25 +77,23 @@ class view
         $str = "
         <center>
         <p> " . Memory_mb(memory_get_usage()) . " <br> 
-        ".$this->translations->get_message('content_page', 'database_queries')." " . $count_query . " <br> 
+        " . $this->translations->get_message('content_page', 'database_queries') . " " . $count_query . " <br> 
         " . Time_sec(TIME_START, microtime(true)) . "
         </p>
         </center>";
         $this->foot = $str;
     }
 
-    public function error_print($error_arr)
+    public function error_print()
     {
-        if ($error_arr) {
+        if ($this->error_manager->has_errors()) {
             $result = '';
-            foreach ($error_arr as $k => $v) {
-                foreach ($v as $val) {
-                    $result .= '
-                    <div class="alert alert-danger" role="alert">
-                        ' . $k . ' -> ' . $val . '
-                    </div>
-                    ';
-                }
+            foreach ($this->error_manager->get_errors() as $error) {
+                $result .= '
+                <div class="alert alert-danger" role="alert">
+                    ' . $error . '
+                </div>
+                ';
             }
             $this->system_mesage = $result;
         }

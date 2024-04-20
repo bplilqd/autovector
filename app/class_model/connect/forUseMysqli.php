@@ -5,12 +5,6 @@ namespace model\connect;
 class forUseMysqli extends useMysqli implements interfaceForUseMysqli
 {
 
-    // error array
-    public function error_array()
-    {
-        return $this->error_arr;
-    }
-
     // SELECT sql
     public function sql_select($sql_in, $echo = true, $no_log = false)
     {

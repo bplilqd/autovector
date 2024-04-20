@@ -12,10 +12,6 @@ class default_controller extends main_controller
         $this->start_name_class();
         // standart methods -> set request, set hash from browser, set object of model and others...
         $this->set_standart();
-        // sending error to model
-        if ($this->error_arr) {
-            $this->model->error($this->error_arr, 'controller');
-        }
 
         // model ->
         // set user auth
@@ -26,7 +22,7 @@ class default_controller extends main_controller
         // view ->
         $this->settings_user();
         // for print errors
-        $this->view->error_print($this->model->error_arr);
+        $this->view->error_print();
         // set_menu
         if ($this->model->auth) {
             $this->view->set_menu();

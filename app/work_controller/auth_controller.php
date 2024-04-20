@@ -25,7 +25,12 @@ class auth_controller extends main_controller
         $this->set_standart();
         // if auth to refresh/redirect
         if ($this->hash) {
-            $this->error_arr[] = $this->translations->get_message('auth', 'redirection_after');
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'auth',
+                    'redirection_after'
+                )
+            );
             header("refresh:5; url=/");
         }
         // validation of user input of data
@@ -36,10 +41,6 @@ class auth_controller extends main_controller
 
     protected function set_in_model()
     {
-        // sending error to model
-        if ($this->error_arr) {
-            $this->model->error($this->error_arr, 'controller');
-        }
         // start work for to model -> option/settings
         $this->model->set_and_setting();
     }
@@ -59,7 +60,7 @@ class auth_controller extends main_controller
         // default set to what is the dark or light theme
         $this->view->setting_properties('data_bs_theme', MODE_THEME); // mode default
         // for print errors
-        $this->view->error_print($this->model->error_arr);
+        $this->view->error_print();
         // set_foot
         $this->view->set_foot($this->model->count_query);
         // include theme
@@ -94,7 +95,12 @@ class auth_controller extends main_controller
                         $phone = $this->valid_phone_set($request['phone']);
                     }
                 } else {
-                    $this->error_arr[] = $this->translations->get_message('auth', 'enter_phone');
+                    $this->error_manager->add_error(
+                        $this->translations->get_message(
+                            'auth',
+                            'enter_phone'
+                        )
+                    );
                 }
 
                 // form handler
@@ -125,7 +131,12 @@ class auth_controller extends main_controller
     {
         $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', trim($phone)));
         if (!$result) {
-            $this->error_arr[] = $this->translations->get_message('auth', 'not_correct_format_number');
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'auth',
+                    'not_correct_format_number'
+                )
+            );
         }
         return $result;
     }

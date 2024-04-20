@@ -7,6 +7,7 @@ use model\function\auth_function;
 use view\auth_form;
 use model\function\recaptcha_v2;
 use model\function\translations;
+use controller\error\error_manager;
 
 class auth_model extends model implements interface_auth_model
 {
@@ -14,6 +15,7 @@ class auth_model extends model implements interface_auth_model
     public object $auth_form;
     public object $captcha;
     protected object $translations; // lang
+    protected object $error_manager; // error
     // other properties
     protected $input_data; // data for auth_form
     protected int $length_generate_pass = 8;
@@ -30,23 +32,9 @@ class auth_model extends model implements interface_auth_model
         $data = $this->input_data;
         // reg or auth
         $this->registr_or_authorization($data);
-        // collection a errors from classes
-        $this->sending_error_message_from_classes();
         // count queries in database
         if ($this->mysql->count_query) {
             $this->count_query = count($this->mysql->count_query);
-        }
-    }
-
-    protected function sending_error_message_from_classes()
-    {
-        // got error from captcha
-        if ($this->captcha->error_arr) {
-            $this->error($this->captcha->error_arr, 'captcha');
-        }
-        // got error from mysql
-        if ($this->mysql->error_arr) {
-            $this->error($this->mysql->error_arr, 'mysql');
         }
     }
 
@@ -89,8 +77,6 @@ class auth_model extends model implements interface_auth_model
                 // auth_function
                 $pass = $this->auth_function->generateCode($this->length_generate_pass);
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
-                // got error from auth_function
-                $this->got_error_from_auth_function();
 
                 // egistr user
                 $this->registr_new_user($phone, $generate_hash);
@@ -104,7 +90,7 @@ class auth_model extends model implements interface_auth_model
 
     protected function authorization($phone, $pass_db, $generate_hash)
     {
-        if ($pass_db && $pass_db == $generate_hash && !$this->error_arr['model']) {
+        if ($pass_db && $pass_db == $generate_hash && !$this->error_manager->has_errors()) {
             // authorization good
 
             // set hash cook
@@ -117,16 +103,15 @@ class auth_model extends model implements interface_auth_model
             header("Location: ../..");
         } else {
             // authorization error
-            $this->error_arr['model'][] = $this->translations->get_message('auth', 'incorrect_pass');
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'auth',
+                    'incorrect_pass'
+                )
+            );
         }
     }
 
-    protected function got_error_from_auth_function()
-    {
-        if ($this->auth_function->error_arr) {
-            $this->error($this->auth_function->error_arr, 'auth_function');
-        }
-    }
     protected function set_authorization($set_phone, $phone, $pass)
     {
         if ($set_phone) {
@@ -139,13 +124,16 @@ class auth_model extends model implements interface_auth_model
 
                     // auth_function
                     $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
-                    // got error from auth_function
-                    $this->got_error_from_auth_function();
 
                     $this->authorization($phone, $pass_db, $generate_hash);
                 }
             } else {
-                $this->error_arr['model'][] = $this->translations->get_message('auth', 'no_pass');
+                $this->error_manager->add_error(
+                    $this->translations->get_message(
+                        'auth',
+                        'no_pass'
+                    )
+                );
             }
         }
     }
@@ -191,6 +179,8 @@ class auth_model extends model implements interface_auth_model
 
     protected function set_objects()
     {
+        // setting error object
+        $this->error_manager = error_manager::get_instance();
         // set object for enter of language
         $this->translations = translations::getInstance();
         // set object for connect mysql
