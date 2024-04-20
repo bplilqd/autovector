@@ -75,9 +75,26 @@ class view
 
         $str = "
         <center>
-        <p> " . Memory_mb(memory_get_usage()) . " <br> 
-        " . $this->translations->get_message('content_page', 'database_queries') . " " . $count_query . " <br> 
-        " . Time_sec(TIME_START, microtime(true)) . "
+        <p> " . $this->translations->get_message(
+            'content_page',
+            'memory_size'
+        ) . ' ' . Memory_mb(memory_get_usage()) . ' '
+            . $this->translations->get_message(
+                'content_page',
+                'mb'
+            ) . " <br> 
+        " . $this->translations->get_message(
+                'content_page',
+                'database_queries'
+            ) . " " . $count_query . " <br> 
+        " . $this->translations->get_message(
+                'content_page',
+                'execution_time'
+            ) . ' ' .  Time_sec(TIME_START, microtime(true))  . ' '
+            . $this->translations->get_message(
+                'content_page',
+                'sec'
+            ) . "
         </p>
         </center>";
         $this->foot = $str;

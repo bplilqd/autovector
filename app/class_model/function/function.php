@@ -1,7 +1,7 @@
 <?php
 define("TIME_START", microtime(true)); // для вычеслений, внимание - не менять эту строку!
 
-// определение девайса перенести в главный контролер
+// device of user
 $mobile_device_true = false;
 if ($_SERVER['HTTP_USER_AGENT']) {
     if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPad') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'Mobile') || strstr($_SERVER['HTTP_USER_AGENT'], 'Phone') || isset($_GET['mobile'])) {
@@ -31,19 +31,17 @@ function set_main_class($name_class)
 // типа так: $time_start = microtime(true);
 function Time_sec($t_start, $t_end)
 {
-    $time_s = 'Время выполнения ';
     $t = $t_end - $t_start;
-    $time_s .= round($t, 3);
-    return $time_s .= ' сек.';
+    $time_s = round($t, 3);
+    return $time_s;
 }
 
 // функция вычесления объема требуемой памяти
 function Memory_mb($a)
 {
-    $memory = 'Объем памяти ';
     $a = $a / 1024 / 1024;
-    $memory .= round($a, 2);
-    return $memory .= ' mb';
+    $memory = round($a, 2);
+    return $memory;
 }
 
 
