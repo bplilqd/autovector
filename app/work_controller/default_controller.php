@@ -31,6 +31,8 @@ class default_controller extends main_controller
         if ($this->model->auth) {
             $this->view->set_menu();
         }
+        // title
+        $this->view->setting_properties('title', $this->translations->get_message('content_page', 'welcome'));
         // set_foot
         $this->view->set_foot($this->model->count_query);
         // include theme
