@@ -7,7 +7,7 @@ class not_authorized_view extends view implements interface_auth_view
     public function __construct()
     {
         $this->start_standart_view();
-        $this->setting_properties('title', 'You not authorized');
+        $this->setting_properties('title', $this->translations->get_message('content_page', 'not_auth'));
     }
 
     public function include_theme()
