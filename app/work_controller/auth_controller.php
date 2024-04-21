@@ -47,13 +47,16 @@ class auth_controller extends main_controller
 
     protected function set_in_view()
     {
-        // data transfer and set view
-        $form = $this->model->auth_form->form($this->data);
-        $this->view->setting_properties('content', $form);
-        if (RECAPTCHA_ON) {
-            // set recaptcha js to meta
-            $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
-            $this->view->setting_properties('meta', '', $meta);
+        // show form only if no authentication
+        if (!$this->hash) {
+            // data transfer and set view
+            $form = $this->model->auth_form->form($this->data);
+            $this->view->setting_properties('content', $form);
+            if (RECAPTCHA_ON) {
+                // set recaptcha js to meta
+                $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
+                $this->view->setting_properties('meta', '', $meta);
+            }
         }
         // for print errors
         $this->view->error_print();
@@ -84,21 +87,8 @@ class auth_controller extends main_controller
         if ($request['auth_submit'] == 'auth_submit') {
             $captcha = $this->check_recaptcha();
             if ($captcha) {
-
                 // validation data of user
-                if ($request['phone']) {
-                    if ($this->phone_validate($request['phone'])) {
-                        $phone = $this->valid_phone_set($request['phone']);
-                    }
-                } else {
-                    $this->error_manager->add_error(
-                        $this->translations->get_message(
-                            'auth',
-                            'enter_phone'
-                        )
-                    );
-                }
-
+                $phone = $this->validation_data_of_user($request['phone']);
                 // form handler
                 $data['auth_form'] = [
                     'phone' => $phone,
@@ -106,13 +96,29 @@ class auth_controller extends main_controller
                     'pass' => strip_tags($request['pass']),
                     'auth_submit' => strip_tags($request['auth_submit'])
                 ];
-
                 // sent data -> model
                 $this->model->data_of_auth($data);
                 // set data of user
                 $this->data = $data;
             }
         }
+    }
+
+    protected function validation_data_of_user($request_phone)
+    {
+        if ($request_phone) {
+            if ($this->phone_validate($request_phone)) {
+                $phone = $this->valid_phone_set($request_phone);
+            }
+        } else {
+            $this->error_manager->add_error(
+                $this->translations->get_message(
+                    'auth',
+                    'enter_phone'
+                )
+            );
+        }
+        return $phone;
     }
 
     protected function valid_phone_set($phone)
