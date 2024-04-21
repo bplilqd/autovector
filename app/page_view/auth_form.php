@@ -6,9 +6,8 @@ use model\function\translations;
 
 class auth_form implements interface_auth_form
 {
-    protected $test;
-    protected $array;
-    protected $form;
+    protected $array = [];
+    protected $form = '';
     protected object $translations; // lang
 
     public function form($array)
@@ -42,14 +41,14 @@ class auth_form implements interface_auth_form
         <div class="mb-3">
             <label for="phone" class="form-label">' . $this->translations->get_message('auth_form', 'phone') . '</label>
             <input name="phone" value="' . $phone . '" type="phone" class="form-control" 
-            id="phone" aria-describedby="phoneHelp" placeholder="' . $phone . '"' . $disabled . '>
+            id="phone" aria-describedby="phoneHelp" placeholder=""' . $disabled . ' required>
             <div id="phoneHelp" class="form-text">' . $help_text . '</div>
         </div>';
         if ($active_input_pass) {
             $str .= '
         <div class="mb-3">
             <label for="pass" class="form-label">' . $this->translations->get_message('auth_form', 'pass') . '</label>
-            <input name="pass" type="password" class="form-control" id="pass">
+            <input name="pass" type="password" class="form-control" id="pass" required>
             <input type="hidden" name="set_phone" value="true">
             <input type="hidden" name="phone" value="' . $phone . '">
         </div>

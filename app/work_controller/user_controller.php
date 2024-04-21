@@ -19,18 +19,18 @@ class user_controller extends main_controller
         $this->set_in_view();
     }
 
+    // controller ->
     protected function set_in_controller()
     {
-        // controller ->
         // load casses - add names for class for set autoload 
         $this->start_name_class();
         // standart methods -> set request, set hash from browser, set object of model and others...
         $this->set_standart();
     }
 
+    // model ->
     protected function set_in_model()
     {
-        // model ->
         // set user auth
         $this->model->set_user($this->hash);
         // start work for to model -> option/settings
@@ -39,15 +39,18 @@ class user_controller extends main_controller
         $this->settings_user();
     }
 
+    // view ->
     protected function set_in_view()
     {
-        // view ->
         if ($this->model->auth) {
             // if authorized -> view...
             // sent data for set in wiew
             $this->view->input_data_user($this->model->data_user);
             // set title
-            $title_user_page = $this->translations->get_message('panel_user', 'title_user_page');
+            $title_user_page = $this->translations->get_message(
+                'panel_user',
+                'title_user_page'
+            );
             $this->view->setting_properties('title', $title_user_page);
             // set content
             $this->view->set_content();
@@ -71,7 +74,7 @@ class user_controller extends main_controller
             $this->more_setting_default('not_authorized');
         }
     }
-    
+
     protected function more_setting_default($view_namme)
     {
         // set_foot
@@ -86,7 +89,11 @@ class user_controller extends main_controller
     protected function start_name_class()
     {
         // array for model -> connect class
-        $class_mosel_setings = ['interfaceForUseMysqli', 'useMysqli', 'forUseMysqli'];
+        $class_mosel_setings = [
+            'interfaceForUseMysqli',
+            'useMysqli',
+            'forUseMysqli'
+        ];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
@@ -106,7 +113,12 @@ class user_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_auth_view', 'interface_user_view', 'not_authorized_view', NAME_VIEW];
+        $class_view = [
+            'interface_auth_view',
+            'interface_user_view',
+            'not_authorized_view',
+            NAME_VIEW
+        ];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 

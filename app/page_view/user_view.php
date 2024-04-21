@@ -52,6 +52,7 @@ class user_view extends view implements interface_auth_view, interface_user_view
 ';
     $array = $this->array_info_user_content;
     foreach ($data as $key => $value) {
+      // if it's on the list
       if ($value && in_array($key, $array)) {
         $content .= '
     <li class="list-group-item">' . $value . '</li>
