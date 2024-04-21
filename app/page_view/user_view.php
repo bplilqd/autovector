@@ -8,7 +8,7 @@ class user_view extends view implements interface_auth_view, interface_user_view
 {
   protected $data_user;
   protected $array_info_user_content;
-  
+
   protected $znach_array;
 
   public function __construct()
@@ -28,17 +28,22 @@ class user_view extends view implements interface_auth_view, interface_user_view
 
   public function set_menu()
   {
+    $array = [
+      ['active', '/panel/user/', 'profile'],
+      ['', '?settings', 'settings'],
+      ['', '?logout', 'logout'],
+    ];
     $menu = '
-        <ul class="nav nav-underline">
+        <ul class="nav nav-underline">';
+
+    foreach ($array as $value) {
+    $menu .= '
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/panel/user/">' . $this->translations->get_message('panel_user', 'profile') . '</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?settings">' . $this->translations->get_message('panel_user', 'settings') . '</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?logout">' . $this->translations->get_message('panel_user', 'logout') . '</a>
-          </li>
+            <a class="nav-link '.$value[0].'" href="'.$value[1].'">' . $this->translations->get_message('panel_user', $value[2]) . '</a>
+          </li>';
+    }
+
+    $menu .= '
         </ul>
         ';
     $this->setting_properties('menu', $menu);
