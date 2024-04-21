@@ -42,6 +42,8 @@ class user_controller extends main_controller
     // view ->
     protected function set_in_view()
     {
+        // logout
+        $this->logout();
         if ($this->model->auth) {
             // if authorized -> view...
             // sent data for set in wiew
@@ -72,6 +74,34 @@ class user_controller extends main_controller
             $this->not_authorized = new not_authorized_view;
             // set this method if there is no authorization
             $this->more_setting_default('not_authorized');
+        }
+    }
+
+    protected function go_out() {
+        if ($this->model->auth) {
+            $hash = $this->hash;
+            // куки записать хаш в браузер
+            setcookie("hash", $hash, time() - SET_COOK_TIME_HASH, "/");
+            // редирект на нужную страницу
+            header("Location: /");
+        }
+    }
+
+    protected function logout()
+    {
+        if ($this->request) {
+            if (isset($this->request['logout'])) {
+                if (!$this->model->auth) {
+                    // error and redirect
+                    $this->error_manager->add_error(
+                        $this->translations->get_message(
+                            'auth',
+                            'already_logged_out'
+                        )
+                    );
+                }
+                $this->go_out();
+            }
         }
     }
 

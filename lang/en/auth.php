@@ -10,5 +10,6 @@ return [
     'error_captcha' => 'Recaptcha error.',
     'verification_failed' => 'Verification failed, click - I\'m not a robot.',
     'auth' => 'Authorization',
-    'no_data' => 'no data'
+    'no_data' => 'no data',
+    'already_logged_out'=>'You are already logged out!'
 ];
