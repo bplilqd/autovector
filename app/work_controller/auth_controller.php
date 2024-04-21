@@ -55,10 +55,6 @@ class auth_controller extends main_controller
             $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
             $this->view->setting_properties('meta', '', $meta);
         }
-        // default set to name of current theme
-        $this->view->setting_properties('user_theme', DESIGN_THEME); // theme default
-        // default set to what is the dark or light theme
-        $this->view->setting_properties('data_bs_theme', MODE_THEME); // mode default
         // for print errors
         $this->view->error_print();
         // set_foot
