@@ -10,17 +10,17 @@ class view
     protected object $error_manager; // error
     protected object $translations; // lang
     // standart
-    private $header;
-    private $menu;
-    private $top;
-    private $system_mesage;
-    private $announce;
-    private $title;
-    private $sidebar;
-    private $content;
-    private $foot;
+    private $header = '';
+    private $menu = '';
+    private $top = '';
+    private $system_mesage = '';
+    private $announce = '';
+    private $title = '';
+    private $sidebar = '';
+    private $content = ''; // content and also content_without_sidebar
+    private $foot = '';
     // extra
-    private $meta;
+    private $meta = '';
 
 
     // setting of theme
@@ -72,7 +72,6 @@ class view
         if (!$count_query) {
             $count_query = 0;
         }
-
         $str = "
         <center>
         <p> " . $this->translations->get_message(
