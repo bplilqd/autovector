@@ -100,6 +100,7 @@ class user_controller extends main_controller
                         )
                     );
                 }
+                // logged out
                 $this->go_out();
             }
         }
