@@ -146,6 +146,11 @@ class auth_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+        // array for view -> form
+        $class_view_form = ['interface_form', 'form', 'auth_form'];
+        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS. 'form' . DS;
+        $array[] = [$class_view_form, $path_model];
+
         // array for model -> fuction classes
         $class_mosel_setings = ['recaptcha_v2', 'auth_function'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
@@ -162,7 +167,7 @@ class auth_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_auth_form', 'auth_form', 'interface_auth_view', NAME_VIEW];
+        $class_view = ['interface_auth_view', NAME_VIEW];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 

@@ -4,7 +4,7 @@ namespace model;
 
 use model\connect\forUseMysqli;
 use model\function\auth_function;
-use view\auth_form;
+use view\form\auth_form;
 use model\function\recaptcha_v2;
 use model\function\translations;
 use controller\error\error_manager;
