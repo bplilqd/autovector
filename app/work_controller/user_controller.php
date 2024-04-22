@@ -42,6 +42,8 @@ class user_controller extends main_controller
     // view ->
     protected function set_in_view()
     {
+        // settings
+        $this->eddit_user_data();
         // logout
         $this->logout();
         if ($this->model->auth) {
@@ -77,7 +79,16 @@ class user_controller extends main_controller
         }
     }
 
-    protected function go_out() {
+    protected function eddit_user_data()
+    {
+        if ($this->request) {
+            if (isset($this->request['eddit_user_data'])) {
+            }
+        }
+    }
+
+    protected function go_out()
+    {
         if ($this->model->auth) {
             $hash = $this->hash;
             // куки записать хаш в браузер
@@ -119,6 +130,15 @@ class user_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+        // array for view -> form
+        $class_view_form = [
+            'interface_form',
+            'form',
+            'edit_form_user'
+        ];
+        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;
+        $array[] = [$class_view_form, $path_model];
+
         // array for model -> connect class
         $class_mosel_setings = [
             'interfaceForUseMysqli',

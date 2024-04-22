@@ -4,10 +4,12 @@ namespace model;
 
 use model\settings\user_config;
 use model\connect\forUseMysqli;
+use view\form\edit_form_user;
 
 class user_model extends model
 {
     protected object $mysql;
+    protected object $edit_form_user;
     // output data -> view
     public $data_user;
 
@@ -49,6 +51,8 @@ class user_model extends model
 
     protected function set_objects()
     {
+        // set edit form user
+        $this->edit_form_user = new edit_form_user;
         // set object for connect mysql
         $this->mysql = new forUseMysqli;
         // set user
