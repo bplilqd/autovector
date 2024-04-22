@@ -71,7 +71,7 @@ class auth_form extends form implements interface_form
         ';
         }
         // setting recaptcha
-        $this->recaptcha();
+        $str .= $this->recaptcha();
         $str .= '
         <button type="submit" name="auth_submit" value="auth_submit" class="btn btn-primary">' . $this->translations->get_message('auth_form', 'auth_submit') . '</button>
     </form>';
