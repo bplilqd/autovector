@@ -112,9 +112,7 @@ class user_controller extends main_controller
     {
         if ($this->model->auth) {
             $hash = $this->hash;
-            // куки записать хаш в браузер
             setcookie("hash", $hash, time() - SET_COOK_TIME_HASH, "/");
-            // редирект на нужную страницу
             header("Location: /");
         }
     }
