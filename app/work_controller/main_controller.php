@@ -30,7 +30,6 @@ class main_controller
     protected function settings_user()
     {
         if ($this->model->auth) {
-
             // set lang default to translations class
             $language = $this->model->user_config->language;
             $this->translations->set_language($language);

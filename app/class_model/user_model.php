@@ -32,6 +32,18 @@ class user_model extends model implements interface_user
         }
     }
 
+    public function edit_form($data)
+    {
+        $data_user = $this->data_user;
+        $data['data_user'] = [
+            'name' => $data_user['name'],
+            'last_name' => $data_user['last_name'],
+            'phone' => $data_user['phone'],
+            'email' => $data_user['email']
+        ];
+        return $this->edit_form_user->form($data);
+    }
+
     protected function set_data_user_for_view()
     {
         $user_config = $this->user_config;
@@ -47,18 +59,6 @@ class user_model extends model implements interface_user
         ];
 
         $this->data_user = $user_data;
-    }
-
-    public function edit_form($data)
-    {
-        $user_config = $this->user_config;
-        $data['user_config'] = [
-            'name' => $user_config->name,
-            'last_name' => $user_config->last_name,
-            'phone' => $user_config->phone,
-            'email' => $user_config->email
-        ];
-        return $this->edit_form_user->form($data);
     }
 
     protected function set_objects()

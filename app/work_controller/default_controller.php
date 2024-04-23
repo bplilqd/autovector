@@ -18,9 +18,10 @@ class default_controller extends main_controller
         $this->model->set_user($this->hash);
         // start work for to model -> option/settings
         $this->model->set_and_setting();
+        // set of the settings user
+        $this->settings_user();
 
         // view ->
-        $this->settings_user();
         // for print errors
         $this->view->error_print();
         // set_menu

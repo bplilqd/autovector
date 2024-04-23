@@ -46,8 +46,6 @@ class user_controller extends main_controller
         $this->logout();
         // if authorized -> view...
         if ($this->model->auth) {
-            // settings
-            $this->settings_user();
             // sent data for set in wiew
             $this->view->input_data_user($this->model->data_user);
             // set title
@@ -78,15 +76,6 @@ class user_controller extends main_controller
             $this->not_authorized = new not_authorized_view;
             // set this method if there is no authorization
             $this->more_setting_default('not_authorized');
-        }
-    }
-
-    protected function settings_user()
-    {
-        if ($this->request) {
-            if (isset($this->request['settings'])) {
-                print_r('settings');
-            }
         }
     }
 
