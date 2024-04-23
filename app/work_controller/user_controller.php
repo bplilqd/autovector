@@ -42,12 +42,12 @@ class user_controller extends main_controller
     // view ->
     protected function set_in_view()
     {
-        // settings
-        $this->eddit_user_data();
         // logout
         $this->logout();
+        // if authorized -> view...
         if ($this->model->auth) {
-            // if authorized -> view...
+            // settings
+            $this->settings_user();
             // sent data for set in wiew
             $this->view->input_data_user($this->model->data_user);
             // set title
@@ -58,6 +58,8 @@ class user_controller extends main_controller
             $this->view->setting_properties('title', $title_user_page);
             // set content
             $this->view->set_content();
+            // edit
+            $this->edit_user();
             // set menu
             $this->view->set_menu();
             // more if authorized
@@ -79,10 +81,29 @@ class user_controller extends main_controller
         }
     }
 
-    protected function eddit_user_data()
+    protected function settings_user()
     {
         if ($this->request) {
-            if (isset($this->request['eddit_user_data'])) {
+            if (isset($this->request['settings'])) {
+                print_r('settings');
+            }
+        }
+    }
+
+    protected function edit_user()
+    {
+        if ($this->request) {
+            $request = $this->request;
+            if (isset($request['edit_user'])) {
+                $data = [];
+                if (isset($request['submit_edit'])) {
+                    $data['edit_form'] = [
+                        'name' => strip_tags($request['name']),
+                        'last_name' => strip_tags($request['last_name'])
+                    ];
+                }
+                $form = $this->model->edit_form($data);
+                $this->view->setting_properties('content', $form);
             }
         }
     }
@@ -159,7 +180,7 @@ class user_controller extends main_controller
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
-        $class_model = [NAME_MODEL];
+        $class_model = ['interface_user', NAME_MODEL];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
         $array[] = [$class_model, $path_model];
 
