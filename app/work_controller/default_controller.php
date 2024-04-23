@@ -54,7 +54,7 @@ class default_controller extends main_controller
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
-        $class_model = [NAME_MODEL];
+        $class_model = ['interface_model', NAME_MODEL];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
         $array[] = [$class_model, $path_model];
 

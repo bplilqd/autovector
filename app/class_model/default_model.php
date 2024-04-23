@@ -6,7 +6,7 @@ use model\settings\user_config;
 use model\connect\forUseMysqli;
 use model\function\znach_array;
 
-class default_model extends model
+class default_model extends model implements interface_model
 {
     protected object $znach_array;
     protected object $mysql;
