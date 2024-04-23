@@ -6,7 +6,7 @@ use model\settings\user_config;
 use model\connect\forUseMysqli;
 use view\form\edit_form_user;
 
-class user_model extends model
+class user_model extends model implements interface_user
 {
     protected object $mysql;
     protected object $edit_form_user;
@@ -17,7 +17,6 @@ class user_model extends model
     {
         // set objects other
         $this->set_objects();
-
     }
 
     public function set_and_setting()
@@ -39,6 +38,7 @@ class user_model extends model
 
         $user_data = [
             'name' => $user_config->name,
+            'last_name' => $user_config->last_name,
             'phone' => '+' . $user_config->phone,
             'email' => $user_config->email,
             'user_theme' => $user_config->user_theme,
@@ -47,6 +47,18 @@ class user_model extends model
         ];
 
         $this->data_user = $user_data;
+    }
+
+    public function edit_form($data)
+    {
+        $user_config = $this->user_config;
+        $data['user_config'] = [
+            'name' => $user_config->name,
+            'last_name' => $user_config->last_name,
+            'phone' => $user_config->phone,
+            'email' => $user_config->email
+        ];
+        return $this->edit_form_user->form($data);
     }
 
     protected function set_objects()
