@@ -22,11 +22,12 @@ class edit_form_user extends form implements interface_form
     protected function set_form()
     {
         $date = $this->date;
-        $name = $date['edit_form']['name'] ? $date['edit_form']['name'] : $date['user_config']['name'];
-        $last_name  = $date['edit_form']['last_name'] ? $date['edit_form']['last_name'] : $date['user_config']['last_name'];
+        $name = $date['edit_form']['name'] ? $date['edit_form']['name'] : $date['data_user']['name'];
+        $last_name  = $date['edit_form']['last_name'] ? $date['edit_form']['last_name'] : $date['data_user']['last_name'];
         
         $name_word = $this->translations->get_message('panel_user', 'name');
         $last_name_word = $this->translations->get_message('panel_user', 'last_name');
+        $save_name_button = $this->translations->get_message('panel_user', 'save');
         $str = '
       <form>
         <div class="row g-3">
@@ -39,7 +40,7 @@ class edit_form_user extends form implements interface_form
               aria-label="' . $last_name_word . '">
           </div>
           <div class="col-12">
-            <button type="submit" name="submit_edit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" name="submit_edit" class="btn btn-primary">'.$save_name_button.'</button>
           </div>
         </div>
       </form>';
