@@ -90,7 +90,21 @@
           <div class="card-body">
             <?=$this->getting_properties('content')?>
             <!--del-->
-            content
+            <form>
+              <div class="row g-3">
+                <div class="col">
+                  <input type="text" name="name" value="" class="form-control" placeholder="Имя" aria-label="Имя">
+                </div>
+                <div class="col">
+                  <input type="text" name="last_name" value="" class="form-control" placeholder="Фамилия"
+                    aria-label="Фамилия">
+                </div>
+                <div class="col-12">
+                  <button type="submit" name="submit_edit" value="submit_edit"
+                    class="btn btn-primary">Сохранить</button>
+                </div>
+              </div>
+            </form>
             <!--/del-->
           </div>
         </div>
