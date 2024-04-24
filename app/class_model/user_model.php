@@ -26,22 +26,45 @@ class user_model extends model implements interface_user
             // data user for sent to wiew
             $this->set_data_user_for_view();
         }
+    }
+
+    public function count_request()
+    {
         // count queries in database
         if ($this->mysql->count_query) {
             $this->count_query = count($this->mysql->count_query);
+            return $this->count_query;
         }
     }
-
     public function edit_form($data)
     {
         $data_user = $this->data_user;
+
+        $id = $this->user_config->id;
+        $submit_edit = $data['edit_form']['submit_edit'];
+        $name = $data['edit_form']['name'];
+        $last_name = $data['edit_form']['last_name'];
+
+        // update in db
+        $this->update_data_of_user_in_db($submit_edit, $name, $last_name, $id);
+
         $data['data_user'] = [
-            'name' => $data_user['name'],
-            'last_name' => $data_user['last_name'],
-            'phone' => $data_user['phone'],
-            'email' => $data_user['email']
+            'name' => $data_user['name'] ? $data_user['name'] : '',
+            'last_name' => $data_user['last_name'] ? $data_user['last_name'] : '',
         ];
+
         return $this->edit_form_user->form($data);
+    }
+
+    protected function update_data_of_user_in_db($submit_edit, $name, $last_name, $id)
+    {
+        if ($submit_edit) {
+            $sql = "UPDATE `user` SET `name` = '$name', 
+            `last_name` = '$last_name' 
+            WHERE `id` = $id;";
+            $this->mysql->sql_update($sql);
+            header("Location: /panel/user");
+        }
     }
 
     protected function set_data_user_for_view()
