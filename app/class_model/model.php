@@ -17,6 +17,15 @@ class model
 
     public $count_query; // count request in db
 
+    public function count_request()
+    {
+        // count queries in database
+        if ($this->mysql->count_query) {
+            $this->count_query = count($this->mysql->count_query);
+            return $this->count_query;
+        }
+    }
+    
     public function set_user($hash)
     {
         if ($hash) {
