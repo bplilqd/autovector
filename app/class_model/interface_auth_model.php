@@ -10,4 +10,6 @@ interface interface_auth_model
     public function set_and_setting();
     // data of user got from form
     public function data_of_auth($data);
+    // count queries in database
+    public function count_request();
 }
