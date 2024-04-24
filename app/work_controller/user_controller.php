@@ -87,6 +87,7 @@ class user_controller extends main_controller
                 $data = [];
                 if (isset($request['submit_edit'])) {
                     $data['edit_form'] = [
+                        'submit_edit' => true,
                         'name' => strip_tags($request['name']),
                         'last_name' => strip_tags($request['last_name'])
                     ];
@@ -128,7 +129,7 @@ class user_controller extends main_controller
     protected function more_setting_default($view_namme)
     {
         // set_foot
-        $this->$view_namme->set_foot($this->model->count_query);
+        $this->$view_namme->set_foot($this->model->count_request());
         // for print errors
         $this->$view_namme->error_print();
         // include theme

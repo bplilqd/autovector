@@ -31,7 +31,7 @@ class default_controller extends main_controller
         // title
         $this->view->setting_properties('title', $this->translations->get_message('content_page', 'welcome'));
         // set_foot
-        $this->view->set_foot($this->model->count_query);
+        $this->view->set_foot($this->model->count_request());
         // include theme
         $this->view->include_theme();
     }
