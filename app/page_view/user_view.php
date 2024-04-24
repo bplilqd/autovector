@@ -21,6 +21,7 @@ class user_view extends view implements interface_auth_view, interface_user_view
     // data output limitation
     $this->array_info_user_content = [
       'name',
+      'last_name',
       'phone',
       'email',
       'date'
