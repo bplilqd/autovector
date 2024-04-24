@@ -24,15 +24,15 @@ class edit_form_user extends form implements interface_form
     $str = '
       <form method="POST">
         <div class="row g-3">
-          <div class="col">
+          <div class="mb-3">
             <input type="hidden" name="edit_user">
             <input type="text" name="name" value="' . $name . '" class="form-control" placeholder="' . $name_word . '" aria-label="' . $name_word . '">
           </div>
-          <div class="col">
+          <div class="mb-3">
             <input type="text" name="last_name" value="' . $last_name . '" class="form-control" placeholder="' . $last_name_word . '"
               aria-label="' . $last_name_word . '">
           </div>
-          <div class="col-12">
+          <div class="mb-3">
             <button type="submit" name="submit_edit" class="btn btn-primary">' . $save_name_button . '</button>
           </div>
         </div>
