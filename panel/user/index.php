@@ -1,6 +1,6 @@
 <?php
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 $name_model = 'user_model'; // name basic of model / NAME_MODEL
 $name_controller = 'user_controller'; // name basic of controller / NAME_CONTROLLER
@@ -14,4 +14,4 @@ require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'fu
 set_main_class(NAME_CONTROLLER); // set controller for start work
 $main = new ('controller\\' . NAME_CONTROLLER); // set object controller
 
-//print_r($main);
+print_r($_SERVER);
