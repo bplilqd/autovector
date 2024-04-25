@@ -40,6 +40,19 @@ class view
         $this->setting_properties('top', $top_str);
     }
 
+    // set properties array...
+    public function properties_array($property, $array)
+    {
+        $arr_of_name_propertes = [
+            'top'
+        ];
+        if (in_array($property, $arr_of_name_propertes)) {
+            $namme_function = "set_array_" . $property;
+            $html = $this->$namme_function($array);
+
+        }
+    }
+
     // set properties (function in data)
     public function setting_properties($property, $change_or_set_parm = '', $start_parm = '', $end_parm = '')
     {
