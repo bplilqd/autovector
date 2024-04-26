@@ -7,6 +7,7 @@ interface interface_translations
     public static function getInstance();
     public function set_language($language);
     public function get_message($name, $key);
+    public function get_language();
 }
 
 // Singleton
@@ -39,6 +40,11 @@ class translations implements interface_translations
     public function set_language($language)
     {
         $this->language = $language;
+    }
+
+    public function get_language()
+    {
+        return $this->language;
     }
 
     public function get_message($name, $key)
