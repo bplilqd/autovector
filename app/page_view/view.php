@@ -19,7 +19,6 @@ class view
     private $sidebar = '';
     private $content = ''; // content and also content_without_sidebar
     private $foot = '';
-    protected $arr_of_name_propertes = ['top'];
     // extra
     private $meta = '';
 
@@ -38,18 +37,30 @@ class view
 
         // set top
         $this->properties_array('top', ['Hello, World!']);
+        //$this->replacing_value('top', [0 => 'Hello']);
+    }
+
+    // method for replacing the value
+    public function replacing_value($property, $array)
+    {
+        $namme_function = "set_array_" . $property;
+        if ($this->$namme_function) {
+            foreach ($array as $key => $value) {
+                $this->$namme_function[$key] = $value;
+            }
+            $array = $this->$namme_function;
+            $this->properties_array($property, $array);
+        }
     }
 
     // method for setting values ​​as an array for an html template
     public function properties_array($property, $array)
     {
-        // array with names for names of methods
-        $arr_of_name_propertes = $this->arr_of_name_propertes;
         $namme_function = "set_array_" . $property;
-
-        if (in_array($property, $arr_of_name_propertes)) {
+        if (method_exists($this, $namme_function)) {
             $html = $this->$namme_function($array);
             $this->setting_properties($property, $html);
+            $this->$namme_function = $array;
         } else {
             $no_such_method_name = $this->translations->get_message(
                 'system',

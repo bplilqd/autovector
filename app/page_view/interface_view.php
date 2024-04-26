@@ -14,4 +14,6 @@ interface interface_view
     public function getting_properties($property);
     // method for setting values ​​as an array for an html template
     public function properties_array($property, $array);
+    // method for replacing the value
+    public function replacing_value($property, $array);
 }
