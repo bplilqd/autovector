@@ -4,11 +4,12 @@ namespace view;
 
 //use model\function\znach_array;
 
-class user_view extends view implements interface_auth_view, interface_user_view
+class user_view extends view implements interface_view, interface_user_view
 {
   protected $data_user;
   protected $array_info_user_content;
 
+  //protected $arr_of_name_propertes = ['top'];
   //protected $znach_array;
 
   public function __construct()

@@ -2,7 +2,7 @@
 
 namespace view;
 
-class not_authorized_view extends view implements interface_auth_view
+class not_authorized_view extends view implements interface_view
 {
     public function __construct()
     {

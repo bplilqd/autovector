@@ -174,7 +174,7 @@ class user_controller extends main_controller
 
         // array for view class
         $class_view = [
-            'interface_auth_view',
+            'interface_view',
             'interface_user_view',
             'not_authorized_view',
             NAME_VIEW
