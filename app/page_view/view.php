@@ -19,9 +19,9 @@ class view
     private $sidebar = '';
     private $content = ''; // content and also content_without_sidebar
     private $foot = '';
+    protected $arr_of_name_propertes = ['top'];
     // extra
     private $meta = '';
-
 
     // setting of theme
     public $language = LANGUAGE;
@@ -36,21 +36,34 @@ class view
         // set object for enter of language
         $this->translations = translations::getInstance();
 
-        $top_str = '<a href="/" style="text-decoration: none;"><h1 class="text-info">Hello, World!</h1></a>';
-        $this->setting_properties('top', $top_str);
+        // set top
+        $this->properties_array('top', ['Hello, World!']);
     }
 
-    // set properties array...
+    // method for setting values ​​as an array for an html template
     public function properties_array($property, $array)
     {
-        $arr_of_name_propertes = [
-            'top'
-        ];
-        if (in_array($property, $arr_of_name_propertes)) {
-            $namme_function = "set_array_" . $property;
-            $html = $this->$namme_function($array);
+        // array with names for names of methods
+        $arr_of_name_propertes = $this->arr_of_name_propertes;
+        $namme_function = "set_array_" . $property;
 
+        if (in_array($property, $arr_of_name_propertes)) {
+            $html = $this->$namme_function($array);
+            $this->setting_properties($property, $html);
+        }else{
+            $no_such_method_name = $this->translations->get_message(
+                'system',
+                'no_such_method_name'
+            );
+            $error = __METHOD__.' -> '.$no_such_method_name.': '.$namme_function.'() -> protected $arr_of_name_propertes = [???]';
+            $this->error_manager->add_error($error);
         }
+    }
+
+    protected function set_array_top($data)
+    {
+        $html = '<a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>';
+        return $html;
     }
 
     // set properties (function in data)
