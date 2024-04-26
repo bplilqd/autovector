@@ -35,13 +35,15 @@ class user_controller extends main_controller
         $this->model->set_user($this->hash);
         // start work for to model -> option/settings
         $this->model->set_and_setting();
-        // set of the settings user
-        $this->settings_user();
     }
 
     // view ->
     protected function set_in_view()
     {
+        // set view -> template
+        $this->view = new ('view\\' . NAME_VIEW);
+        // set of the settings user
+        $this->settings_user();
         // logout
         $this->logout();
         // if authorized -> view...

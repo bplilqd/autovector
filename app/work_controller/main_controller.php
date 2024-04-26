@@ -35,7 +35,8 @@ class main_controller
             $this->translations->set_language($language);
             // set lang to html default pages
             $this->view->language = $language;
-            //print_r('[' . strtoupper($language) . '] ');
+            // print lang
+            $this->view->replacing_value('top', ['lang' => strtoupper($this->translations->get_language())]);
             // set to name of current theme
             $this->view->user_theme = $this->model->user_config->user_theme;
             // set to what is the dark or light theme
@@ -67,8 +68,6 @@ class main_controller
         $this->translations = translations::getInstance();
         // set model
         $this->model = new ('model\\' . NAME_MODEL);
-        // set view -> template
-        $this->view = new ('view\\' . NAME_VIEW);
     }
 
     // method for autoload class

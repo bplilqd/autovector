@@ -47,6 +47,8 @@ class auth_controller extends main_controller
 
     protected function set_in_view()
     {
+        // set view -> template
+        $this->view = new ('view\\' . NAME_VIEW);
         // show form only if no authentication
         if (!$this->hash) {
             // data transfer and set view
@@ -148,7 +150,7 @@ class auth_controller extends main_controller
     {
         // array for view -> form
         $class_view_form = ['interface_form', 'form', 'auth_form'];
-        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS. 'form' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;
         $array[] = [$class_view_form, $path_model];
 
         // array for model -> fuction classes

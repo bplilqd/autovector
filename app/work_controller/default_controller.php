@@ -16,12 +16,15 @@ class default_controller extends main_controller
         // model ->
         // set user auth
         $this->model->set_user($this->hash);
+        
+
+        // view ->
+        // set view -> template
+        $this->view = new ('view\\' . NAME_VIEW);
         // start work for to model -> option/settings
         $this->model->set_and_setting();
         // set of the settings user
         $this->settings_user();
-
-        // view ->
         // for print errors
         $this->view->error_print();
         // set_menu
