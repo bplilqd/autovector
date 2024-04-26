@@ -35,9 +35,8 @@ class view
         // set object for enter of language
         $this->translations = translations::getInstance();
 
-        // set top
-        $this->properties_array('top', ['Hello, World!']);
-        //$this->replacing_value('top', [0 => 'Hello']);
+        // set top default
+        $this->properties_array('top', ['Hello, World!', 'lang' => strtoupper($this->translations->get_language())]);
     }
 
     // method for replacing the value
@@ -67,14 +66,24 @@ class view
                 'no_such_method_name'
             );
             $error = __METHOD__ . ' -> ' . $no_such_method_name . ': 
-            ' . $namme_function . '() -> protected $arr_of_name_propertes = [???]';
+            ' . $namme_function . '()';
             $this->error_manager->add_error($error);
         }
     }
 
     protected function set_array_top($data)
     {
-        $html = '<a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>';
+        $html = '
+    <div class="row">
+        <div class="col">
+            <a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end"><h1 class="text-info"><span class="badge bg-secondary">' . $data['lang'] . '</span></h1></div>
+        </div>
+    </div>
+        
+        ';
         return $html;
     }
 
