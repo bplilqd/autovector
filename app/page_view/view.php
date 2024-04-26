@@ -50,12 +50,13 @@ class view
         if (in_array($property, $arr_of_name_propertes)) {
             $html = $this->$namme_function($array);
             $this->setting_properties($property, $html);
-        }else{
+        } else {
             $no_such_method_name = $this->translations->get_message(
                 'system',
                 'no_such_method_name'
             );
-            $error = __METHOD__.' -> '.$no_such_method_name.': '.$namme_function.'() -> protected $arr_of_name_propertes = [???]';
+            $error = __METHOD__ . ' -> ' . $no_such_method_name . ': 
+            ' . $namme_function . '() -> protected $arr_of_name_propertes = [???]';
             $this->error_manager->add_error($error);
         }
     }
