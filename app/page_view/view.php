@@ -79,7 +79,7 @@ class view
             <a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>
         </div>
         <div class="col">
-            <div class="d-flex justify-content-end"><h1 class="text-info"><span class="badge bg-secondary">' . $data['lang'] . '</span></h1></div>
+            <div class="d-flex justify-content-end"><h2 class="text-info"><span class="badge bg-secondary">' . $data['lang'] . '</span></h2></div>
         </div>
     </div>
         
