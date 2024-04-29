@@ -148,6 +148,12 @@ class auth_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
+
+        // array for model -> whatsapp class
+        $class_model = ['interface_whatsapp', 'whatsapp_main', 'whatsapp_error', 'whatsapp_connect'];
+        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'whatsapp' . DS;
+        $array[] = [$class_model, $path_model];
+
         // array for view -> form
         $class_view_form = ['interface_form', 'form', 'auth_form'];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;

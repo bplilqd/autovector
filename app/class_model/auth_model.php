@@ -8,9 +8,11 @@ use view\form\auth_form;
 use model\function\recaptcha_v2;
 use model\function\translations;
 use controller\error\error_manager;
+use model\whatsApp\whatsapp_connect;
 
 class auth_model extends model implements interface_auth_model
 {
+    protected object $whatsapp;
     protected object $auth_function;
     public object $auth_form;
     public object $captcha;
@@ -81,9 +83,15 @@ class auth_model extends model implements interface_auth_model
                 // egistr user
                 $this->registr_new_user($phone, $generate_hash);
 
-                // отправляем пароль
+                // message with password
+                $message = $this->translations->get_message(
+                    'auth',
+                    'your_pass'
+                ) . ': ' . $pass;
+                // send pass
+                $this->whatsapp->msg_to($phone, $message);
 
-                // уведомляем что отправили пароль
+                // уведомляем что отправили пароль на экране
             }
         }
     }
@@ -179,6 +187,8 @@ class auth_model extends model implements interface_auth_model
 
     protected function set_objects()
     {
+        // for send messages in whatsApp
+        $this->whatsapp = new whatsapp_connect;
         // setting error object
         $this->error_manager = error_manager::get_instance();
         // set object for enter of language
