@@ -4,7 +4,7 @@ namespace model\whatsApp;
 
 class whatsapp_main
 {
-    private $token = 'aGJQpdRbS71C2TbF';
+    private $token = '';
     private $url = 'https://wamm.chat/api2/';
     protected $result_json = '';
     protected $result_arr = [];
