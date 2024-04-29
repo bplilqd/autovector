@@ -33,3 +33,6 @@ define("SET_COOK_TIME_HASH", $set_cook_time_hash); // установка вре�
 define("RECAPTCHA_HTML", $recaptcha_key_html); // open key
 define("RECAPTCHA_INSIDE", $recaptcha_key_inside); // secret key
 define("RECAPTCHA_ON", $recaptcha_on); // true/false
+
+// whatsapp
+define("WHATSAPP_TOKEN", $whatsapp_token); // whatsapp token
