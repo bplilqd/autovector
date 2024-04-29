@@ -36,11 +36,11 @@ class whatsapp_main
     // log
     private function log_whatsapp($result, $phone = false, $mesage = false)
     {
-        $str = date("c") . " | ID: " . $phone . " - " . $_SERVER['REMOTE_ADDR'] . " | " . $mesage . " | ###" . $result . "###\n";
+        $str = date("c") . " | phone: " . $phone . " - ip: " . $_SERVER['REMOTE_ADDR'] . " | " . $mesage . " | #start#" . $result . "#end#\n";
         if ($phone) {
-            $val = __DIR__ . "/log_whatsapp/id_" . $phone . "_log_user" . date("-d-m-Y") . ".txt";
+            $val = PATH . DS . 'app' . DS . 'logs' . DS . 'log_whatsapp' . DS . "log_whatsapp_" . $phone . '_' . date("d-m-Y") . ".txt";
         } else {
-            $val = __DIR__ . "/log_whatsapp/id_other_log_user" . date("-d-m-Y") . ".txt";
+            $val = PATH . DS . 'app' . DS . 'logs' . DS . 'log_whatsapp' . DS . "other_" . date("d-m-Y") . ".txt";
         }
         $new = fopen($val, "a");
         fwrite($new, $str);
