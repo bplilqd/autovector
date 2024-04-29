@@ -11,5 +11,6 @@ return [
     'verification_failed' => 'Проверка не пройдена, нажмите - Я не робот.',
     'auth' => 'Авторизация',
     'no_data' => 'Нет данных',
-    'already_logged_out'=>'Вы уже вышли из ситемы!'
+    'already_logged_out'=>'Вы уже вышли из ситемы!',
+    'your_pass' => 'Ваш пароль'
 ];

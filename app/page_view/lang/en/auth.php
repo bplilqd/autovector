@@ -11,5 +11,6 @@ return [
     'verification_failed' => 'Verification failed, click - I\'m not a robot.',
     'auth' => 'Authorization',
     'no_data' => 'no data',
-    'already_logged_out'=>'You are already logged out!'
+    'already_logged_out' => 'You are already logged out!',
+    'your_pass' => 'Your password'
 ];
