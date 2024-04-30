@@ -44,7 +44,16 @@ class main_controller
         }
     }
 
-    protected function set_hash_check()
+    // set for autoload class
+    protected function autoload_class($array)
+    {
+        foreach ($array as $value) {
+            // to autoload
+            $this->new_load_class($value[0], $value[1]);
+        }
+    }
+    
+    private function set_hash_check()
     {
         if (USER_HASH) {
             $this->hash = USER_HASH;
@@ -52,7 +61,7 @@ class main_controller
     }
 
     // set request
-    protected function set_request()
+    private function set_request()
     {
         if ($_REQUEST) {
             $this->request = $_REQUEST;
@@ -60,7 +69,7 @@ class main_controller
     }
 
     // set new class to objects
-    protected function set_object_default()
+    private function set_object_default()
     {
         // setting error object
         $this->error_manager = error_manager::get_instance();
@@ -71,19 +80,10 @@ class main_controller
     }
 
     // method for autoload class
-    protected function new_load_class($array, $path)
+    private function new_load_class($array, $path)
     {
         foreach ($array as $name_class) {
             require_once $path .  $name_class . '.php';
-        }
-    }
-
-    // set for autoload class
-    protected function autoload_class($array)
-    {
-        foreach ($array as $value) {
-            // to autoload
-            $this->new_load_class($value[0], $value[1]);
         }
     }
 }

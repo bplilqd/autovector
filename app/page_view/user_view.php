@@ -32,8 +32,8 @@ class user_view extends view implements interface_view, interface_user_view
   {
     $array = [
       ['active', '/panel/user/', 'profile'],
-      ['', '?settings', 'settings'],
-      ['', '?logout', 'logout'],
+      ['', '/panel/user/settings/', 'settings'],
+      ['', '/panel/user/?logout', 'logout'],
     ];
     $menu = '
         <ul class="nav nav-underline">';
