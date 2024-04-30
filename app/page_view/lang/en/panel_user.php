@@ -8,5 +8,6 @@ return [
     'name' => 'Name',
     'last_name' => 'Last name',
     'save' => 'Save',
-    'edit' => 'Edit'
+    'edit' => 'Edit',
+    'title_user_settings' => 'Settings of user'
 ];
