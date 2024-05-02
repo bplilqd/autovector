@@ -73,7 +73,7 @@ class user_controller extends main_controller
                     'not_authorized'
                 )
             );
-            header("refresh:5; url=../auth");
+            header("refresh:5; url=" . SITE_URL . 'panel' . DS . 'auth');
             // set other object of view
             $this->not_authorized = new not_authorized_view;
             // set this method if there is no authorization
@@ -105,7 +105,7 @@ class user_controller extends main_controller
         if ($this->model->auth) {
             $hash = $this->hash;
             setcookie("hash", $hash, time() - SET_COOK_TIME_HASH, "/");
-            header("Location: /");
+            header("Location: " . SITE_URL);
         }
     }
 

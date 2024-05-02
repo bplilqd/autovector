@@ -31,7 +31,7 @@ class auth_controller extends main_controller
                     'redirection_after'
                 )
             );
-            header("refresh:5; url=/");
+            header("refresh:5; url=" . SITE_URL);
         }
         // validation of user input of data
         if ($this->request) {
