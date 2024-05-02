@@ -71,7 +71,7 @@ class view
         }
     }
 
-    protected function set_array_top($data)
+    private function set_array_top($data)
     {
         $html = '
     <div class="row">
