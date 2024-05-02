@@ -56,8 +56,7 @@ class auth_controller extends main_controller
             $this->view->setting_properties('content', $form);
             if (RECAPTCHA_ON) {
                 // set recaptcha js to meta
-                $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
-                $this->view->setting_properties('meta', '', $meta);
+                $this->view->set_meta();
             }
         }
         // for print errors
@@ -148,7 +147,6 @@ class auth_controller extends main_controller
     // start name class
     protected function start_name_class()
     {
-
         // array for model -> whatsapp class
         $class_model = ['interface_whatsapp', 'whatsapp_main', 'whatsapp_error', 'whatsapp_connect'];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'whatsapp' . DS;
@@ -175,7 +173,7 @@ class auth_controller extends main_controller
         $array[] = [$class_model, $path_model];
 
         // array for view class
-        $class_view = ['interface_view', NAME_VIEW];
+        $class_view = ['interface_auth', 'interface_view', NAME_VIEW];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
         $array[] = [$class_view, $path_model];
 
