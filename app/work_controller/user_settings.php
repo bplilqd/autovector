@@ -69,7 +69,7 @@ class user_settings extends main_controller
                     'not_authorized'
                 )
             );
-            header("refresh:5; url=../auth");
+            header("refresh:5; url=" . SITE_URL . 'panel' . DS . 'auth');
             // set other object of view
             $this->not_authorized = new not_authorized_view;
             // set this method if there is no authorization

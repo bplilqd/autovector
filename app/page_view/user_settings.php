@@ -39,13 +39,23 @@ class user_settings extends view implements interface_view
   {
     $data = $this->data_user;
     $content = '
-    <div class="row g-3">
+    <div class="row">
+
     <div class="mb-3">
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
   <label class="form-check-label" for="flexSwitchCheckDefault">Темный режим</label>
 </div>
 </div>
+
+<div class="mb-3">
+<label for="theme_sefault" class="form-label">Язык по умолчанию</label>
+<select class="form-select" id="theme_sefault" aria-label="Язык по умолчанию">
+  <option selected value="1">ru</option>
+  <option value="2">en</option>
+</select>
+</div>
+
 <div class="mb-3">
 <label for="theme_sefault" class="form-label">Тема по умолчанию</label>
 <select class="form-select" id="theme_sefault" aria-label="Тема по умолчанию">
@@ -53,9 +63,11 @@ class user_settings extends view implements interface_view
   <option value="2">theme</option>
 </select>
 </div>
+
 <div class="mb-3">
 <button type="submit" class="btn btn-primary">Сохранить</button>
 </div>
+
 </div>';
     $this->setting_properties('content', $content);
   }
