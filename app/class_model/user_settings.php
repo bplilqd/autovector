@@ -6,7 +6,7 @@ use model\settings\user_config;
 use model\connect\forUseMysqli;
 use view\form\form_settings_user;
 
-class user_settings extends model implements interface_user
+class user_settings extends model implements interface_settings
 {
     protected object $mysql;
     protected object $form_settings;
@@ -52,6 +52,23 @@ class user_settings extends model implements interface_user
         ];
 
         return $this->form_settings->form($data);
+    }
+
+    public function scan_dir_lang_and_template()
+    {
+        $path_lang = realpath(__DIR__ . '/../page_view' . DS . 'lang');
+        $array['language_data'] = $this->how_many_directories($path_lang);
+        $path_template = realpath(__DIR__ . '/../page_view' . DS . 'template');
+        $array['user_theme_data'] = $this->how_many_directories($path_template);
+        return $array;
+    }
+
+    // check how many directories are inside
+    private function how_many_directories($path)
+    {
+        $directories = scandir($path);
+        $result = array_diff($directories, ['.', '..']);
+        return $result;
     }
 
     private function update_data_of_user_in_db($id, $language, $user_theme, $data_bs_theme)
