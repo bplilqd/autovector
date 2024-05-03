@@ -65,7 +65,7 @@ class user_view extends view implements interface_view, interface_user_view
       }
     }
     $content .= '
-    <li class="list-group-item"><a class="btn btn-secondary" href="?edit_user" role="button">' .
+    <li class="list-group-item"><a class="btn btn-primary" href="?edit_user" role="button">' .
       $this->translations->get_message(
         'panel_user',
         'edit'

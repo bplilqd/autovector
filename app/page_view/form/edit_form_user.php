@@ -33,7 +33,7 @@ class edit_form_user extends form implements interface_form
               aria-label="' . $last_name_word . '">
           </div>
           <div class="mb-3">
-            <button type="submit" name="submit_edit" class="btn btn-primary">' . $save_name_button . '</button>
+            <button type="submit" name="submit_edit" class="btn btn-success">' . $save_name_button . '</button>
             </div>
         </div>
       </form>';
