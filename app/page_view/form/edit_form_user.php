@@ -34,13 +34,13 @@ class edit_form_user extends form implements interface_form
           </div>
           <div class="mb-3">
             <button type="submit" name="submit_edit" class="btn btn-primary">' . $save_name_button . '</button>
-          </div>
+            </div>
         </div>
       </form>';
     $this->form = $str;
   }
 
-  protected function option_setting_form()
+  private function option_setting_form()
   {
     $date = $this->date;
 

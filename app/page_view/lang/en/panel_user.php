@@ -9,5 +9,8 @@ return [
     'last_name' => 'Last name',
     'save' => 'Save',
     'edit' => 'Edit',
-    'title_user_settings' => 'Settings of user'
+    'title_user_settings' => 'Settings of user',
+    'dark_theme'=>'Dark mode',
+    'lang_default'=>'Default language',
+    'theme_default'=>'Default theme'
 ];

@@ -43,7 +43,7 @@ class user_model extends model implements interface_user
         if ($submit_edit) {
             $this->update_data_of_user_in_db($name, $last_name, $id);
         }
-        
+
         $data['data_user'] = [
             'name' => $data_user['name'] ? $data_user['name'] : '',
             'last_name' => $data_user['last_name'] ? $data_user['last_name'] : '',
@@ -54,12 +54,11 @@ class user_model extends model implements interface_user
 
     protected function update_data_of_user_in_db($name, $last_name, $id)
     {
-
         $sql = "UPDATE `user` SET `name` = '$name', 
             `last_name` = '$last_name' 
             WHERE `id` = $id;";
         $this->mysql->sql_update($sql);
-        header("Location: /panel/user");
+        header("Location: " . SITE_URL . "panel" . DS . "user");
     }
 
     protected function set_data_user_for_view()
