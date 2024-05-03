@@ -55,7 +55,7 @@ class user_settings extends main_controller
             );
             $this->view->setting_properties('title', $title_user_page);
             // set content
-            $this->view->set_content();
+            $this->edit_settings();
             // set menu
             $this->view->set_menu();
             // more if authorized
@@ -77,6 +77,36 @@ class user_settings extends main_controller
         }
     }
 
+    private function edit_settings()
+    {
+        $data = [];
+        if ($this->request) {
+            $request = $this->request;
+            if (isset($request['submit_edit'])) {
+                
+                $data_bs_theme = strip_tags($request['data_bs_theme']);
+                $edit_form_data_bs_theme = $this->check_dark_mode($data_bs_theme);
+
+                $data['edit_form'] = [
+                    'submit_edit' => true,
+                    'language' => strip_tags($request['language']),
+                    'data_bs_theme' => $edit_form_data_bs_theme,
+                    'user_theme' => strip_tags($request['user_theme'])
+                ];
+            }
+        }
+        $content = $this->model->edit_form($data);
+        $this->view->setting_properties('content', $content);
+    }
+
+    private function check_dark_mode($data_bs_theme)
+    {
+        if ($data_bs_theme == 'on') {
+            return 'dark';
+        } else {
+            return 'light';
+        }
+    }
 
     private function more_setting_default($view_namme)
     {
@@ -91,7 +121,14 @@ class user_settings extends main_controller
     // start name class
     private function start_name_class()
     {
-
+        // array for view -> form
+        $class_view_form = [
+            'interface_form',
+            'form',
+            'form_settings_user'
+        ];
+        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;
+        $array[] = [$class_view_form, $path_model];
         // array for model -> connect class
         $class_mosel_setings = [
             'interfaceForUseMysqli',
@@ -107,7 +144,7 @@ class user_settings extends main_controller
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
-        $class_model = ['interface_model', NAME_MODEL];
+        $class_model = ['interface_user', NAME_MODEL];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
         $array[] = [$class_model, $path_model];
 
