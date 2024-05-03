@@ -79,7 +79,7 @@ class user_settings extends main_controller
 
     private function edit_settings()
     {
-        $data = [];
+        $data = $this->model->scan_dir_lang_and_template();
         if ($this->request) {
             $request = $this->request;
             if (isset($request['submit_edit'])) {
@@ -144,7 +144,7 @@ class user_settings extends main_controller
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
-        $class_model = ['interface_user', NAME_MODEL];
+        $class_model = ['interface_settings', NAME_MODEL];
         $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
         $array[] = [$class_model, $path_model];
 
