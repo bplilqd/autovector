@@ -123,11 +123,12 @@ class user_settings extends main_controller
     {
         // array for view -> form
         $class_view_form = [
-            'interface_form',
-            'form',
+            'interface_form', // intreface default and main for forms
+            'form', // form class main
             'form_settings_user'
         ];
         $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;
+
         $array[] = [$class_view_form, $path_model];
         // array for model -> connect class
         $class_mosel_setings = [
@@ -150,7 +151,8 @@ class user_settings extends main_controller
 
         // array for view class
         $class_view = [
-            'interface_view',
+            'interface_view', // interface main
+            'interface_user_settings',
             'not_authorized_view',
             NAME_VIEW
         ];
