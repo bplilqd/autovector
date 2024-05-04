@@ -2,7 +2,7 @@
 
 namespace view;
 
-class user_settings extends view implements interface_view
+class user_settings extends view implements interface_view, interface_user_settings
 {
   protected $data_user;
 
