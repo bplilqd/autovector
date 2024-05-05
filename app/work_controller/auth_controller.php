@@ -6,8 +6,10 @@ class auth_controller extends main_controller
 {
 
     protected $data = []; // data of auth
+    private $hash_captcha = 600;
+    private $path_set_cookie = DS . 'panel' . DS . 'auth' . DS;
 
-    function __construct()
+    public function __construct()
     {
         // controller ->
         $this->set_in_controller();
@@ -17,7 +19,7 @@ class auth_controller extends main_controller
         $this->set_in_view();
     }
 
-    protected function set_in_controller()
+    private function set_in_controller()
     {
         // load casses - add names for class for set autoload 
         $this->start_name_class();
@@ -39,13 +41,13 @@ class auth_controller extends main_controller
         }
     }
 
-    protected function set_in_model()
+    private function set_in_model()
     {
         // start work for to model -> option/settings
         $this->model->set_and_setting();
     }
 
-    protected function set_in_view()
+    private function set_in_view()
     {
         // set view -> template
         $this->view = new ('view\\' . NAME_VIEW);
@@ -67,7 +69,7 @@ class auth_controller extends main_controller
         $this->view->include_theme();
     }
 
-    protected function check_recaptcha()
+    private function check_recaptcha()
     {
         if (RECAPTCHA_ON) {
             // start recaptcha for check
@@ -80,16 +82,61 @@ class auth_controller extends main_controller
         return $captcha;
     }
 
+    private function input_check_captcha_once($captcha, $phone)
+    {
+        if ($captcha) {
+            // create sash
+            $hash_captcha = $this->create_md5_to_auth_phone(SECRET_KEY, $phone);
+            if (!$this->error_manager->has_errors()) {
+                // set cook 10 minutes
+                setcookie("hash_captcha", $hash_captcha, time() + $this->hash_captcha, $this->path_set_cookie, HOST);
+                $result = true;
+            } else {
+                $result = false;
+            }
+        } else {
+            // if have cook to check hash
+            $hash_captcha = $this->create_md5_to_auth_phone(SECRET_KEY, $phone);
+            if (HASH_CAPTCHA && HASH_CAPTCHA == $hash_captcha && !$this->error_manager->has_errors()) {
+                // true/false and delete cook - 10 minutes
+                setcookie("hash_captcha", $hash_captcha, time() - $this->hash_captcha, $this->path_set_cookie, HOST);
+                $result = true;
+            } else {
+                $result = false;
+            }
+        }
+        return $result;
+    }
+
+    private function create_md5_to_auth_phone($secret_key, int $phone)
+    {
+        if ($secret_key && $phone) {
+            $date = date('d-m-Y');
+            $generate_hash = md5("$secret_key:$date:$phone");
+            return $generate_hash;
+        } else {
+            $this->error_manager->add_error(
+                __METHOD__ . ' -> ' .
+                    $this->translations->get_message(
+                        'auth',
+                        'no_data'
+                    )
+            );
+        }
+    }
     // validation of user input
-    protected function check_of_user_input()
+    private function check_of_user_input()
     {
         $request = $this->request;
         // if push button
         if ($request['auth_submit'] == 'auth_submit') {
+            // validation data of user
+            $phone = $this->validation_data_of_user($request['phone']);
+            // first factor strict
             $captcha = $this->check_recaptcha();
+            // second factor not strict
+            $captcha = $this->input_check_captcha_once($captcha, $phone);
             if ($captcha) {
-                // validation data of user
-                $phone = $this->validation_data_of_user($request['phone']);
                 // form handler
                 $data['auth_form'] = [
                     'phone' => $phone,
@@ -105,7 +152,7 @@ class auth_controller extends main_controller
         }
     }
 
-    protected function validation_data_of_user($request_phone)
+    private function validation_data_of_user($request_phone)
     {
         if ($request_phone) {
             if ($this->phone_validate($request_phone)) {
@@ -122,7 +169,7 @@ class auth_controller extends main_controller
         return $phone;
     }
 
-    protected function valid_phone_set($phone)
+    private function valid_phone_set($phone)
     {
         $phone_trim = preg_replace('/[^0-9]/', '', trim($phone));
         $phone_str = substr($phone_trim, -10);
@@ -130,7 +177,7 @@ class auth_controller extends main_controller
         return $result;
     }
 
-    protected function phone_validate($phone)
+    private function phone_validate($phone)
     {
         $result = (preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', trim($phone)));
         if (!$result) {
@@ -145,7 +192,7 @@ class auth_controller extends main_controller
     }
 
     // start name class
-    protected function start_name_class()
+    private function start_name_class()
     {
         // array for model -> whatsapp class
         $class_model = ['interface_whatsapp', 'whatsapp_main', 'whatsapp_error', 'whatsapp_connect'];
