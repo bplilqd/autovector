@@ -5,7 +5,8 @@ namespace model\function;
 use model\function\translations;
 use controller\error\error_manager;
 
-class auth_function{
+class auth_function
+{
     // object language
     protected object $translations; // lang
     protected object $error_manager; // error
@@ -27,22 +28,20 @@ class auth_function{
         } else {
             $this->dependency_injection();
             $this->error_manager->add_error(
-                $this->translations->get_message(
-                    'auth',
-                    'no_data'
-                )
+                __METHOD__ . ' -> ' .
+                    $this->translations->get_message(
+                        'auth',
+                        'no_data'
+                    )
             );
         }
     }
-    protected function dependency_injection()
+    private function dependency_injection()
     {
         // setting error object
-        if (!$this->error_manager) {
-            $this->error_manager = error_manager::get_instance();
-        }
+        $this->error_manager = error_manager::get_instance();
+
         // set object for enter of language
-        if (!$this->translations) {
-            $this->translations = translations::getInstance();
-        }
+        $this->translations = translations::getInstance();
     }
 }

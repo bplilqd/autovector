@@ -28,6 +28,12 @@ class auth_model extends model implements interface_auth_model
         $this->set_objects();
     }
 
+    public function data_of_auth($data)
+    {
+        $this->input_data = $data;
+        //print_r($this->input_data);
+    }
+    
     public function set_and_setting()
     {
         // receiving data
@@ -40,7 +46,7 @@ class auth_model extends model implements interface_auth_model
         }
     }
 
-    protected function set_new_auth_or_reg($set_phone, $phone, $pass)
+    private function set_new_auth_or_reg($set_phone, $phone, $pass)
     {
         // registr new user
         $this->set_registr($phone, $set_phone);
@@ -48,7 +54,7 @@ class auth_model extends model implements interface_auth_model
         $this->set_authorization($set_phone, $phone, $pass);
     }
 
-    protected function registr_or_authorization($data)
+    private function registr_or_authorization($data)
     {
         if ($data) {
             if ($data['auth_form']['auth_submit']) {
@@ -70,7 +76,7 @@ class auth_model extends model implements interface_auth_model
         }
     }
 
-    protected function set_registr($phone, $set_phone)
+    private function set_registr($phone, $set_phone)
     {
         if ($phone && !$set_phone) {
             $result = $this->check_user_to_db($phone);
@@ -80,23 +86,25 @@ class auth_model extends model implements interface_auth_model
                 $pass = $this->auth_function->generateCode($this->length_generate_pass);
                 $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
 
-                // egistr user
-                $this->registr_new_user($phone, $generate_hash);
+                if (!$this->error_manager->has_errors()) {
+                    // egistr user
+                    $this->registr_new_user($phone, $generate_hash);
 
-                // message with password
-                $message = $this->translations->get_message(
-                    'auth',
-                    'your_pass'
-                ) . ': ' . $pass;
-                // send pass
-                $this->whatsapp->msg_to($phone, $message);
+                    // message with password
+                    $message = $this->translations->get_message(
+                        'auth',
+                        'your_pass'
+                    ) . ': ' . $pass;
+                    // send pass
+                    $this->whatsapp->msg_to($phone, $message);
 
-                // уведомляем что отправили пароль на экране
+                    // уведомляем что отправили пароль на экране
+                }
             }
         }
     }
 
-    protected function authorization($phone, $pass_db, $generate_hash)
+    private function authorization($phone, $pass_db, $generate_hash)
     {
         if ($pass_db && $pass_db == $generate_hash && !$this->error_manager->has_errors()) {
             // authorization good
@@ -120,7 +128,7 @@ class auth_model extends model implements interface_auth_model
         }
     }
 
-    protected function set_authorization($set_phone, $phone, $pass)
+    private function set_authorization($set_phone, $phone, $pass)
     {
         if ($set_phone) {
             if ($pass) {
@@ -130,10 +138,12 @@ class auth_model extends model implements interface_auth_model
                     $row = $this->mysql->query->fetch_assoc();
                     $pass_db = $row['pass'];
 
-                    // auth_function
+                    // auth function -> create md5
                     $generate_hash = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass, $phone);
 
-                    $this->authorization($phone, $pass_db, $generate_hash);
+                    if (!$this->error_manager->has_errors()) {
+                        $this->authorization($phone, $pass_db, $generate_hash);
+                    }
                 }
             } else {
                 $this->error_manager->add_error(
@@ -145,28 +155,22 @@ class auth_model extends model implements interface_auth_model
             }
         }
     }
-    protected function auth_set_cookie($hash)
+    private function auth_set_cookie($hash)
     {
         if ($hash) {
-            setcookie("hash", $hash, time() + SET_COOK_TIME_HASH, "/");
+            setcookie("hash", $hash, time() + SET_COOK_TIME_HASH, "/", HOST);
         }
     }
-    public function data_of_auth($data)
-    {
-        $this->input_data = $data;
-        //print_r($this->input_data);
-    }
-
 
     // is there a user in the database (db)
-    protected function check_user_to_db(int $phone)
+    private function check_user_to_db(int $phone)
     {
         $sql = "SELECT *  FROM `user` WHERE `phone` = $phone;";
         $result = $this->mysql->sql_select($sql, false);
         return $result;
     }
 
-    protected function registr_new_user($phone, $generate_hash)
+    private function registr_new_user($phone, $generate_hash)
     {
         $name_table = 'user';
         $array = [
@@ -185,7 +189,7 @@ class auth_model extends model implements interface_auth_model
         $this->mysql->insert_set_and_add($name_table, $array);
     }
 
-    protected function set_objects()
+    private function set_objects()
     {
         // for send messages in whatsApp
         $this->whatsapp = new whatsapp_connect;

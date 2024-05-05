@@ -104,7 +104,7 @@ class user_controller extends main_controller
     {
         if ($this->model->auth) {
             $hash = $this->hash;
-            setcookie("hash", $hash, time() - SET_COOK_TIME_HASH, "/");
+            setcookie("hash", $hash, time() - SET_COOK_TIME_HASH, "/", HOST);
             header("Location: " . SITE_URL);
         }
     }
