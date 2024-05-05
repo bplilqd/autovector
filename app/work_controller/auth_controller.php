@@ -72,6 +72,9 @@ class auth_controller extends main_controller
     private function check_recaptcha()
     {
         if (RECAPTCHA_ON) {
+            // first factor strict...?
+            // second factor not strict...?
+            
             // start recaptcha for check
             $this->model->captcha->recaptcha();
             // recaptcha false / true
@@ -132,10 +135,8 @@ class auth_controller extends main_controller
         if ($request['auth_submit'] == 'auth_submit') {
             // validation data of user
             $phone = $this->validation_data_of_user($request['phone']);
-            // first factor strict
+            // check recaptcha
             $captcha = $this->check_recaptcha();
-            // second factor not strict
-            $captcha = $this->input_check_captcha_once($captcha, $phone);
             if ($captcha) {
                 // form handler
                 $data['auth_form'] = [

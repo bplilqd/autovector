@@ -23,6 +23,7 @@ class auth_form extends form implements interface_form
     {
         $disabled = '';
         $phone = '';
+        $help_text_pass = '';
         $help_text = $this->translations->get_message(
             'auth_form',
             'help_text'
@@ -34,24 +35,36 @@ class auth_form extends form implements interface_form
                 $help_text = $this->translations->get_message(
                     'auth_form',
                     'help_text2'
-                ) .
-                    ' <a href="index.php">' . $this->translations->get_message('auth_form', 'help_text3') . '</a>';
+                ) . ' <a href="' . SITE_URL . 'panel' . DS . 'auth">' .
+                    $this->translations->get_message(
+                        'auth_form',
+                        'help_text3'
+                    ) . '</a>';
                 $disabled = ' disabled';
+                $help_text_pass = '<a href="' . SITE_URL . 'panel' . DS . 'auth">'.
+                $this->translations->get_message(
+                    'auth_form',
+                    'remind_password'
+                ).'</a>';
                 $active_input_pass = true;
             }
         }
-        return [$disabled, $phone, $help_text, (bool) $active_input_pass];
+        return [$disabled, $phone, $help_text, (bool) $active_input_pass, $help_text_pass];
     }
 
     protected function set_form()
     {
         $date = $this->option_form();
+
         $disabled = $date[0];
         $phone = $date[1];
         $help_text = $date[2];
         $active_input_pass = $date[3];
+        $help_text_pass = $date[4];
+
         $text_phone = $this->translations->get_message('auth_form', 'phone');
         $text_pass = $this->translations->get_message('auth_form', 'pass');
+       
         $str = '
     <form method="post" action="">
         <div class="mb-3">
@@ -64,7 +77,8 @@ class auth_form extends form implements interface_form
             $str .= '
         <div class="mb-3">
             <label for="pass" class="form-label">' . $text_pass . '</label>
-            <input name="pass" type="password" class="form-control" id="pass" required>
+            <input name="pass" type="password" class="form-control" aria-describedby="passHelp" id="pass" required>
+            <div id="passHelp" class="form-text">' . $help_text_pass . '</div>
             <input type="hidden" name="set_phone" value="true">
             <input type="hidden" name="phone" value="' . $phone . '">
         </div>
