@@ -20,6 +20,7 @@ define("NAME_VIEW", $name_view); // name basic ofview / NAME_VIEW
 
 // служебные
 define("USER_HASH", $_COOKIE['hash']); // hash
+define("HASH_CAPTCHA", $_COOKIE['hash_captcha']); // hash_captcha
 define("IP", $_SERVER['REMOTE_ADDR']); // ip адрес пользователя
 define("HOST", $_SERVER['SERVER_NAME']); // имя сайта
 define("REFERER", $_SERVER['HTTP_REFERER']); // реф ссылка
