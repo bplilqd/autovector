@@ -91,6 +91,7 @@ class auth_controller extends main_controller
         } else {
             $captcha = true;
         }
+        print_r($captcha);
         return $captcha;
     }
 
