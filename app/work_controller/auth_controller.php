@@ -84,6 +84,10 @@ class auth_controller extends main_controller
                 // second factor not strict
                 $this->set_hash_captcha_once($phone);
             }
+            if ($result) {
+                // whereas the captcha was introduced earlier
+                $captcha = true;
+            }
         } else {
             $captcha = true;
         }
