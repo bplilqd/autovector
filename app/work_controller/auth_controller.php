@@ -56,7 +56,7 @@ class auth_controller extends main_controller
             // data transfer and set view
             $form = $this->model->auth_form->form($this->data);
             $this->view->setting_properties('content', $form);
-            if (RECAPTCHA_ON) {
+            if (RECAPTCHA_ON && !HASH_CAPTCHA) {
                 // set recaptcha js to meta
                 $this->view->set_meta();
             }
@@ -114,32 +114,6 @@ class auth_controller extends main_controller
             setcookie("hash_captcha", $hash_captcha, time() - $this->hash_captcha, $this->path_set_cookie, HOST);
             return true;
         }
-    }
-
-    private function input_check_captcha_once($captcha, $phone)
-    {
-        if ($captcha) {
-            // create sash
-            $hash_captcha = $this->create_md5_to_auth_phone(SECRET_KEY, $phone);
-            if (!$this->error_manager->has_errors()) {
-                // set cook 10 minutes
-                setcookie("hash_captcha", $hash_captcha, time() + $this->hash_captcha, $this->path_set_cookie, HOST);
-                $result = true;
-            } else {
-                $result = false;
-            }
-        } else {
-            // if have cook to check hash
-            $hash_captcha = $this->create_md5_to_auth_phone(SECRET_KEY, $phone);
-            if (HASH_CAPTCHA && HASH_CAPTCHA == $hash_captcha && !$this->error_manager->has_errors()) {
-                // true/false and delete cook - 10 minutes
-                setcookie("hash_captcha", $hash_captcha, time() - $this->hash_captcha, $this->path_set_cookie, HOST);
-                $result = true;
-            } else {
-                $result = false;
-            }
-        }
-        return $result;
     }
 
     private function create_md5_to_auth_phone($secret_key, int $phone)
