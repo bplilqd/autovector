@@ -69,20 +69,46 @@ class auth_controller extends main_controller
         $this->view->include_theme();
     }
 
-    private function check_recaptcha()
+    private function check_recaptcha($phone)
     {
         if (RECAPTCHA_ON) {
-            // first factor strict...?
-            // second factor not strict...?
-            
+            $result = $this->check_before_entering_captcha($phone);
             // start recaptcha for check
-            $this->model->captcha->recaptcha();
-            // recaptcha false / true
-            $captcha = $this->model->captcha->captcha;
+            if (!$result) {
+                // first factor strict
+                $this->model->captcha->recaptcha();
+                // recaptcha false / true
+                $captcha = $this->model->captcha->captcha;
+            }
+            if ($captcha) {
+                // second factor not strict
+                $this->set_hash_captcha_once($phone);
+            }
         } else {
             $captcha = true;
         }
         return $captcha;
+    }
+
+    private function set_hash_captcha_once($phone)
+    {
+        // create sash
+        $hash_captcha = $this->create_md5_to_auth_phone(SECRET_KEY, $phone);
+        if (!$this->error_manager->has_errors()) {
+            // set cook 10 minutes
+            setcookie("hash_captcha", $hash_captcha, time() + $this->hash_captcha, $this->path_set_cookie, HOST);
+        }
+    }
+
+    private function check_before_entering_captcha($phone)
+    {
+        $hash_captcha = $this->create_md5_to_auth_phone(SECRET_KEY, $phone);
+        // if have cook to check hash
+        if (HASH_CAPTCHA && HASH_CAPTCHA == $hash_captcha && !$this->error_manager->has_errors()) {
+            // true/false and delete cook - 10 minutes
+            setcookie("hash_captcha", $hash_captcha, time() - $this->hash_captcha, $this->path_set_cookie, HOST);
+            return true;
+        }
     }
 
     private function input_check_captcha_once($captcha, $phone)
@@ -136,7 +162,7 @@ class auth_controller extends main_controller
             // validation data of user
             $phone = $this->validation_data_of_user($request['phone']);
             // check recaptcha
-            $captcha = $this->check_recaptcha();
+            $captcha = $this->check_recaptcha($phone);
             if ($captcha) {
                 // form handler
                 $data['auth_form'] = [
