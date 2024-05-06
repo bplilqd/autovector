@@ -94,7 +94,7 @@ class auth_form extends form implements interface_form
 
     protected function recaptcha()
     {
-        if (RECAPTCHA_ON && !HASH_CAPTCHA) {
+        if (RECAPTCHA_ON) {
             return '
         <div class="mb-3 g-recaptcha" data-theme="' . $this->invert_mode_theme(MODE_THEME) . '" data-sitekey="' . RECAPTCHA_HTML . '"></div>
         ';
