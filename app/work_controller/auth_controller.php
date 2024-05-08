@@ -63,6 +63,8 @@ class auth_controller extends main_controller
         }
         // for print errors
         $this->view->error_print();
+        // message print
+        $this->view->messages_print();
         // set_foot
         $this->view->set_foot($this->model->count_request());
         // include theme
