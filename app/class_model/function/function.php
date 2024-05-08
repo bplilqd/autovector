@@ -11,8 +11,10 @@ if ($_SERVER['HTTP_USER_AGENT']) {
 
 // for functions
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'translations.php'; // translations
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'error' . DS . 'interface_error_manager.php'; // set err
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'error' . DS . 'error_manager.php'; // set err
+require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'error' . DS . 'interface_error_manager.php';
+require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'error' . DS . 'error_manager.php'; // set error
+require_once PATH . DS . 'app' . DS . 'page_view' .  DS . 'messages' . DS . 'interfaceMessage.php';
+require_once PATH . DS . 'app' . DS . 'page_view' .  DS . 'messages' . DS . 'message.php'; // set for messages
 // for settings
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'config.php'; // config
 require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'constant.php'; // constant
