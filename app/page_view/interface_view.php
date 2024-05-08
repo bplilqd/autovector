@@ -8,6 +8,8 @@ interface interface_view
     public function include_theme();
     // for error print
     public function error_print();
+    // print other messages
+    public function messages_print();
     // set foot default
     public function set_foot($count_query);
     // function the input data of properties
