@@ -5,6 +5,7 @@ namespace model;
 use model\connect\forUseMysqli;
 use model\function\auth_function;
 use view\form\auth_form;
+use view\messages\message;
 use model\function\recaptcha_v2;
 use model\function\translations;
 use controller\error\error_manager;
@@ -12,6 +13,7 @@ use model\whatsApp\whatsapp_connect;
 
 class auth_model extends model implements interface_auth_model
 {
+    private object $message; // messages
     private object $whatsapp;
     private object $auth_function;
     public object $auth_form;
@@ -33,7 +35,7 @@ class auth_model extends model implements interface_auth_model
         $this->input_data = $data;
         //print_r($this->input_data);
     }
-    
+
     public function set_and_setting()
     {
         // receiving data
@@ -98,7 +100,11 @@ class auth_model extends model implements interface_auth_model
                     // send pass
                     $this->whatsapp->msg_to($phone, $message);
 
-                    // уведомляем что отправили пароль на экране
+                    // print info
+                    $this->message->messages($this->translations->get_message(
+                        'auth',
+                        'successfully_sent'
+                    ), 'info');
                 }
             }
         }
@@ -199,6 +205,8 @@ class auth_model extends model implements interface_auth_model
         $this->translations = translations::getInstance();
         // set object for connect mysql
         $this->mysql = new forUseMysqli;
+        // message
+        $this->message = message::get_instance();
         // auth form
         $this->auth_form = new auth_form;
         // other auth function
