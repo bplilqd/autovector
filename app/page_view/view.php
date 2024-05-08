@@ -21,23 +21,10 @@ class view
     private $foot = '';
     // extra
     private $meta = '';
-
     // setting of theme
     public $language = LANGUAGE;
     public $user_theme = DESIGN_THEME;
     public $data_bs_theme = MODE_THEME;
-
-    // main property of this class
-    protected function start_standart_view()
-    {
-        // setting error object
-        $this->error_manager = error_manager::get_instance();
-        // set object for enter of language
-        $this->translations = translations::getInstance();
-
-        // set top default
-        $this->properties_array('top', ['Hello, World!', 'lang' => strtoupper($this->translations->get_language())]);
-    }
 
     // method for replacing the value
     public function replacing_value($property, $array)
@@ -69,22 +56,6 @@ class view
             ' . $namme_function . '()';
             $this->error_manager->add_error($error);
         }
-    }
-
-    private function set_array_top($data)
-    {
-        $html = '
-    <div class="row">
-        <div class="col">
-            <a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>
-        </div>
-        <div class="col">
-            <div class="d-flex justify-content-end"><h2 class="text-info"><span class="badge bg-secondary">' . $data['lang'] . '</span></h2></div>
-        </div>
-    </div>
-        
-        ';
-        return $html;
     }
 
     // set properties (function in data)
@@ -159,5 +130,31 @@ class view
             }
             $this->system_mesage = $result;
         }
+    }
+    // main property of this class
+    protected function start_standart_view()
+    {
+        // setting error object
+        $this->error_manager = error_manager::get_instance();
+        // set object for enter of language
+        $this->translations = translations::getInstance();
+
+        // set top default
+        $this->properties_array('top', ['Hello, World!', 'lang' => strtoupper($this->translations->get_language())]);
+    }
+    private function set_array_top($data)
+    {
+        $html = '
+        <div class="row">
+            <div class="col">
+                <a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end"><h2 class="text-info"><span class="badge bg-secondary">' . $data['lang'] . '</span></h2></div>
+            </div>
+        </div>
+            
+            ';
+        return $html;
     }
 }

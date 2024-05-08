@@ -12,15 +12,15 @@ use model\whatsApp\whatsapp_connect;
 
 class auth_model extends model implements interface_auth_model
 {
-    protected object $whatsapp;
-    protected object $auth_function;
+    private object $whatsapp;
+    private object $auth_function;
     public object $auth_form;
     public object $captcha;
-    protected object $translations; // lang
-    protected object $error_manager; // error
+    private object $translations; // lang
+    private object $error_manager; // error
     // other properties
-    protected $input_data = []; // data for auth_form
-    protected int $length_generate_pass = 8;
+    private $input_data = []; // data for auth_form
+    private int $length_generate_pass = 8;
 
     public function __construct()
     {
