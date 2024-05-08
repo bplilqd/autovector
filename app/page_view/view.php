@@ -4,9 +4,11 @@ namespace view;
 
 use model\function\translations;
 use controller\error\error_manager;
+use view\messages\message;
 
 class view
 {
+    protected object $message; // messages
     protected object $error_manager; // error
     protected object $translations; // lang
     // standart
@@ -131,6 +133,24 @@ class view
             $this->system_mesage = $result;
         }
     }
+
+    public function messages_print()
+    {
+        if ($this->message->has_messages()) {
+            $result = '';
+            foreach ($this->message->get_messages() as $style => $array) {
+                foreach ($array as $message) {
+                    $result .= '
+                <div class="alert alert-' . $style . '" role="alert">
+                    ' . $message . '
+                </div>
+                ';
+                }
+            }
+            $this->setting_properties('system_mesage', '', '', $end_parm = $result);
+        }
+    }
+
     // main property of this class
     protected function start_standart_view()
     {
@@ -138,6 +158,8 @@ class view
         $this->error_manager = error_manager::get_instance();
         // set object for enter of language
         $this->translations = translations::getInstance();
+        // set object message
+        $this->message = message::get_instance();
 
         // set top default
         $this->properties_array('top', ['Hello, World!', 'lang' => strtoupper($this->translations->get_language())]);
