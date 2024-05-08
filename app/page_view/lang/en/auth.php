@@ -12,5 +12,6 @@ return [
     'auth' => 'Authorization',
     'no_data' => 'no data',
     'already_logged_out' => 'You are already logged out!',
-    'your_pass' => 'Your password'
+    'your_pass' => 'Your password',
+    'successfully_sent' => 'The password has been successfully sent to you'
 ];
