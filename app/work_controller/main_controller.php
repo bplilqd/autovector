@@ -83,7 +83,12 @@ class main_controller
     private function new_load_class($array, $path)
     {
         foreach ($array as $name_class) {
-            require_once $path .  $name_class . '.php';
+            $file_path = $path . $name_class . '.php';
+            if (file_exists($file_path)) {
+                require_once $file_path;
+            } else {
+                echo "File $file_path not found";
+            }
         }
     }
 }
