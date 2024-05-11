@@ -5,3 +5,4 @@ app/logs/log_whatsapp/*
 composer.phar
 /vendor/
 composer.lock
+test.php
