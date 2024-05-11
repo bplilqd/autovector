@@ -9,7 +9,7 @@ use view\messages\message;
 use model\function\recaptcha_v2;
 use model\function\translations;
 use controller\error\error_manager;
-use model\whatsApp\whatsapp_connect;
+use model\whatsapp\whatsapp_connect;
 
 class auth_model extends model implements interface_auth_model
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace model\whatsApp;
+namespace model\whatsapp;
 
 class whatsapp_main
 {
