@@ -1,4 +1,4 @@
-app/class_model/settings/config.php
+app/model/settings/config.php
 app/test/*
 app/logs/log_sql/*
 app/logs/log_whatsapp/*
