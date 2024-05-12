@@ -3,10 +3,12 @@
 namespace controller;
 
 use view\not_authorized_view;
+use model\function\scan_dir;
 
 class user_settings extends main_controller
 {
 
+    private object $scan_dir;
     private object $not_authorized;
 
     function __construct()
@@ -77,7 +79,10 @@ class user_settings extends main_controller
 
     private function edit_settings()
     {
-        $data = $this->model->scan_dir_lang_and_template();
+        // set object scan_dir
+        $this->scan_dir = new scan_dir;
+        // scan dir lang and template
+        $data = $this->scan_dir->scan_dir_lang_and_template();
         if ($this->request) {
             $request = $this->request;
             if (isset($request['submit_edit'])) {
