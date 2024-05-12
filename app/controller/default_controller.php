@@ -8,8 +8,6 @@ class default_controller extends main_controller
     function __construct()
     {
         // controller ->
-        // load casses - add names for class for set autoload 
-        $this->start_name_class();
         // standart methods -> set request, set hash from browser, set object of model and others...
         $this->set_standart();
 
@@ -39,35 +37,4 @@ class default_controller extends main_controller
         $this->view->include_theme();
     }
 
-    // start name class
-    protected function start_name_class()
-    {
-        // array for model -> connect class
-        $class_mosel_setings = ['useMysqli', 'interfaceForUseMysqli', 'forUseMysqli'];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'connect' . DS;
-        $array[] = [$class_mosel_setings, $path_model];
-
-        // array for model -> function class
-        $class_mosel_setings = ['znach_array'];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'function' . DS;
-        $array[] = [$class_mosel_setings, $path_model];
-
-        // array for model -> settings class
-        $class_mosel_setings = ['interface_user_classe', 'user_config'];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS;
-        $array[] = [$class_mosel_setings, $path_model];
-
-        // array for model class
-        $class_model = ['interface_model', NAME_MODEL];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS;
-        $array[] = [$class_model, $path_model];
-
-        // array for view class
-        $class_view = ['interface_view', NAME_VIEW];
-        $path_model = PATH . DS . 'app' . DS . 'view' . DS;
-        $array[] = [$class_view, $path_model];
-
-        // autoload class
-        $this->autoload_class($array);
-    }
 }

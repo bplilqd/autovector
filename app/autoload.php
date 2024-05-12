@@ -22,8 +22,8 @@ spl_autoload_register(function ($class_name) {
 });
 
 // for settings
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'config.php'; // config
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'constant.php'; // constant
+require_once PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS . 'config.php'; // config
+require_once PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS . 'constant.php'; // constant
 
 
 function Time_sec($t_start, $t_end)

@@ -43,15 +43,6 @@ class main_controller
             $this->view->data_bs_theme = $this->model->user_config->data_bs_theme;
         }
     }
-
-    // set for autoload class
-    protected function autoload_class($array)
-    {
-        foreach ($array as $value) {
-            // to autoload
-            $this->new_load_class($value[0], $value[1]);
-        }
-    }
     
     private function set_hash_check()
     {
@@ -79,16 +70,4 @@ class main_controller
         $this->model = new ('model\\' . NAME_MODEL);
     }
 
-    // method for autoload class
-    private function new_load_class($array, $path)
-    {
-        foreach ($array as $name_class) {
-            $file_path = $path . $name_class . '.php';
-            if (file_exists($file_path)) {
-                require_once $file_path;
-            } else {
-                echo "File $file_path not found";
-            }
-        }
-    }
 }

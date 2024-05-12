@@ -22,8 +22,6 @@ class user_settings extends main_controller
     // controller ->
     private function set_in_controller()
     {
-        // load casses - add names for class for set autoload 
-        $this->start_name_class();
         // standart methods -> set request, set hash from browser, set object of model and others...
         $this->set_standart();
     }
@@ -118,48 +116,4 @@ class user_settings extends main_controller
         $this->$view_namme->include_theme();
     }
 
-    // start name class
-    private function start_name_class()
-    {
-        // array for view -> form
-        $class_view_form = [
-            'interface_form', // intreface default and main for forms
-            'form', // form class main
-            'form_settings_user'
-        ];
-        $path_model = PATH . DS . 'app' . DS . 'view' . DS . 'form' . DS;
-
-        $array[] = [$class_view_form, $path_model];
-        // array for model -> connect class
-        $class_mosel_setings = [
-            'interfaceForUseMysqli',
-            'useMysqli',
-            'forUseMysqli'
-        ];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'connect' . DS;
-        $array[] = [$class_mosel_setings, $path_model];
-
-        // array for model -> settings class
-        $class_mosel_setings = ['interface_user_classe', 'user_config'];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS;
-        $array[] = [$class_mosel_setings, $path_model];
-
-        // array for model class
-        $class_model = ['interface_settings', NAME_MODEL];
-        $path_model = PATH . DS . 'app' . DS . 'model' . DS;
-        $array[] = [$class_model, $path_model];
-
-        // array for view class
-        $class_view = [
-            'interface_view', // interface main
-            'interface_user_settings',
-            'not_authorized_view',
-            NAME_VIEW
-        ];
-        $path_model = PATH . DS . 'app' . DS . 'view' . DS;
-        $array[] = [$class_view, $path_model];
-
-        // autoload class
-        $this->autoload_class($array);
-    }
 }
