@@ -1,33 +1,4 @@
 <?php
-define("TIME_START", microtime(true)); // для вычеслений, внимание - не менять эту строку!
-
-// device of user
-$mobile_device_true = false;
-if ($_SERVER['HTTP_USER_AGENT']) {
-    if (strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') || strstr($_SERVER['HTTP_USER_AGENT'], 'iPad') || strstr($_SERVER['HTTP_USER_AGENT'], 'Android') || strstr($_SERVER['HTTP_USER_AGENT'], 'Mobile') || strstr($_SERVER['HTTP_USER_AGENT'], 'Phone') || isset($_GET['mobile'])) {
-        $mobile_device_true = true;
-    }
-}
-
-// for functions
-require_once PATH . DS . 'app' . DS . 'model' . DS . 'function' . DS . 'translations.php'; // translations
-require_once PATH . DS . 'app' . DS . 'controller' . DS . 'error' . DS . 'interface_error_manager.php';
-require_once PATH . DS . 'app' . DS . 'controller' . DS . 'error' . DS . 'error_manager.php'; // set error
-require_once PATH . DS . 'app' . DS . 'view' .  DS . 'messages' . DS . 'interfaceMessage.php';
-require_once PATH . DS . 'app' . DS . 'view' .  DS . 'messages' . DS . 'message.php'; // set for messages
-// for settings
-require_once PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS . 'config.php'; // config
-require_once PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS . 'constant.php'; // constant
-// for main class
-require_once PATH . DS . 'app' . DS . 'model' . DS . 'model.php'; // main model class
-require_once PATH . DS . 'app' . DS . 'view' . DS . 'view.php'; // main view class
-require_once PATH . DS . 'app' . DS . 'controller' . DS . 'main_controller.php'; // best main class
-
-// имя текущего класа исполнения/controller, корневого объекта
-function set_main_class($name_class)
-{
-    require_once PATH . DS . 'app' . DS . 'controller' . DS . $name_class . '.php'; // controller
-}
 
 // функция время выполнения скрипта в  начале, обязательно microtime(true),
 // типа так: $time_start = microtime(true);
@@ -47,7 +18,6 @@ function Memory_mb($a)
 }
 
 
-
 // для вывода заголовков и не только
 function text_echo($name, $teg_html, $class_text = '')
 {
@@ -63,17 +33,18 @@ function Padezh($number, $arr)
 }
 
 // вункция выводит одномерный масив в печать/файл иногда это удобно
-//function do_arr_echo_from_arr($arr, $name, $array_unique = FALSE) {
-//    // если нужно убрать повторы
-//    if ($array_unique) {
-//        $arr = array_unique($arr);
-//    }
-//    // сортировка
-//    asort($arr);
-//    $str = '$arr_' . $name . ' = [' . PHP_EOL;
-//    foreach ($arr as $value) {
-//        $str .= '\'' . $value . '\',' . PHP_EOL;
-//    }
-//    $str .= '];' . PHP_EOL;
-//    return $str;
-//}
+function do_arr_echo_from_arr($arr, $name, $array_unique = FALSE)
+{
+    // если нужно убрать повторы
+    if ($array_unique) {
+        $arr = array_unique($arr);
+    }
+    // сортировка
+    asort($arr);
+    $str = '$arr_' . $name . ' = [' . PHP_EOL;
+    foreach ($arr as $value) {
+        $str .= '\'' . $value . '\',' . PHP_EOL;
+    }
+    $str .= '];' . PHP_EOL;
+    return $str;
+}
