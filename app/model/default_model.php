@@ -4,11 +4,9 @@ namespace model;
 
 use model\settings\user_config;
 use model\connect\forUseMysqli;
-use model\function\znach_array;
 
 class default_model extends model implements interface_model
 {
-    protected object $znach_array;
     protected object $mysql;
 
     public function __construct()
@@ -32,7 +30,5 @@ class default_model extends model implements interface_model
         $this->mysql = new forUseMysqli;
         // set user
         $this->user_config = new user_config;
-        // set new
-        $this->znach_array = new znach_array;
     }
 }
