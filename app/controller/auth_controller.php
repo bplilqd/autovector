@@ -170,32 +170,32 @@ class auth_controller extends main_controller
     {
         // array for model -> whatsapp class
         $class_model = ['interface_whatsapp', 'whatsapp_main', 'whatsapp_error', 'whatsapp_connect'];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'whatsapp' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'whatsapp' . DS;
         $array[] = [$class_model, $path_model];
 
         // array for view -> form
         $class_view_form = ['interface_form', 'form', 'auth_form'];
-        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'view' . DS . 'form' . DS;
         $array[] = [$class_view_form, $path_model];
 
         // array for model -> fuction classes
         $class_mosel_setings = ['recaptcha_v2', 'auth_function'];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'function' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model -> connect class
         $class_mosel_setings = ['useMysqli', 'interfaceForUseMysqli', 'forUseMysqli'];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'connect' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
         $class_model = ['interface_auth_model', NAME_MODEL];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS;
         $array[] = [$class_model, $path_model];
 
         // array for view class
         $class_view = ['interface_auth', 'interface_view', NAME_VIEW];
-        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'view' . DS;
         $array[] = [$class_view, $path_model];
 
         // autoload class

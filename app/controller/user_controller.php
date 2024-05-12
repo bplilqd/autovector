@@ -4,10 +4,10 @@ namespace controller;
 
 use view\not_authorized_view;
 
-class user_settings extends main_controller
+class user_controller extends main_controller
 {
 
-    private object $not_authorized;
+    protected object $not_authorized;
 
     function __construct()
     {
@@ -20,7 +20,7 @@ class user_settings extends main_controller
     }
 
     // controller ->
-    private function set_in_controller()
+    protected function set_in_controller()
     {
         // load casses - add names for class for set autoload 
         $this->start_name_class();
@@ -29,7 +29,7 @@ class user_settings extends main_controller
     }
 
     // model ->
-    private function set_in_model()
+    protected function set_in_model()
     {
         // set user auth
         $this->model->set_user($this->hash);
@@ -38,12 +38,14 @@ class user_settings extends main_controller
     }
 
     // view ->
-    private function set_in_view()
+    protected function set_in_view()
     {
         // set view -> template
         $this->view = new ('view\\' . NAME_VIEW);
         // set of the settings user
         $this->settings_user();
+        // logout
+        $this->logout();
         // if authorized -> view...
         if ($this->model->auth) {
             // sent data for set in wiew
@@ -51,11 +53,13 @@ class user_settings extends main_controller
             // set title
             $title_user_page = $this->translations->get_message(
                 'panel_user',
-                'title_user_settings'
+                'title_user_page'
             );
             $this->view->setting_properties('title', $title_user_page);
             // set content
-            $this->edit_settings();
+            $this->view->set_content();
+            // edit
+            $this->edit_user();
             // set menu
             $this->view->set_menu();
             // more if authorized
@@ -77,38 +81,54 @@ class user_settings extends main_controller
         }
     }
 
-    private function edit_settings()
+    protected function edit_user()
     {
-        $data = $this->model->scan_dir_lang_and_template();
         if ($this->request) {
             $request = $this->request;
-            if (isset($request['submit_edit'])) {
-                
-                $data_bs_theme = strip_tags($request['data_bs_theme']);
-                $edit_form_data_bs_theme = $this->check_dark_mode($data_bs_theme);
-
-                $data['edit_form'] = [
-                    'submit_edit' => true,
-                    'language' => strip_tags($request['language']),
-                    'data_bs_theme' => $edit_form_data_bs_theme,
-                    'user_theme' => strip_tags($request['user_theme'])
-                ];
+            if (isset($request['edit_user'])) {
+                $data = [];
+                if (isset($request['submit_edit'])) {
+                    $data['edit_form'] = [
+                        'submit_edit' => true,
+                        'name' => strip_tags($request['name']),
+                        'last_name' => strip_tags($request['last_name'])
+                    ];
+                }
+                $form = $this->model->edit_form($data);
+                $this->view->setting_properties('content', $form);
             }
         }
-        $content = $this->model->edit_form($data);
-        $this->view->setting_properties('content', $content);
     }
 
-    private function check_dark_mode($data_bs_theme)
+    protected function go_out()
     {
-        if ($data_bs_theme == 'on') {
-            return 'dark';
-        } else {
-            return 'light';
+        if ($this->model->auth) {
+            $hash = $this->hash;
+            setcookie("hash", $hash, time() - SET_COOK_TIME_HASH, "/", HOST);
+            header("Location: " . SITE_URL);
         }
     }
 
-    private function more_setting_default($view_namme)
+    protected function logout()
+    {
+        if ($this->request) {
+            if (isset($this->request['logout'])) {
+                if (!$this->model->auth) {
+                    // error and redirect
+                    $this->error_manager->add_error(
+                        $this->translations->get_message(
+                            'auth',
+                            'already_logged_out'
+                        )
+                    );
+                }
+                // logged out
+                $this->go_out();
+            }
+        }
+    }
+
+    protected function more_setting_default($view_namme)
     {
         // set_foot
         $this->$view_namme->set_foot($this->model->count_request());
@@ -119,44 +139,49 @@ class user_settings extends main_controller
     }
 
     // start name class
-    private function start_name_class()
+    protected function start_name_class()
     {
         // array for view -> form
         $class_view_form = [
-            'interface_form', // intreface default and main for forms
-            'form', // form class main
-            'form_settings_user'
+            'interface_form',
+            'form',
+            'edit_form_user'
         ];
-        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS . 'form' . DS;
-
+        $path_model = PATH . DS . 'app' . DS . 'view' . DS . 'form' . DS;
         $array[] = [$class_view_form, $path_model];
+
         // array for model -> connect class
         $class_mosel_setings = [
             'interfaceForUseMysqli',
             'useMysqli',
             'forUseMysqli'
         ];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'connect' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'connect' . DS;
+        $array[] = [$class_mosel_setings, $path_model];
+
+        // array for model -> function class
+        $class_mosel_setings = ['znach_array'];
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'function' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model -> settings class
         $class_mosel_setings = ['interface_user_classe', 'user_config'];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS;
         $array[] = [$class_mosel_setings, $path_model];
 
         // array for model class
-        $class_model = ['interface_settings', NAME_MODEL];
-        $path_model = PATH . DS . 'app' . DS . 'class_model' . DS;
+        $class_model = ['interface_user', NAME_MODEL];
+        $path_model = PATH . DS . 'app' . DS . 'model' . DS;
         $array[] = [$class_model, $path_model];
 
         // array for view class
         $class_view = [
-            'interface_view', // interface main
-            'interface_user_settings',
+            'interface_view',
+            'interface_user_view',
             'not_authorized_view',
             NAME_VIEW
         ];
-        $path_model = PATH . DS . 'app' . DS . 'page_view' . DS;
+        $path_model = PATH . DS . 'app' . DS . 'view' . DS;
         $array[] = [$class_view, $path_model];
 
         // autoload class

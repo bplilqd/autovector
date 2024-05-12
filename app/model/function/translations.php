@@ -52,7 +52,7 @@ class translations implements interface_translations
         $language = $this->language;
         // If the language is changed, download the package again
         if (!$this->$name) {
-            $path = __DIR__ . '/../../page_view/lang/' . $language . '/' . $name . '.php';
+            $path = __DIR__ . DS . '..' . DS . '..' . DS . 'view' . DS . 'lang' . DS .$language . DS . $name . '.php';
             $this->$name = include realpath($path);
             //print_r('lang_set ' . $language . ' -> ' . $path . "\n");
         }

@@ -10,23 +10,23 @@ if ($_SERVER['HTTP_USER_AGENT']) {
 }
 
 // for functions
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'function' . DS . 'translations.php'; // translations
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'error' . DS . 'interface_error_manager.php';
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'error' . DS . 'error_manager.php'; // set error
-require_once PATH . DS . 'app' . DS . 'page_view' .  DS . 'messages' . DS . 'interfaceMessage.php';
-require_once PATH . DS . 'app' . DS . 'page_view' .  DS . 'messages' . DS . 'message.php'; // set for messages
+require_once PATH . DS . 'app' . DS . 'model' . DS . 'function' . DS . 'translations.php'; // translations
+require_once PATH . DS . 'app' . DS . 'controller' . DS . 'error' . DS . 'interface_error_manager.php';
+require_once PATH . DS . 'app' . DS . 'controller' . DS . 'error' . DS . 'error_manager.php'; // set error
+require_once PATH . DS . 'app' . DS . 'view' .  DS . 'messages' . DS . 'interfaceMessage.php';
+require_once PATH . DS . 'app' . DS . 'view' .  DS . 'messages' . DS . 'message.php'; // set for messages
 // for settings
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'config.php'; // config
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'settings' . DS . 'constant.php'; // constant
+require_once PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS . 'config.php'; // config
+require_once PATH . DS . 'app' . DS . 'model' . DS . 'settings' . DS . 'constant.php'; // constant
 // for main class
-require_once PATH . DS . 'app' . DS . 'class_model' . DS . 'model.php'; // main model class
-require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'view.php'; // main view class
-require_once PATH . DS . 'app' . DS . 'work_controller' . DS . 'main_controller.php'; // best main class
+require_once PATH . DS . 'app' . DS . 'model' . DS . 'model.php'; // main model class
+require_once PATH . DS . 'app' . DS . 'view' . DS . 'view.php'; // main view class
+require_once PATH . DS . 'app' . DS . 'controller' . DS . 'main_controller.php'; // best main class
 
 // имя текущего класа исполнения/controller, корневого объекта
 function set_main_class($name_class)
 {
-    require_once PATH . DS . 'app' . DS . 'work_controller' . DS . $name_class . '.php'; // controller
+    require_once PATH . DS . 'app' . DS . 'controller' . DS . $name_class . '.php'; // controller
 }
 
 // функция время выполнения скрипта в  начале, обязательно microtime(true),

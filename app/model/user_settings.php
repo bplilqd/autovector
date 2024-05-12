@@ -56,9 +56,9 @@ class user_settings extends model implements interface_settings
 
     public function scan_dir_lang_and_template()
     {
-        $path_lang = realpath(__DIR__ . '/../page_view' . DS . 'lang');
+        $path_lang = realpath(__DIR__ . DS . '..' . DS . 'view' . DS . 'lang');
         $array['language_data'] = $this->how_many_directories($path_lang);
-        $path_template = realpath(__DIR__ . '/../page_view' . DS . 'template');
+        $path_template = realpath(__DIR__ . DS . '..' . DS . 'view' . DS . 'template');
         $array['user_theme_data'] = $this->how_many_directories($path_template);
         return $array;
     }

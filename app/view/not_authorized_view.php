@@ -26,7 +26,7 @@ class not_authorized_view extends view implements interface_view
             'foot'
         ];
         foreach ($array as $value) {
-            require_once PATH . DS . 'app' . DS . 'page_view' . DS . 'template' . DS . $this->user_theme . DS . $value . '.html';
+            require_once PATH . DS . 'app' . DS . 'view' . DS . 'template' . DS . $this->user_theme . DS . $value . '.html';
         }
     }
 }
