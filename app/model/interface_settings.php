@@ -12,6 +12,4 @@ interface interface_settings
     public function count_request();
     // setting form
     public function edit_form($data);
-    // check how many directories are inside for lang and templat
-    public function scan_dir_lang_and_template();
 }

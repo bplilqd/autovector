@@ -54,23 +54,6 @@ class user_settings extends model implements interface_settings
         return $this->form_settings->form($data);
     }
 
-    public function scan_dir_lang_and_template()
-    {
-        $path_lang = realpath(__DIR__ . DS . '..' . DS . 'view' . DS . 'lang');
-        $array['language_data'] = $this->how_many_directories($path_lang);
-        $path_template = realpath(__DIR__ . DS . '..' . DS . 'view' . DS . 'template');
-        $array['user_theme_data'] = $this->how_many_directories($path_template);
-        return $array;
-    }
-
-    // check how many directories are inside
-    private function how_many_directories($path)
-    {
-        $directories = scandir($path);
-        $result = array_diff($directories, ['.', '..']);
-        return $result;
-    }
-
     private function update_data_of_user_in_db($id, $language, $user_theme, $data_bs_theme)
     {
         $sql = "UPDATE `user` SET `language` = '$language', 
@@ -84,11 +67,6 @@ class user_settings extends model implements interface_settings
     private function set_data_user_for_view()
     {
         $user_config = $this->user_config;
-        /*   example data from db 
-        [language] => ru
-        [user_theme] => theme
-        [data_bs_theme] => dark
-        */
         $user_data = [
             'language' => $user_config->language,
             'user_theme' => $user_config->user_theme,
