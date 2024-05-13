@@ -4,10 +4,7 @@ namespace controller;
 
 class auth_controller extends main_controller
 {
-
     protected $data = []; // data of auth
-    private $hash_captcha = 600;
-    private $path_set_cookie = DS . 'panel' . DS . 'auth' . DS;
 
     public function __construct()
     {
@@ -82,22 +79,6 @@ class auth_controller extends main_controller
         return $captcha;
     }
 
-    private function create_md5_to_auth_phone($secret_key, int $phone)
-    {
-        if ($secret_key && $phone) {
-            $date = date('d-m-Y');
-            $generate_hash = md5("$secret_key:$date:$phone");
-            return $generate_hash;
-        } else {
-            $this->error_manager->add_error(
-                __METHOD__ . ' -> ' .
-                    $this->translations->get_message(
-                        'auth',
-                        'no_data'
-                    )
-            );
-        }
-    }
     // validation of user input
     private function check_of_user_input()
     {
