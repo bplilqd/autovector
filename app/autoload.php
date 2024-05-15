@@ -17,7 +17,7 @@ spl_autoload_register(function ($class_name) {
     if (file_exists($file_path)) {
         require_once $file_path;
     } else {
-        echo "File $file_path not found";
+        echo "File $file_path not found:" . __METHOD__;
     }
 });
 
