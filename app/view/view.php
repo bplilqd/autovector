@@ -12,6 +12,7 @@ class view
     protected object $error_manager; // error
     protected object $translations; // lang
     // standart
+    protected $applicationName = HOST; // Application Name
     private $header = '';
     private $menu = '';
     private $top = '';
@@ -162,7 +163,7 @@ class view
         $this->message = message::get_instance();
 
         // set top default
-        $this->properties_array('top', ['Hello, World!', 'lang' => strtoupper($this->translations->get_language())]);
+        $this->properties_array('top', [$this->applicationName, 'lang' => strtoupper($this->translations->get_language())]);
     }
     private function set_array_top($data)
     {
