@@ -17,7 +17,7 @@ define("LANGUAGE", 'en'); // mode default
 define("NAME_MODEL", $name_model); // name basic of model
 define("NAME_CONTROLLER", $name_controller); // name basic of controller
 define("NAME_VIEW", $name_view); // name basic ofview / NAME_VIEW
-define('DIR_APP', $dir_app . DS); // директория сайта, приложения
+define('DIR_APP', $dir_app); // директория сайта, приложения
 
 // служебные
 define("USER_HASH", $_COOKIE['hash']); // hash
