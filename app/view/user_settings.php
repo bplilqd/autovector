@@ -15,9 +15,9 @@ class user_settings extends view implements interface_view, interface_user_setti
   public function set_menu()
   {
     $array = [
-      ['', '/panel/user/', 'profile'],
-      ['active', '/panel/user/settings/', 'settings'],
-      ['', '/panel/user/?logout', 'logout'],
+      ['', SITE_URL . 'panel' . DS . 'user' . DS, 'profile'],
+      ['active', SITE_URL . 'panel' . DS . 'user' . DS . 'settings' . DS, 'settings'],
+      ['', SITE_URL . 'panel' . DS . 'user' . DS . '?logout', 'logout'],
     ];
     $menu = '
         <ul class="nav nav-underline">';

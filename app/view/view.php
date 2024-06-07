@@ -170,7 +170,7 @@ class view
         $html = '
         <div class="row">
             <div class="col">
-                <a href="/" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>
+                <a href="' . SITE_URL . '" style="text-decoration: none;"><h1 class="text-info">' . $data[0] . '</h1></a>
             </div>
             <div class="col">
                 <div class="d-flex justify-content-end"><h2 class="text-info"><span class="badge bg-secondary">' . $data['lang'] . '</span></h2></div>

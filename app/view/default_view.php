@@ -7,19 +7,19 @@ class default_view extends view implements interface_view
     public function __construct()
     {
         $this->start_standart_view();
-      
+
         $url_img_autovector = SITE_URL . 'images/autovector.jpg';
         //$url_img_autovector = PATH . DS. 'images/autovector.jpg';
 
         $this->setting_properties('content', '<img src="' . $url_img_autovector . '" class="img-fluid" alt="autovector">');
-        
-        $menu_str = '<a href="/panel/auth/"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
+
+        $menu_str = '<a href="' . SITE_URL . 'panel' . DS . 'auth' . DS . '"><i class="bi bi-person-square" style="font-size: 2rem;"></i></a>';
         $this->setting_properties('menu', $menu_str);
     }
 
     public function set_menu()
     {
-        $menu_str = '<a href="/panel/user/"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
+        $menu_str = '<a href="' . SITE_URL . 'panel' . DS . 'user' . DS . '"><i class="bi bi-person-square text-success" style="font-size: 2rem;"></i></a>';
         $this->setting_properties('menu', $menu_str);
     }
 
