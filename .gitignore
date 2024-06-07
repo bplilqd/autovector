@@ -1,8 +1,8 @@
 app/model/settings/config.php
 app/test/*
-app/logs/log_sql/*
-app/logs/log_whatsapp/*
 composer.phar
 /vendor/
 composer.lock
 test.php
+app/logs/log_sql/*
+app/logs/log_whatsapp/*
