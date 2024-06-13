@@ -14,5 +14,5 @@ return [
     'already_logged_out' => 'You are already logged out!',
     'your_pass' => 'Your password',
     'successfully_sent' => 'The password has been successfully sent to you',
-    'deadline_has_expired' => 'The link or number of attempts in this token has expired, try running the password recovery procedure again.'
+    'title_remind_password' => 'Password reminder'
 ];

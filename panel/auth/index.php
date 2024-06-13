@@ -1,7 +1,7 @@
 <?php
 
-$name_model = 'auth_model'; // name basic of model / NAME_MODEL
 $name_controller = 'auth_controller'; // name basic of controller / NAME_CONTROLLER
+$name_model = 'auth_model'; // name basic of model / NAME_MODEL
 $name_view = 'auth_view'; // name basic ofview / NAME_VIEW
 
 // builds a file path with the appropriate directory separator

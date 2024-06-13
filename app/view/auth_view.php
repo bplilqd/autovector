@@ -2,7 +2,7 @@
 
 namespace view;
 
-class auth_view extends view implements interface_view,interface_auth
+class auth_view extends view implements interface_view, interface_auth
 {
     public function __construct()
     {
@@ -10,7 +10,8 @@ class auth_view extends view implements interface_view,interface_auth
         $this->setting_properties('title', $this->translations->get_message('auth', 'auth'));
     }
 
-    public function set_meta(){
+    public function set_meta()
+    {
         $meta = '<script src="https://www.google.com/recaptcha/api.js"></script>';
         $this->setting_properties('meta', '', $meta);
     }

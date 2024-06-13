@@ -35,6 +35,7 @@ class auth_model extends model implements interface_auth_model
         $this->input_data = $data;
     }
 
+    // main method of model
     public function set_and_setting()
     {
         // receiving data
