@@ -7,5 +7,6 @@ return [
     'help_text2' => 'Ввести',
     'help_text3' => 'другой номер',
     'auth_submit' => 'Отправить',
-    'remind_password' => 'Напомнить пароль'
+    'remind_password' => 'Напомнить пароль',
+    'remind_pass_submit' => 'Для получения нового пароля введите свой номер телефона'
 ];
