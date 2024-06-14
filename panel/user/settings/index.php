@@ -1,11 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
-$name_model = 'user_settings'; // name basic of model / NAME_MODEL
 $name_controller = 'user_settings'; // name basic of controller / NAME_CONTROLLER
+$name_model = 'user_settings'; // name basic of model / NAME_MODEL
 $name_view = 'user_settings'; // name basic ofview / NAME_VIEW
-
 
 // builds a file path with the appropriate directory separator
 define("DS", DIRECTORY_SEPARATOR);
