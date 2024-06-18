@@ -14,5 +14,6 @@ return [
     'already_logged_out' => 'You are already logged out!',
     'your_pass' => 'Your password',
     'successfully_sent' => 'The password has been successfully sent to you',
-    'title_remind_password' => 'Password reminder'
+    'title_remind_password' => 'Password reminder',
+    'no_such_number_in_db' => 'There is no such user with this phone number in the database, check the phone number and try again.'
 ];

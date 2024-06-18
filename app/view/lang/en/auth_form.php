@@ -8,5 +8,6 @@ return [
     'help_text3' => 'another number',
     'auth_submit' => 'Submit',
     'remind_password' => 'Remind password',
-    'remind_pass_submit' => 'To receive a new password, enter your phone number'
+    'remind_pass_submit' => 'To receive a new password, enter your phone number',
+    'get_new_pass' => 'Get a new password'
 ];

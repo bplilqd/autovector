@@ -41,7 +41,7 @@ class auth_form extends form implements interface_form
                         'help_text3'
                     ) . '</a>';
                 $disabled = ' disabled';
-                $help_text_pass = '<a href="' . SITE_URL . 'panel' . DS . 'auth">'.
+                $help_text_pass = '<a href="' . SITE_URL . 'panel' . DS . 'auth' . DS . 'remind_password"">'.
                 $this->translations->get_message(
                     'auth_form',
                     'remind_password'

@@ -4,7 +4,6 @@ namespace view\form;
 
 use model\function\translations;
 
-// example url of return http://localhost/autovector/panel/auth/?phone=79214604140&auth_submit=auth_submit
 class remind_password_form extends form implements interface_form
 {
 
@@ -35,7 +34,7 @@ class remind_password_form extends form implements interface_form
         // setting recaptcha
         $str .= $this->recaptcha();
         $str .= '
-        <button type="submit" name="auth_remind_pass" value="auth_remind_pass" class="btn btn-primary">' . $this->translations->get_message('auth_form', 'auth_submit') . '</button>
+        <button type="submit" name="auth_remind_pass" value="auth_remind_pass" class="btn btn-warning">' . $this->translations->get_message('auth_form', 'get_new_pass') . '</button>
     </form>';
         $this->form = $str;
     }
