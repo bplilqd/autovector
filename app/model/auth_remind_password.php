@@ -67,13 +67,34 @@ class auth_remind_password extends model implements interface_auth_model
 
     private function check_user_and_sent_pas($phone)
     {
-        // проверка есть ли такой клиент в базе
-        $result_phone = $this->check_user_to_db($phone);
-        if ($result_phone) {
-            // отправка нового пароля..?
-            // редирект пользователя..?
-        } else {
-            // вывод ошибки..?
+        if ($phone) {
+            // check phone number
+            $result_phone = $this->check_user_to_db($phone);
+            if ($result_phone) {
+                // create new pass
+                $pass_new = $this->auth_function->generateCode($this->length_generate_pass);
+                // create as hash
+                $pass = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass_new, $phone);
+                // update password in database..?
+
+                // message with password
+                $message = $this->translations->get_message(
+                    'auth',
+                    'your_pass'
+                ) . ': ' . $pass_new;
+                // send pass
+                $this->whatsapp->msg_to($phone, $message);
+
+                // redirect user..?
+                // example url of return http://localhost/autovector/panel/auth/?phone=79214604455&auth_submit=auth_submit
+            } else {
+                $this->error_manager->add_error(
+                    $this->translations->get_message(
+                        'auth',
+                        'no_such_number_in_db'
+                    )
+                );
+            }
         }
     }
 
