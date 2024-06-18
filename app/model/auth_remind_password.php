@@ -75,7 +75,10 @@ class auth_remind_password extends model implements interface_auth_model
                 $pass_new = $this->auth_function->generateCode($this->length_generate_pass);
                 // create as hash
                 $pass = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass_new, $phone);
-                // update password in database..?
+
+                // update password in database
+                $sql = "UPDATE `user` SET `pass` = '$pass' WHERE `phone` =" . $phone;
+                $this->mysql->sql_update($sql);
 
                 // message with password
                 $message = $this->translations->get_message(
@@ -85,8 +88,8 @@ class auth_remind_password extends model implements interface_auth_model
                 // send pass
                 $this->whatsapp->msg_to($phone, $message);
 
-                // redirect user..?
-                // example url of return http://localhost/autovector/panel/auth/?phone=79214604455&auth_submit=auth_submit
+                // redirect user
+                header("Location: " . SITE_URL . DS . "panel" . DS . "auth?phone=$phone&auth_submit=auth_submit");
             } else {
                 $this->error_manager->add_error(
                     $this->translations->get_message(
