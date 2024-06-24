@@ -75,30 +75,40 @@ class auth_remind_password extends model implements interface_auth_model
                 $pass_new = $this->auth_function->generateCode($this->length_generate_pass);
                 // create as hash
                 $pass = $this->auth_function->create_md5_to_auth_phone(SECRET_KEY, $pass_new, $phone);
-
                 // update password in database
-                $sql = "UPDATE `user` SET `pass` = '$pass' WHERE `phone` =" . $phone;
-                $this->mysql->sql_update($sql);
-
-                // message with password
-                $message = $this->translations->get_message(
-                    'auth',
-                    'your_pass'
-                ) . ': ' . $pass_new;
-                // send pass
-                $this->whatsapp->msg_to($phone, $message);
-
+                $this->update_password_in_database($pass, $phone);
+                // message with password and send pass
+                $this->send_pass($pass_new, $phone);
                 // redirect user
-                header("Location: " . SITE_URL . DS . "panel" . DS . "auth?phone=$phone&auth_submit=auth_submit");
+                header("Location: " . SITE_URL . DS . "panel" . DS . "auth");
             } else {
-                $this->error_manager->add_error(
-                    $this->translations->get_message(
-                        'auth',
-                        'no_such_number_in_db'
-                    )
-                );
+                $this->error_no_such_number_in_db();
             }
         }
+    }
+
+    private function error_no_such_number_in_db()
+    {
+        $this->error_manager->add_error(
+            $this->translations->get_message(
+                'auth',
+                'no_such_number_in_db'
+            )
+        );
+    }
+    private function send_pass($pass_new, $phone)
+    {
+        $message = $this->translations->get_message(
+            'auth',
+            'your_pass'
+        ) . ': ' . $pass_new;
+        // send pass
+        $this->whatsapp->msg_to($phone, $message);
+    }
+    private function update_password_in_database($pass, $phone)
+    {
+        $sql = "UPDATE `user` SET `pass` = '$pass' WHERE `phone` =" . $phone;
+        $this->mysql->sql_update($sql);
     }
 
     // is there a user in the database (db)
